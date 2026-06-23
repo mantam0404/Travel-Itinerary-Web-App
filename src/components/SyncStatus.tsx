@@ -9,14 +9,14 @@ interface SyncStatusProps {
 }
 
 const statusConfig: Record<ConnectionStatus, { label: string; color: string; dot: string }> = {
-  online: { label: '已連線', color: 'text-[var(--od-travel-sky)]', dot: 'bg-[var(--od-travel-sky)]' },
-  offline: { label: '離線模式', color: 'text-[var(--od-travel-gold)]', dot: 'bg-[var(--od-travel-gold)]' },
-  syncing: { label: '同步中…', color: 'text-[var(--od-rausch)]', dot: 'bg-[var(--od-rausch)] animate-pulse' },
+  online: { label: '已連線', color: 'text-[var(--ln-accent)]', dot: 'bg-[var(--ln-accent)]' },
+  offline: { label: '離線模式', color: 'text-[#b8860b]', dot: 'bg-[#b8860b]' },
+  syncing: { label: '同步中…', color: 'text-[var(--ln-accent)]', dot: 'bg-[var(--ln-accent)] animate-pulse' },
 };
 
 const heroStatusConfig: Record<ConnectionStatus, { label: string; color: string; dot: string }> = {
   online: { label: '已連線', color: 'text-white/85', dot: 'bg-white/90' },
-  offline: { label: '離線模式', color: 'text-[var(--od-travel-gold)]', dot: 'bg-[var(--od-travel-gold)]' },
+  offline: { label: '離線模式', color: 'text-[#e8c547]', dot: 'bg-[#e8c547]' },
   syncing: { label: '同步中…', color: 'text-white/85', dot: 'bg-white/90 animate-pulse' },
 };
 
@@ -47,7 +47,7 @@ export function SyncStatus({ status, syncMeta, onSync, variant = 'default' }: Sy
               ? 'text-white/60'
               : variant === 'hero-light'
                 ? 'text-[#5c6068]'
-                : 'text-[var(--od-ink-subtle)]'
+                : 'text-[var(--ln-ink-tertiary)]'
           }
         >
           上次同步{' '}
@@ -66,7 +66,7 @@ export function SyncStatus({ status, syncMeta, onSync, variant = 'default' }: Sy
               ? 'text-white/90'
               : variant === 'hero-light'
                 ? 'text-[#4f5cc6]'
-                : 'text-[var(--od-rausch)]'
+                : 'text-[var(--ln-accent)]'
           }`}
           aria-label="手動同步"
         >

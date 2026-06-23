@@ -77,24 +77,16 @@ export function IconHome({ size = 20 }: { size?: number }) {
 export function ThemeToggleButton({
   isDark,
   onToggle,
-  variant = 'default',
 }: {
   isDark: boolean;
   onToggle: () => void;
-  variant?: 'default' | 'hero' | 'editorial' | 'linear';
+  variant?: 'linear';
 }) {
-  const className =
-    variant === 'editorial'
-      ? 'ed-theme-btn'
-      : variant === 'linear'
-        ? 'ln-theme-btn'
-        : `od-theme-btn ${variant === 'hero' ? 'od-theme-btn-hero' : ''}`;
-
   return (
     <button
       type="button"
       onClick={onToggle}
-      className={className}
+      className="ln-theme-btn"
       aria-label={isDark ? '切換至淺色模式' : '切換至深色模式'}
       title={isDark ? '淺色模式' : '深色模式'}
     >

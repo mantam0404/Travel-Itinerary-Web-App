@@ -211,3 +211,43 @@
 .ln-fade-d2 {
   animation-delay: 0.1s;
 }
+
+.ln-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--ln-border);
+  background: var(--ln-bg-elevated);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ln-ink-secondary);
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.ln-chip-active {
+  border-color: var(--ln-accent);
+  background: var(--ln-accent-muted);
+  color: var(--ln-accent);
+}
+
+.ln-leaflet .leaflet-container {
+  background: var(--ln-bg-hover);
+}
+
+.ln-timeline {
+  border-left: 2px solid var(--ln-border-strong);
+}
+
+.ln-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.35rem;
+  top: 0.35rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ln-accent);
+  background: var(--ln-bg-elevated);
+}

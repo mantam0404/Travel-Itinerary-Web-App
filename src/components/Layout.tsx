@@ -3,7 +3,7 @@ import { SyncStatus } from './SyncStatus';
 import { ThemeToggleButton } from './icons';
 import type { ConnectionStatus } from '../hooks/useOfflineSync';
 import type { SyncMeta } from '../services/storage';
-import '../styles/open-design.css';
+import '../styles/linear.css';
 
 export type Tab = 'home' | 'itinerary' | 'map' | 'expenses';
 
@@ -43,15 +43,15 @@ export function Layout({
 }: LayoutProps) {
   return (
     <div
-      className={`od-app relative mx-auto min-h-dvh max-w-lg overflow-x-hidden pb-36 ${isDark ? 'dark' : ''}`}
+      className={`ln-app relative mx-auto min-h-dvh max-w-lg overflow-x-hidden pb-32 ${isDark ? '' : 'light'}`}
     >
-      <div className="od-grain" aria-hidden />
+      <div className="ln-glow pointer-events-none absolute inset-x-0 top-0 h-48" aria-hidden />
 
       {activeTab !== 'home' && (
-        <header className="sticky top-0 z-40 border-b border-[var(--od-hairline)] bg-[var(--od-nav-bg)] px-4 py-4 backdrop-blur-lg">
+        <header className="sticky top-0 z-40 border-b border-[var(--ln-border)] bg-[var(--ln-nav-bg)] px-4 py-4 backdrop-blur-xl">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h1 className="od-section-title">{pageTitles[activeTab]}</h1>
+              <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
               <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} />
             </div>
             <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
@@ -62,23 +62,18 @@ export function Layout({
       <main>{children}</main>
 
       <nav
-        className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--od-hairline)] backdrop-blur-lg"
-        style={{ background: 'var(--od-nav-bg)' }}
+        className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--ln-border)] backdrop-blur-xl"
+        style={{ background: 'var(--ln-nav-bg)' }}
       >
-        <div className="mx-auto flex max-w-lg items-center justify-around px-2 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div className="mx-auto flex max-w-lg justify-around px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`flex min-w-[3.5rem] flex-col items-center gap-1 px-3 py-1 text-[11px] font-semibold transition-colors ${
-                activeTab === tab.id ? 'text-[var(--od-rausch)]' : 'text-[var(--od-ink-subtle)]'
-              }`}
+              className={`ln-nav-tab min-w-[3.5rem] px-2 py-1 ${activeTab === tab.id ? 'ln-nav-tab-active' : ''}`}
             >
               {tab.label}
-              {activeTab === tab.id && (
-                <span className="h-0.5 w-6 rounded-full bg-[var(--od-rausch)]" />
-              )}
             </button>
           ))}
         </div>

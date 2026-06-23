@@ -39,30 +39,26 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
   return (
     <section id="expenses" className="space-y-4 px-4 py-6">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-sm text-[var(--od-ink-muted)]">匯率 €1 = HK${exchangeRate.toFixed(2)}</p>
-        <button
-          type="button"
-          onClick={() => setShowEur(!showEur)}
-          className="od-chip shrink-0 text-xs"
-        >
+        <p className="text-sm text-[var(--ln-ink-secondary)]">匯率 €1 = HK${exchangeRate.toFixed(2)}</p>
+        <button type="button" onClick={() => setShowEur(!showEur)} className="ln-chip shrink-0 text-xs">
           {showEur ? '顯示 HKD' : '顯示 EUR'}
         </button>
       </div>
 
-      <div className="od-surface-card grid grid-cols-2 gap-3 rounded-[16px] p-4">
+      <div className="ln-panel grid grid-cols-2 gap-3 p-4">
         <div className="col-span-2 sm:col-span-1">
-          <p className="text-xs font-medium text-[var(--od-ink-muted)]">總支出</p>
-          <p className="mt-1 text-2xl font-bold text-[var(--od-rausch)]">
+          <p className="ln-label">總支出</p>
+          <p className="ln-tabular mt-1 text-2xl font-semibold text-[var(--ln-accent)]">
             {formatAmount(totals.total)}
           </p>
           {!showEur && (
-            <p className="mt-0.5 text-xs text-[var(--od-ink-subtle)]">≈ {formatEur(totals.total)}</p>
+            <p className="mt-0.5 text-xs text-[var(--ln-ink-tertiary)]">≈ {formatEur(totals.total)}</p>
           )}
         </div>
         {(['accommodation', 'transportation', 'tickets'] as const).map((cat) => (
           <div key={cat}>
-            <p className="text-xs text-[var(--od-ink-muted)]">{categoryLabels[cat]}</p>
-            <p className="mt-1 text-lg font-semibold">{formatAmount(totals[cat])}</p>
+            <p className="text-xs text-[var(--ln-ink-secondary)]">{categoryLabels[cat]}</p>
+            <p className="ln-tabular mt-1 text-lg font-semibold">{formatAmount(totals[cat])}</p>
           </div>
         ))}
       </div>
@@ -73,14 +69,14 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
             key={cat}
             type="button"
             onClick={() => setFilter(cat)}
-            className={`od-chip shrink-0 text-sm ${filter === cat ? 'od-chip-active' : ''}`}
+            className={`ln-chip shrink-0 ${filter === cat ? 'ln-chip-active' : ''}`}
           >
             {cat === 'all' ? '全部' : categoryLabels[cat]}
           </button>
         ))}
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {filtered.map((expense) => (
           <ExpenseCard
             key={expense.id}
@@ -109,43 +105,43 @@ function ExpenseCard({
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="od-surface-card overflow-hidden rounded-[16px]">
+    <div className="ln-panel overflow-hidden">
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between gap-3 p-4 text-left"
+        className="flex w-full items-center justify-between gap-3 p-4 text-left transition hover:bg-[var(--ln-bg-hover)]"
       >
         <div className="min-w-0 flex-1">
-          <p className="font-semibold leading-snug">{expense.name}</p>
-          <p className="mt-0.5 text-xs text-[var(--od-ink-muted)]">
+          <p className="font-medium leading-snug">{expense.name}</p>
+          <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
             {categoryLabel} · {expense.date}
           </p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="font-bold text-[var(--od-rausch)]">
+          <p className="ln-tabular font-semibold text-[var(--ln-accent)]">
             {showEur ? formatEur(expense.amountEur) : formatHkd(expense.amountEur, exchangeRate)}
           </p>
           {!showEur && (
-            <p className="text-xs text-[var(--od-ink-subtle)]">{formatEur(expense.amountEur)}</p>
+            <p className="text-xs text-[var(--ln-ink-tertiary)]">{formatEur(expense.amountEur)}</p>
           )}
         </div>
       </button>
 
       {expanded && (
-        <div className="border-t border-[var(--od-hairline)] px-4 pb-4">
-          <p className="mb-2 mt-3 text-xs font-semibold text-[var(--od-ink-muted)]">費用明細</p>
+        <div className="border-t border-[var(--ln-border)] px-4 pb-4">
+          <p className="ln-label mb-2 mt-3">費用明細</p>
           <ul className="space-y-2">
             {expense.breakdown.map((item, i) => (
               <li key={i} className="flex justify-between gap-3 text-sm">
-                <span className="min-w-0 text-[var(--od-ink-muted)]">{item.label}</span>
-                <span className="shrink-0 font-medium">
+                <span className="min-w-0 text-[var(--ln-ink-secondary)]">{item.label}</span>
+                <span className="ln-tabular shrink-0 font-medium">
                   {showEur ? formatEur(item.amountEur) : formatHkd(item.amountEur, exchangeRate)}
                 </span>
               </li>
             ))}
           </ul>
           {expense.notes && (
-            <p className="mt-3 text-xs leading-relaxed text-[var(--od-ink-subtle)]">{expense.notes}</p>
+            <p className="mt-3 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">{expense.notes}</p>
           )}
         </div>
       )}
