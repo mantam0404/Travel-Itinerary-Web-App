@@ -21,6 +21,14 @@
 - LocalForage (IndexedDB)
 - Leaflet + react-leaflet
 
+## 線上版本
+
+部署完成後，可在手機瀏覽器開啟：
+
+**https://mantam0404.github.io/Travel-Itinerary-Web-App/**
+
+建議加入主畫面（Add to Home Screen）以獲得最佳 PWA 體驗。
+
 ## 快速開始
 
 ```bash
