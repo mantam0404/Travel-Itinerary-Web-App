@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Layout, type Tab } from './components/Layout';
 import { HomePage } from './components/HomePage';
 import { Itinerary } from './components/Itinerary';
@@ -9,8 +9,25 @@ import { useTheme } from './hooks/useTheme';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
+  const [expandedDayDate, setExpandedDayDate] = useState<string | null>(null);
   const { tripData, status, syncMeta, loading, performSync } = useOfflineSync();
   const { isDark, toggleTheme } = useTheme();
+
+  const handleNavigate = useCallback((tab: Tab, options?: { dayDate?: string }) => {
+    if (tab === 'itinerary' && options?.dayDate) {
+      setExpandedDayDate(options.dayDate);
+    } else if (tab !== 'itinerary') {
+      setExpandedDayDate(null);
+    }
+    setActiveTab(tab);
+  }, []);
+
+  const handleTabChange = useCallback((tab: Tab) => {
+    if (tab !== 'itinerary') {
+      setExpandedDayDate(null);
+    }
+    setActiveTab(tab);
+  }, []);
 
   if (loading || !tripData) {
     return (
@@ -26,7 +43,7 @@ export default function App() {
   return (
     <Layout
       activeTab={activeTab}
-      onTabChange={setActiveTab}
+      onTabChange={handleTabChange}
       status={status}
       syncMeta={syncMeta}
       onSync={performSync}
@@ -39,14 +56,19 @@ export default function App() {
           itinerary={tripData.itinerary}
           isDark={isDark}
           onToggleTheme={toggleTheme}
-          onNavigate={setActiveTab}
+          onNavigate={handleNavigate}
           status={status}
           syncMeta={syncMeta}
           onSync={performSync}
         />
       )}
       {activeTab === 'itinerary' && (
-        <Itinerary days={tripData.itinerary} isDark={isDark} />
+        <Itinerary
+          days={tripData.itinerary}
+          isDark={isDark}
+          expandedDayDate={expandedDayDate}
+          onExpandedDayChange={setExpandedDayDate}
+        />
       )}
       {activeTab === 'map' && (
         <TravelMap
