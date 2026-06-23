@@ -81,13 +81,18 @@ export function ThemeToggleButton({
 }: {
   isDark: boolean;
   onToggle: () => void;
-  variant?: 'default' | 'hero';
+  variant?: 'default' | 'hero' | 'editorial';
 }) {
+  const className =
+    variant === 'editorial'
+      ? 'ed-theme-btn'
+      : `od-theme-btn ${variant === 'hero' ? 'od-theme-btn-hero' : ''}`;
+
   return (
     <button
       type="button"
       onClick={onToggle}
-      className={`od-theme-btn ${variant === 'hero' ? 'od-theme-btn-hero' : ''}`}
+      className={className}
       aria-label={isDark ? '切換至淺色模式' : '切換至深色模式'}
       title={isDark ? '淺色模式' : '深色模式'}
     >
