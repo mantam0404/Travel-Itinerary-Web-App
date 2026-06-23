@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+
+@theme {
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --color-cream: #faf6f0;
+  --color-sand: #f0e6d8;
+  --color-coral: #e8a598;
+  --color-terracotta: #c97b63;
+  --color-sage: #8fb39a;
+  --color-lavender: #b8a9c9;
+  --color-midnight: #1a1625;
+  --color-dusk: #2d2640;
+  --color-twilight: #3d3555;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-cream text-midnight antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-midnight text-cream;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-white/70 shadow-lg backdrop-blur-md;
+  }
+
+  .dark .glass-card {
+    @apply border-white/5 bg-dusk/80;
+  }
+
+  .pastel-gradient {
+    background: linear-gradient(135deg, #e8a59822 0%, #b8a9c922 50%, #8fb39a22 100%);
+  }
+
+  .dark .pastel-gradient {
+    background: linear-gradient(135deg, #e8a59818 0%, #b8a9c918 50%, #8fb39a18 100%);
+  }
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  border-radius: 1rem;
+  z-index: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+}
