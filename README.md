@@ -25,8 +25,6 @@
 
 **手機瀏覽器網址：** https://mantam0404.github.io/Travel-Itinerary-Web-App/
 
-**設計預覽：** https://mantam0404.github.io/Travel-Itinerary-Web-App/?preview=home
-
 > **GitHub Pages 設定：** 請將 Branch 設為 `gh-pages`（不是 `main` 或功能分支）。`main` 每次 push 會由 GitHub Actions 自動建置並更新 `gh-pages`。
 
 建議加入主畫面（Add to Home Screen）以獲得最佳 PWA 體驗。

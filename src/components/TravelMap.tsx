@@ -15,7 +15,7 @@ const BARCELONA_CENTER: [number, number] = [41.3874, 2.1686];
 const markerIcon = L.divIcon({
   className: 'custom-marker',
   html: `<div style="
-    background: linear-gradient(135deg, #e8a598, #c97b63);
+    background: linear-gradient(135deg, #ff5a7a, #ff385c);
     width: 28px; height: 28px;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
@@ -47,16 +47,12 @@ export function TravelMap({ attractions, exchangeRate }: TravelMapProps) {
   const selected = attractions.find((a) => a.id === selectedId);
 
   return (
-    <section id="map" className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">🗺️</span>
-        <h2 className="text-xl font-bold">景點地圖</h2>
-      </div>
-      <p className="text-sm text-midnight/60 dark:text-cream/60">
+    <section id="map" className="od-leaflet space-y-4 px-4 py-6">
+      <p className="text-sm leading-relaxed text-[var(--od-ink-muted)]">
         地圖瓦片已快取，離線時可使用已瀏覽過的區域
       </p>
 
-      <div className="glass-card overflow-hidden p-1">
+      <div className="od-surface-card overflow-hidden rounded-[16px] p-1">
         {mapReady && (
           <MapContainer
             center={BARCELONA_CENTER}
@@ -74,9 +70,7 @@ export function TravelMap({ attractions, exchangeRate }: TravelMapProps) {
                 key={attr.id}
                 position={[attr.lat, attr.lng]}
                 icon={markerIcon}
-                eventHandlers={{
-                  click: () => setSelectedId(attr.id),
-                }}
+                eventHandlers={{ click: () => setSelectedId(attr.id) }}
               >
                 <Popup>
                   <div className="min-w-[180px] p-1">
@@ -96,17 +90,13 @@ export function TravelMap({ attractions, exchangeRate }: TravelMapProps) {
         )}
       </div>
 
-      <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
         {attractions.map((attr) => (
           <button
             key={attr.id}
             type="button"
             onClick={() => setSelectedId(attr.id === selectedId ? null : attr.id)}
-            className={`shrink-0 rounded-full px-3 py-1.5 text-sm transition ${
-              selectedId === attr.id
-                ? 'bg-terracotta text-white dark:bg-coral'
-                : 'bg-white/50 dark:bg-dusk/50'
-            }`}
+            className={`od-chip shrink-0 text-sm ${selectedId === attr.id ? 'od-chip-active' : ''}`}
           >
             {attr.name}
           </button>
@@ -114,25 +104,25 @@ export function TravelMap({ attractions, exchangeRate }: TravelMapProps) {
       </div>
 
       {selected && (
-        <div className="glass-card pastel-gradient p-4">
+        <div className="od-surface-card rounded-[16px] p-4">
           <h3 className="text-lg font-bold">{selected.name}</h3>
-          <p className="mt-1 text-sm text-midnight/60 dark:text-cream/60">{selected.description}</p>
-          <div className="mt-3 flex flex-wrap gap-3 text-sm">
+          <p className="mt-2 text-sm leading-relaxed text-[var(--od-ink-muted)]">
+            {selected.description}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-sm">
             {selected.openingHours && (
-              <span className="rounded-full bg-sage/20 px-3 py-1 text-sage">
-                🕐 {selected.openingHours}
+              <span className="rounded-full bg-[var(--od-cloud)] px-3 py-1 text-[var(--od-ink-muted)]">
+                {selected.openingHours}
               </span>
             )}
             {selected.ticketPriceEur && (
-              <span className="rounded-full bg-coral/20 px-3 py-1 text-terracotta dark:text-coral">
-                🎫 {formatHkd(selected.ticketPriceEur, exchangeRate)} ({formatEur(selected.ticketPriceEur)})
+              <span className="rounded-full bg-[var(--od-rausch-soft)] px-3 py-1 text-[var(--od-rausch)]">
+                {formatHkd(selected.ticketPriceEur, exchangeRate)} ({formatEur(selected.ticketPriceEur)})
               </span>
             )}
           </div>
           {selected.tips && (
-            <p className="mt-3 text-sm italic text-midnight/50 dark:text-cream/50">
-              💡 {selected.tips}
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--od-ink-subtle)]">{selected.tips}</p>
           )}
         </div>
       )}

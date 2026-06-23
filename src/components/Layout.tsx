@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 import { SyncStatus } from './SyncStatus';
-import { ThemeToggle } from './ThemeToggle';
+import { ThemeToggleButton } from './icons';
 import type { ConnectionStatus } from '../hooks/useOfflineSync';
 import type { SyncMeta } from '../services/storage';
+import '../styles/open-design.css';
 
 export type Tab = 'home' | 'itinerary' | 'map' | 'expenses';
 
@@ -17,12 +18,18 @@ interface LayoutProps {
   onToggleTheme: () => void;
 }
 
-const tabs: { id: Tab; label: string; icon: string }[] = [
-  { id: 'home', label: '首頁', icon: '🏠' },
-  { id: 'itinerary', label: '行程', icon: '📋' },
-  { id: 'map', label: '地圖', icon: '🗺️' },
-  { id: 'expenses', label: '費用', icon: '💰' },
+const tabs: { id: Tab; label: string }[] = [
+  { id: 'home', label: '首頁' },
+  { id: 'itinerary', label: '行程' },
+  { id: 'map', label: '地圖' },
+  { id: 'expenses', label: '費用' },
 ];
+
+const pageTitles: Record<Exclude<Tab, 'home'>, string> = {
+  itinerary: '每日行程',
+  map: '景點地圖',
+  expenses: '費用與預算',
+};
 
 export function Layout({
   children,
@@ -35,38 +42,42 @@ export function Layout({
   onToggleTheme,
 }: LayoutProps) {
   return (
-    <div className="mx-auto min-h-dvh max-w-lg pb-24">
-      <header className="sticky top-0 z-50 border-b border-midnight/5 bg-cream/80 px-4 py-4 backdrop-blur-lg dark:border-cream/5 dark:bg-midnight/80">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-lg font-bold tracking-tight">
-              <span className="text-terracotta dark:text-coral">Spain</span> 旅行行程
-            </h1>
-            <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} />
+    <div
+      className={`od-app relative mx-auto min-h-dvh max-w-lg overflow-x-hidden pb-36 ${isDark ? 'dark' : ''}`}
+    >
+      <div className="od-grain" aria-hidden />
+
+      {activeTab !== 'home' && (
+        <header className="sticky top-0 z-40 border-b border-[var(--od-hairline)] bg-[var(--od-nav-bg)] px-4 py-4 backdrop-blur-lg">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <h1 className="od-section-title">{pageTitles[activeTab]}</h1>
+              <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} />
+            </div>
+            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
           </div>
-          <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
-        </div>
-      </header>
+        </header>
+      )}
 
-      <main className="px-4 py-6">{children}</main>
+      <main>{children}</main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-midnight/5 bg-cream/90 backdrop-blur-lg dark:border-cream/5 dark:bg-midnight/90">
-        <div className="mx-auto flex max-w-lg justify-around px-2 py-2">
+      <nav
+        className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--od-hairline)] backdrop-blur-lg"
+        style={{ background: 'var(--od-nav-bg)' }}
+      >
+        <div className="mx-auto flex max-w-lg items-center justify-around px-2 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`flex flex-col items-center gap-0.5 rounded-xl px-4 py-2 text-xs transition ${
-                activeTab === tab.id
-                  ? 'text-terracotta dark:text-coral'
-                  : 'text-midnight/50 dark:text-cream/50'
+              className={`flex min-w-[3.5rem] flex-col items-center gap-1 px-3 py-1 text-[11px] font-semibold transition-colors ${
+                activeTab === tab.id ? 'text-[var(--od-rausch)]' : 'text-[var(--od-ink-subtle)]'
               }`}
             >
-              <span className="text-xl">{tab.icon}</span>
-              <span className="font-medium">{tab.label}</span>
+              {tab.label}
               {activeTab === tab.id && (
-                <span className="h-1 w-1 rounded-full bg-terracotta dark:bg-coral" />
+                <span className="h-0.5 w-6 rounded-full bg-[var(--od-rausch)]" />
               )}
             </button>
           ))}

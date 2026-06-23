@@ -5,33 +5,44 @@ interface SyncStatusProps {
   status: ConnectionStatus;
   syncMeta: SyncMeta | null;
   onSync: () => void;
+  variant?: 'default' | 'hero';
 }
 
 const statusConfig: Record<ConnectionStatus, { label: string; color: string; dot: string }> = {
-  online: { label: '已連線', color: 'text-sage', dot: 'bg-sage' },
-  offline: { label: '離線模式', color: 'text-coral', dot: 'bg-coral' },
-  syncing: { label: '同步中…', color: 'text-lavender', dot: 'bg-lavender animate-pulse' },
+  online: { label: '已連線', color: 'text-[var(--od-travel-sky)]', dot: 'bg-[var(--od-travel-sky)]' },
+  offline: { label: '離線模式', color: 'text-[var(--od-travel-gold)]', dot: 'bg-[var(--od-travel-gold)]' },
+  syncing: { label: '同步中…', color: 'text-[var(--od-rausch)]', dot: 'bg-[var(--od-rausch)] animate-pulse' },
 };
 
-export function SyncStatus({ status, syncMeta, onSync }: SyncStatusProps) {
-  const cfg = statusConfig[status];
+const heroStatusConfig: Record<ConnectionStatus, { label: string; color: string; dot: string }> = {
+  online: { label: '已連線', color: 'text-white/85', dot: 'bg-white/90' },
+  offline: { label: '離線模式', color: 'text-[var(--od-travel-gold)]', dot: 'bg-[var(--od-travel-gold)]' },
+  syncing: { label: '同步中…', color: 'text-white/85', dot: 'bg-white/90 animate-pulse' },
+};
+
+export function SyncStatus({ status, syncMeta, onSync, variant = 'default' }: SyncStatusProps) {
+  const cfg = variant === 'hero' ? heroStatusConfig[status] : statusConfig[status];
 
   return (
-    <div className="flex items-center gap-2 text-xs">
+    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
       <span className={`inline-flex items-center gap-1.5 ${cfg.color}`}>
         <span className={`h-2 w-2 rounded-full ${cfg.dot}`} />
         {cfg.label}
       </span>
       {syncMeta?.lastSyncedAt && status !== 'syncing' && (
-        <span className="text-midnight/50 dark:text-cream/40">
-          · 上次同步 {new Date(syncMeta.lastSyncedAt).toLocaleTimeString('zh-Hant', { hour: '2-digit', minute: '2-digit' })}
+        <span className={variant === 'hero' ? 'text-white/60' : 'text-[var(--od-ink-subtle)]'}>
+          上次同步{' '}
+          {new Date(syncMeta.lastSyncedAt).toLocaleTimeString('zh-Hant', {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         </span>
       )}
       {status === 'online' && (
         <button
           type="button"
           onClick={onSync}
-          className="ml-1 rounded-full px-2 py-0.5 text-lavender transition hover:bg-lavender/10"
+          className={`font-medium transition hover:opacity-80 ${variant === 'hero' ? 'text-white/90' : 'text-[var(--od-rausch)]'}`}
           aria-label="手動同步"
         >
           同步
