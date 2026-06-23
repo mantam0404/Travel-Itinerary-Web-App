@@ -101,7 +101,7 @@ const highlights = [
 ];
 
 const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=900&q=80';
+  'https://picsum.photos/seed/barcelona-park-guell-travel/900/1125';
 
 export function HomePagePreview({
   flights,
