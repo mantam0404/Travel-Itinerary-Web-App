@@ -81,12 +81,14 @@ export function ThemeToggleButton({
 }: {
   isDark: boolean;
   onToggle: () => void;
-  variant?: 'default' | 'hero' | 'editorial';
+  variant?: 'default' | 'hero' | 'editorial' | 'linear';
 }) {
   const className =
     variant === 'editorial'
       ? 'ed-theme-btn'
-      : `od-theme-btn ${variant === 'hero' ? 'od-theme-btn-hero' : ''}`;
+      : variant === 'linear'
+        ? 'ln-theme-btn'
+        : `od-theme-btn ${variant === 'hero' ? 'od-theme-btn-hero' : ''}`;
 
   return (
     <button

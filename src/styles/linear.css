@@ -1,0 +1,170 @@
+/* Linear.app-inspired design tokens for Spain travel app */
+
+.ln-app {
+  --ln-bg: #08090a;
+  --ln-bg-elevated: #12141a;
+  --ln-bg-hover: #1a1d26;
+  --ln-border: rgba(255, 255, 255, 0.08);
+  --ln-border-strong: rgba(255, 255, 255, 0.12);
+  --ln-ink: #f7f8f8;
+  --ln-ink-secondary: #8a8f98;
+  --ln-ink-tertiary: #5c5f66;
+  --ln-accent: #5e6ad2;
+  --ln-accent-muted: rgba(94, 106, 210, 0.15);
+  --ln-success: #4cb782;
+  --ln-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 106, 210, 0.18), transparent);
+  --ln-font: "Inter", "Noto Sans TC", system-ui, sans-serif;
+  --ln-nav-bg: rgba(8, 9, 10, 0.88);
+  --ln-radius: 8px;
+  --ln-radius-lg: 12px;
+}
+
+.ln-app.light {
+  --ln-bg: #ffffff;
+  --ln-bg-elevated: #f9f9fb;
+  --ln-bg-hover: #f0f0f5;
+  --ln-border: rgba(0, 0, 0, 0.08);
+  --ln-border-strong: rgba(0, 0, 0, 0.12);
+  --ln-ink: #1a1d26;
+  --ln-ink-secondary: #6b6f76;
+  --ln-ink-tertiary: #9b9ea5;
+  --ln-accent: #5e6ad2;
+  --ln-accent-muted: rgba(94, 106, 210, 0.1);
+  --ln-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 106, 210, 0.08), transparent);
+  --ln-nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+.ln-app {
+  font-family: var(--ln-font);
+  color: var(--ln-ink);
+  background: var(--ln-bg);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.ln-glow {
+  background: var(--ln-glow);
+}
+
+.ln-panel {
+  background: var(--ln-bg-elevated);
+  border: 1px solid var(--ln-border);
+  border-radius: var(--ln-radius-lg);
+}
+
+.ln-row {
+  display: flex;
+  gap: 0.875rem;
+  padding: 0.75rem;
+  border-radius: var(--ln-radius-lg);
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.ln-row:hover {
+  background: var(--ln-bg-hover);
+  border-color: var(--ln-border);
+}
+
+.ln-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: var(--ln-accent-muted);
+  color: var(--ln-accent);
+}
+
+.ln-badge-neutral {
+  background: var(--ln-bg-hover);
+  color: var(--ln-ink-secondary);
+}
+
+.ln-divider {
+  height: 1px;
+  background: var(--ln-border);
+  border: none;
+}
+
+.ln-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ln-ink-tertiary);
+}
+
+.ln-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.ln-theme-btn {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ln-radius);
+  border: 1px solid var(--ln-border);
+  background: var(--ln-bg-elevated);
+  color: var(--ln-ink-secondary);
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.ln-theme-btn:active {
+  transform: scale(0.97);
+}
+
+.ln-nav-tab {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ln-ink-tertiary);
+  transition: color 0.15s ease;
+}
+
+.ln-nav-tab-active {
+  color: var(--ln-ink);
+}
+
+.ln-nav-tab-active::after {
+  content: "";
+  display: block;
+  margin: 0.2rem auto 0;
+  width: 1rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ln-accent);
+}
+
+.ln-thumb {
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--ln-radius);
+  border: 1px solid var(--ln-border);
+}
+
+@keyframes ln-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ln-fade {
+  animation: ln-fade 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ln-fade-d1 {
+  animation-delay: 0.05s;
+}
+
+.ln-fade-d2 {
+  animation-delay: 0.1s;
+}

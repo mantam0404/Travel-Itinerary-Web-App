@@ -25,6 +25,7 @@ interface HomePageProps {
   syncMeta: SyncMeta | null;
   onSync: () => void;
   onTryEditorial?: () => void;
+  onTryLinear?: () => void;
 }
 
 const HERO_IMAGE = 'https://picsum.photos/seed/barcelona-park-guell-travel/900/1125';
@@ -46,6 +47,7 @@ export function HomePage({
   syncMeta,
   onSync,
   onTryEditorial,
+  onTryLinear,
 }: HomePageProps) {
   const departure = flights.find((f) => f.type === 'departure');
   const nextDay = itinerary[1];
@@ -59,18 +61,29 @@ export function HomePage({
 
   return (
     <>
-      {onTryEditorial && (
-        <div className="mx-4 mt-4">
-          <button
-            type="button"
-            onClick={onTryEditorial}
-            className="w-full rounded-xl border border-[var(--od-hairline)] bg-[var(--od-cloud)] px-4 py-3 text-left transition hover:opacity-90"
-          >
-            <p className="text-xs font-medium text-[var(--od-ink-subtle)]">新設計方向預覽 · Editorial</p>
-            <p className="mt-0.5 text-sm font-semibold text-[var(--od-ink)]">
-              查看 anti-vaporware 風格首頁 →
-            </p>
-          </button>
+      {(onTryLinear || onTryEditorial) && (
+        <div className="mx-4 mt-4 space-y-2">
+          {onTryLinear && (
+            <button
+              type="button"
+              onClick={onTryLinear}
+              className="w-full rounded-xl border border-[var(--od-hairline)] bg-[var(--od-cloud)] px-4 py-3 text-left transition hover:opacity-90"
+            >
+              <p className="text-xs font-medium text-[var(--od-ink-subtle)]">新設計方向預覽 · Linear</p>
+              <p className="mt-0.5 text-sm font-semibold text-[var(--od-ink)]">
+                全幅 Hero + 行程附圖 →
+              </p>
+            </button>
+          )}
+          {onTryEditorial && (
+            <button
+              type="button"
+              onClick={onTryEditorial}
+              className="w-full rounded-xl border border-[var(--od-hairline)] px-4 py-2.5 text-left text-xs text-[var(--od-ink-muted)] transition hover:opacity-90"
+            >
+              查看 Editorial 風格預覽
+            </button>
+          )}
         </div>
       )}
 

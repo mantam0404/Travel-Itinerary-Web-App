@@ -2,27 +2,33 @@ import { useState, useCallback, useMemo } from 'react';
 import { Layout, type Tab } from './components/Layout';
 import { HomePage } from './components/HomePage';
 import { HomePageEditorial } from './components/preview/HomePageEditorial';
+import { HomePageLinear } from './components/preview/HomePageLinear';
 import { Itinerary } from './components/Itinerary';
 import { TravelMap } from './components/TravelMap';
 import { ExpenseTracker } from './components/ExpenseTracker';
 import { useOfflineSync } from './hooks/useOfflineSync';
 import { useTheme } from './hooks/useTheme';
 
-type PreviewMode = 'editorial' | null;
+type PreviewMode = 'editorial' | 'linear' | null;
 
 function usePreviewMode() {
   const initial = useMemo((): PreviewMode => {
     const p = new URLSearchParams(window.location.search).get('preview');
-    return p === 'editorial' ? 'editorial' : null;
+    if (p === 'editorial') return 'editorial';
+    if (p === 'linear') return 'linear';
+    return null;
   }, []);
   const [preview, setPreview] = useState<PreviewMode>(initial);
 
+  const enter = (mode: Exclude<PreviewMode, null>) => {
+    setPreview(mode);
+    window.history.replaceState({}, '', `?preview=${mode}`);
+  };
+
   return {
     preview,
-    enterEditorial: () => {
-      setPreview('editorial');
-      window.history.replaceState({}, '', '?preview=editorial');
-    },
+    enterEditorial: () => enter('editorial'),
+    enterLinear: () => enter('linear'),
     exitPreview: () => {
       setPreview(null);
       window.history.replaceState({}, '', window.location.pathname);
@@ -34,15 +40,23 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const { tripData, status, syncMeta, loading, performSync } = useOfflineSync();
   const { isDark, toggleTheme } = useTheme();
-  const { preview, enterEditorial, exitPreview } = usePreviewMode();
+  const { preview, enterEditorial, enterLinear, exitPreview } = usePreviewMode();
 
   const scrollToFlights = useCallback(() => {
     document.getElementById('flights')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
+  const navigateFromPreview = useCallback(
+    (tab: Tab) => {
+      exitPreview();
+      setActiveTab(tab);
+    },
+    [exitPreview],
+  );
+
   if (loading || !tripData) {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-[#121212] text-white/70">
+      <div className="flex min-h-dvh items-center justify-center bg-[#08090a] text-white/70">
         <div className="text-center">
           <p className="text-4xl animate-pulse">✈️</p>
           <p className="mt-4 text-sm">載入行程資料中…</p>
@@ -59,15 +73,28 @@ export default function App() {
         itinerary={tripData.itinerary}
         isDark={isDark}
         onToggleTheme={toggleTheme}
-        onNavigate={(tab) => {
-          exitPreview();
-          setActiveTab(tab);
-        }}
+        onNavigate={navigateFromPreview}
         onExitPreview={exitPreview}
         status={status}
         syncMeta={syncMeta}
         onSync={performSync}
         totalExpensesEur={totalExpensesEur}
+      />
+    );
+  }
+
+  if (preview === 'linear') {
+    return (
+      <HomePageLinear
+        flights={tripData.flights}
+        itinerary={tripData.itinerary}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
+        onNavigate={navigateFromPreview}
+        onExitPreview={exitPreview}
+        status={status}
+        syncMeta={syncMeta}
+        onSync={performSync}
       />
     );
   }
@@ -93,6 +120,7 @@ export default function App() {
           status={status}
           syncMeta={syncMeta}
           onSync={performSync}
+          onTryLinear={enterLinear}
           onTryEditorial={enterEditorial}
         />
       )}
