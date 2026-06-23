@@ -23,9 +23,13 @@
 
 ## 線上版本
 
-部署完成後，可在手機瀏覽器開啟：
+**手機瀏覽器網址：** https://mantam0404.github.io/Travel-Itinerary-Web-App/
 
-**https://mantam0404.github.io/Travel-Itinerary-Web-App/**
+> 首次使用需由倉庫擁有者在 GitHub 啟用 Pages（只需設定一次）：
+> 1. 開啟 [Repository Settings → Pages](https://github.com/mantam0404/Travel-Itinerary-Web-App/settings/pages)
+> 2. **Source** 選擇 **Deploy from a branch**
+> 3. **Branch** 選 `gh-pages`，資料夾選 `/ (root)`，按 **Save**
+> 4. 等待約 1–2 分鐘後，即可在手機瀏覽器開啟上方網址
 
 建議加入主畫面（Add to Home Screen）以獲得最佳 PWA 體驗。
 
