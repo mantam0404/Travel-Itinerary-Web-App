@@ -48,7 +48,7 @@ export function Layout({
       <div className="ln-glow pointer-events-none absolute inset-x-0 top-0 h-48" aria-hidden />
 
       {activeTab !== 'home' && (
-        <header className="sticky top-0 z-40 border-b border-[var(--ln-border)] bg-[var(--ln-nav-bg)] px-4 py-4 backdrop-blur-xl">
+        <header className="ln-fade sticky top-0 z-40 border-b border-[var(--ln-border)] bg-[var(--ln-nav-bg)] px-4 py-4 backdrop-blur-xl">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
               <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
@@ -71,7 +71,7 @@ export function Layout({
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`ln-nav-tab min-w-[3.5rem] px-2 py-1 ${activeTab === tab.id ? 'ln-nav-tab-active' : ''}`}
+              className={`ln-nav-tab ln-pressable min-w-[3.5rem] px-2 py-1 ${activeTab === tab.id ? 'ln-nav-tab-active' : ''}`}
             >
               {tab.label}
             </button>

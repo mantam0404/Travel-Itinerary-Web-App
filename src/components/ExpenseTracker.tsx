@@ -6,6 +6,8 @@ import {
   formatHkd,
   type ExpenseItem as ExpenseItemType,
 } from '../data/tripData';
+import { ScrollReveal } from './ScrollReveal';
+import { IconChevron } from './icons';
 
 interface ExpenseTrackerProps {
   expenses: ExpenseItem[];
@@ -38,53 +40,64 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
 
   return (
     <section id="expenses" className="space-y-4 px-4 py-6">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-sm text-[var(--ln-ink-secondary)]">匯率 €1 = HK${exchangeRate.toFixed(2)}</p>
-        <button type="button" onClick={() => setShowEur(!showEur)} className="ln-chip shrink-0 text-xs">
-          {showEur ? '顯示 HKD' : '顯示 EUR'}
-        </button>
-      </div>
-
-      <div className="ln-panel grid grid-cols-2 gap-3 p-4">
-        <div className="col-span-2 sm:col-span-1">
-          <p className="ln-label">總支出</p>
-          <p className="ln-tabular mt-1 text-2xl font-semibold text-[var(--ln-accent)]">
-            {formatAmount(totals.total)}
-          </p>
-          {!showEur && (
-            <p className="mt-0.5 text-xs text-[var(--ln-ink-tertiary)]">≈ {formatEur(totals.total)}</p>
-          )}
-        </div>
-        {(['accommodation', 'transportation', 'tickets'] as const).map((cat) => (
-          <div key={cat}>
-            <p className="text-xs text-[var(--ln-ink-secondary)]">{categoryLabels[cat]}</p>
-            <p className="ln-tabular mt-1 text-lg font-semibold">{formatAmount(totals[cat])}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-        {(['all', 'accommodation', 'transportation', 'tickets'] as const).map((cat) => (
+      <ScrollReveal>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm text-[var(--ln-ink-secondary)]">匯率 €1 = HK${exchangeRate.toFixed(2)}</p>
           <button
-            key={cat}
             type="button"
-            onClick={() => setFilter(cat)}
-            className={`ln-chip shrink-0 ${filter === cat ? 'ln-chip-active' : ''}`}
+            onClick={() => setShowEur(!showEur)}
+            className="ln-chip ln-pressable shrink-0 text-xs"
           >
-            {cat === 'all' ? '全部' : categoryLabels[cat]}
+            {showEur ? '顯示 HKD' : '顯示 EUR'}
           </button>
-        ))}
-      </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal delay={60}>
+        <div className="ln-panel grid grid-cols-2 gap-3 p-4">
+          <div className="col-span-2 sm:col-span-1">
+            <p className="ln-label">總支出</p>
+            <p className="ln-tabular mt-1 text-2xl font-semibold text-[var(--ln-accent)]">
+              {formatAmount(totals.total)}
+            </p>
+            {!showEur && (
+              <p className="mt-0.5 text-xs text-[var(--ln-ink-tertiary)]">≈ {formatEur(totals.total)}</p>
+            )}
+          </div>
+          {(['accommodation', 'transportation', 'tickets'] as const).map((cat) => (
+            <div key={cat}>
+              <p className="text-xs text-[var(--ln-ink-secondary)]">{categoryLabels[cat]}</p>
+              <p className="ln-tabular mt-1 text-lg font-semibold">{formatAmount(totals[cat])}</p>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+          {(['all', 'accommodation', 'transportation', 'tickets'] as const).map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setFilter(cat)}
+              className={`ln-chip ln-pressable shrink-0 ${filter === cat ? 'ln-chip-active' : ''}`}
+            >
+              {cat === 'all' ? '全部' : categoryLabels[cat]}
+            </button>
+          ))}
+        </div>
+      </ScrollReveal>
 
       <div className="space-y-2">
-        {filtered.map((expense) => (
-          <ExpenseCard
-            key={expense.id}
-            expense={expense}
-            exchangeRate={exchangeRate}
-            showEur={showEur}
-            categoryLabel={categoryEmoji[expense.category]}
-          />
+        {filtered.map((expense, index) => (
+          <ScrollReveal key={expense.id} delay={120 + index * 40}>
+            <ExpenseCard
+              expense={expense}
+              exchangeRate={exchangeRate}
+              showEur={showEur}
+              categoryLabel={categoryEmoji[expense.category]}
+            />
+          </ScrollReveal>
         ))}
       </div>
     </section>
@@ -109,7 +122,8 @@ function ExpenseCard({
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between gap-3 p-4 text-left transition hover:bg-[var(--ln-bg-hover)]"
+        className="ln-pressable flex w-full items-center justify-between gap-3 p-4 text-left hover:bg-[var(--ln-bg-hover)]"
+        aria-expanded={expanded}
       >
         <div className="min-w-0 flex-1">
           <p className="font-medium leading-snug">{expense.name}</p>
@@ -117,34 +131,41 @@ function ExpenseCard({
             {categoryLabel} · {expense.date}
           </p>
         </div>
-        <div className="shrink-0 text-right">
-          <p className="ln-tabular font-semibold text-[var(--ln-accent)]">
-            {showEur ? formatEur(expense.amountEur) : formatHkd(expense.amountEur, exchangeRate)}
-          </p>
-          {!showEur && (
-            <p className="text-xs text-[var(--ln-ink-tertiary)]">{formatEur(expense.amountEur)}</p>
-          )}
+          <div className="flex shrink-0 items-center gap-2 text-right">
+          <div>
+            <p className="ln-tabular font-semibold text-[var(--ln-accent)]">
+              {showEur ? formatEur(expense.amountEur) : formatHkd(expense.amountEur, exchangeRate)}
+            </p>
+            {!showEur && (
+              <p className="text-xs text-[var(--ln-ink-tertiary)]">{formatEur(expense.amountEur)}</p>
+            )}
+          </div>
+          <span className={`ln-chevron ml-2 text-[var(--ln-ink-tertiary)] ${expanded ? 'ln-chevron-open' : ''}`}>
+            <IconChevron />
+          </span>
         </div>
       </button>
 
-      {expanded && (
-        <div className="border-t border-[var(--ln-border)] px-4 pb-4">
-          <p className="ln-label mb-2 mt-3">費用明細</p>
-          <ul className="space-y-2">
-            {expense.breakdown.map((item, i) => (
-              <li key={i} className="flex justify-between gap-3 text-sm">
-                <span className="min-w-0 text-[var(--ln-ink-secondary)]">{item.label}</span>
-                <span className="ln-tabular shrink-0 font-medium">
-                  {showEur ? formatEur(item.amountEur) : formatHkd(item.amountEur, exchangeRate)}
-                </span>
-              </li>
-            ))}
-          </ul>
-          {expense.notes && (
-            <p className="mt-3 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">{expense.notes}</p>
-          )}
+      <div className={`ln-accordion-body ${expanded ? 'ln-accordion-body-open' : ''}`}>
+        <div className="ln-accordion-inner">
+          <div className="border-t border-[var(--ln-border)] px-4 pb-4">
+            <p className="ln-label mb-2 mt-3">費用明細</p>
+            <ul className="space-y-2">
+              {expense.breakdown.map((item, i) => (
+                <li key={i} className="flex justify-between gap-3 text-sm">
+                  <span className="min-w-0 text-[var(--ln-ink-secondary)]">{item.label}</span>
+                  <span className="ln-tabular shrink-0 font-medium">
+                    {showEur ? formatEur(item.amountEur) : formatHkd(item.amountEur, exchangeRate)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            {expense.notes && (
+              <p className="mt-3 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">{expense.notes}</p>
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

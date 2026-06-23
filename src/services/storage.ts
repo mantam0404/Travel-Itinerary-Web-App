@@ -22,7 +22,13 @@ const metaStore = localforage.createInstance({
 
 export async function loadTripData(): Promise<TripData> {
   const cached = await tripStore.getItem<TripData>(TRIP_STORE_KEY);
-  if (cached) return cached;
+  if (cached) {
+    if (cached.version < defaultTripData.version) {
+      await tripStore.setItem(TRIP_STORE_KEY, defaultTripData);
+      return defaultTripData;
+    }
+    return cached;
+  }
 
   await tripStore.setItem(TRIP_STORE_KEY, defaultTripData);
   await metaStore.setItem(SYNC_META_KEY, {
