@@ -5,7 +5,7 @@ import { ThemeToggleButton } from '../icons';
 import { SyncStatus } from '../SyncStatus';
 import type { ConnectionStatus } from '../../hooks/useOfflineSync';
 import type { SyncMeta } from '../../services/storage';
-import { getItineraryDayImage, HERO_IMAGE } from '../../utils/itineraryImages';
+import { getItineraryDayImage, getHeroImage } from '../../utils/itineraryImages';
 import '../../styles/linear.css';
 
 interface HomePageLinearProps {
@@ -33,6 +33,7 @@ export function HomePageLinear({
 }: HomePageLinearProps) {
   const departure = flights.find((f) => f.type === 'departure');
   const returnFlight = flights.find((f) => f.type === 'return');
+  const heroImage = getHeroImage(isDark);
 
   return (
     <div className={`ln-app relative min-h-dvh pb-32 ${isDark ? '' : 'light'}`}>
@@ -42,17 +43,12 @@ export function HomePageLinear({
       <section className="relative w-full overflow-hidden">
         <div className="relative aspect-[5/4] w-full sm:aspect-[16/10]">
           <img
-            src={HERO_IMAGE}
-            alt="Barcelona panorama at dusk"
-            className="absolute inset-0 h-full w-full object-cover"
+            key={heroImage}
+            src={heroImage}
+            alt="Barcelona skyline with Sagrada Família"
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(8,9,10,0.35) 0%, rgba(8,9,10,0.05) 35%, rgba(8,9,10,0.92) 100%)',
-            }}
-          />
+          <div className="ln-hero-overlay absolute inset-0" />
 
           {/* Top bar */}
           <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-between gap-3 px-4 pt-4 pb-2 sm:px-6">
@@ -62,7 +58,7 @@ export function HomePageLinear({
               <button
                 type="button"
                 onClick={onExitPreview}
-                className="rounded-lg border border-[var(--ln-border-strong)] bg-[rgba(8,9,10,0.45)] px-3 py-1.5 text-xs font-medium text-[var(--ln-ink)] backdrop-blur-md"
+                className="ln-hero-control rounded-lg px-3 py-1.5 text-xs font-medium backdrop-blur-md"
               >
                 返回現版
               </button>
@@ -71,15 +67,20 @@ export function HomePageLinear({
 
           {/* Hero copy */}
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label text-[var(--ln-ink-secondary)]">Spain · Oct 15–24, 2026</p>
-            <h1 className="mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] text-[var(--ln-ink)] sm:text-[2rem]">
-              西班牙旅行行程
+            <p className="ln-label ln-hero-ink-secondary">Barcelona · Oct 15–24, 2026</p>
+            <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
+              巴塞隆納旅行行程
             </h1>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-              Barcelona & Madrid · 離線行程、地圖與費用追蹤
+            <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
+              10 天深度漫遊 · 離線行程、地圖與費用追蹤
             </p>
             <div className="mt-3">
-              <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} variant="hero" />
+              <SyncStatus
+                status={status}
+                syncMeta={syncMeta}
+                onSync={onSync}
+                variant={isDark ? 'hero' : 'hero-light'}
+              />
             </div>
           </div>
         </div>
@@ -89,7 +90,7 @@ export function HomePageLinear({
       <section className="ln-fade border-b border-[var(--ln-border)] px-4 py-4 sm:px-6">
         <div className="flex flex-wrap gap-2">
           <span className="ln-badge-neutral ln-badge">10 天行程</span>
-          <span className="ln-badge-neutral ln-badge">2 城市</span>
+          <span className="ln-badge-neutral ln-badge">Barcelona</span>
           <span className="ln-badge">CX321 / CX318</span>
           <span className="ln-badge-neutral ln-badge">離線優先</span>
         </div>
@@ -157,7 +158,7 @@ export function HomePageLinear({
 
         <div className="space-y-2">
           {itinerary.map((day) => {
-            const image = getItineraryDayImage(day);
+            const image = getItineraryDayImage(day, isDark);
             const highlight = day.activities[0];
             return (
               <button
@@ -168,9 +169,10 @@ export function HomePageLinear({
               >
                 <div className="ln-thumb h-[4.5rem] w-[5.5rem] sm:h-20 sm:w-24">
                   <img
+                    key={image}
                     src={image}
-                    alt={day.city}
-                    className="h-full w-full object-cover"
+                    alt={highlight?.title ?? day.city}
+                    className="h-full w-full object-cover transition-opacity duration-300"
                     loading="lazy"
                   />
                 </div>
@@ -222,7 +224,7 @@ export function HomePageLinear({
       <section className="mx-4 mb-4 border border-[var(--ln-border)] px-4 py-3 sm:mx-6">
         <p className="ln-label">設計方向</p>
         <p className="mt-2 text-xs leading-relaxed text-[var(--ln-ink-secondary)]">
-          參考 Linear.app：深色精準介面、全幅 Hero、細邊框面板、靛紫強調色；每日行程附縮圖預覽。
+          參考 Linear.app：全幅 Hero、每日行程附景點縮圖；全程駐紮 Barcelona，深／淺色模式切換對應不同氛圍的攝影圖。
           確認後套用到全站。
         </p>
       </section>

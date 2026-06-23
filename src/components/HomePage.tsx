@@ -7,7 +7,6 @@ import {
   IconCalendar,
   IconWallet,
   IconChevron,
-  IconTrain,
   ThemeToggleButton,
 } from './icons';
 import { SyncStatus } from './SyncStatus';
@@ -33,7 +32,7 @@ const HERO_IMAGE = 'https://picsum.photos/seed/barcelona-park-guell-travel/900/1
 const highlights = [
   { name: 'Sagrada Família', meta: '第 3 天 · 09:30', image: 'https://picsum.photos/seed/sagrada-familia/640/480' },
   { name: 'Park Güell', meta: '第 4 天 · 10:00', image: 'https://picsum.photos/seed/park-guell-barcelona/640/480' },
-  { name: 'Prado Museum', meta: '第 7 天 · Madrid', image: 'https://picsum.photos/seed/prado-madrid/640/480' },
+  { name: 'Casa Milà', meta: '第 6 天 · La Pedrera', image: 'https://picsum.photos/seed/casa-mila-barcelona/640/480' },
 ];
 
 export function HomePage({
@@ -149,11 +148,11 @@ export function HomePage({
                   HKG → BCN
                 </span>
                 <span className="od-hero-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold">
-                  <IconTrain />
-                  Barcelona → Madrid
+                  <IconMap size={12} />
+                  Barcelona 深度遊
                 </span>
                 <span className="od-hero-chip rounded-full px-3 py-1 text-[11px] font-semibold">
-                  10 天 · 2 城市
+                  10 天 · 1 城市
                 </span>
               </div>
               <p className="text-[26px] font-bold leading-[1.2] tracking-[-0.03em] text-white sm:text-[28px]">

@@ -1,4 +1,4 @@
-/* Linear.app-inspired design tokens for Spain travel app */
+/* Linear.app-inspired design tokens for Barcelona travel app */
 
 .ln-app {
   --ln-bg: #08090a;
@@ -17,21 +17,41 @@
   --ln-nav-bg: rgba(8, 9, 10, 0.88);
   --ln-radius: 8px;
   --ln-radius-lg: 12px;
+  --ln-hero-gradient: linear-gradient(
+    180deg,
+    rgba(8, 9, 10, 0.45) 0%,
+    rgba(8, 9, 10, 0.08) 38%,
+    rgba(8, 9, 10, 0.94) 100%
+  );
+  --ln-hero-ink: #f7f8f8;
+  --ln-hero-ink-secondary: rgba(247, 248, 248, 0.72);
+  --ln-hero-control-bg: rgba(8, 9, 10, 0.5);
+  --ln-hero-control-ink: #f7f8f8;
 }
 
 .ln-app.light {
-  --ln-bg: #ffffff;
-  --ln-bg-elevated: #f9f9fb;
-  --ln-bg-hover: #f0f0f5;
-  --ln-border: rgba(0, 0, 0, 0.08);
-  --ln-border-strong: rgba(0, 0, 0, 0.12);
+  --ln-bg: #f6f7f9;
+  --ln-bg-elevated: #ffffff;
+  --ln-bg-hover: #eceef2;
+  --ln-border: rgba(26, 29, 38, 0.1);
+  --ln-border-strong: rgba(26, 29, 38, 0.16);
   --ln-ink: #1a1d26;
-  --ln-ink-secondary: #6b6f76;
-  --ln-ink-tertiary: #9b9ea5;
-  --ln-accent: #5e6ad2;
-  --ln-accent-muted: rgba(94, 106, 210, 0.1);
-  --ln-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 106, 210, 0.08), transparent);
-  --ln-nav-bg: rgba(255, 255, 255, 0.9);
+  --ln-ink-secondary: #5c6068;
+  --ln-ink-tertiary: #8a8f98;
+  --ln-accent: #4f5cc6;
+  --ln-accent-muted: rgba(79, 92, 198, 0.12);
+  --ln-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 92, 198, 0.1), transparent);
+  --ln-nav-bg: rgba(255, 255, 255, 0.92);
+  --ln-hero-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.02) 32%,
+    rgba(246, 247, 249, 0.92) 100%
+  );
+  --ln-hero-ink: #1a1d26;
+  --ln-hero-ink-secondary: rgba(26, 29, 38, 0.72);
+  --ln-hero-control-bg: rgba(255, 255, 255, 0.72);
+  --ln-hero-control-ink: #1a1d26;
 }
 
 .ln-app {
@@ -45,10 +65,33 @@
   background: var(--ln-glow);
 }
 
+.ln-hero-overlay {
+  background: var(--ln-hero-gradient);
+}
+
+.ln-hero-ink {
+  color: var(--ln-hero-ink);
+}
+
+.ln-hero-ink-secondary {
+  color: var(--ln-hero-ink-secondary);
+}
+
+.ln-hero-control {
+  border: 1px solid var(--ln-border-strong);
+  background: var(--ln-hero-control-bg);
+  color: var(--ln-hero-control-ink);
+}
+
 .ln-panel {
   background: var(--ln-bg-elevated);
   border: 1px solid var(--ln-border);
   border-radius: var(--ln-radius-lg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ln-app.light .ln-panel {
+  box-shadow: 0 1px 3px rgba(26, 29, 38, 0.06);
 }
 
 .ln-row {
@@ -107,7 +150,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--ln-radius);
-  border: 1px solid var(--ln-border);
+  border: 1px solid var(--ln-border-strong);
   background: var(--ln-bg-elevated);
   color: var(--ln-ink-secondary);
   font-size: 0.875rem;

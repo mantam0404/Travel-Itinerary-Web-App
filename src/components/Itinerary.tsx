@@ -13,7 +13,7 @@ export function Itinerary({ days }: ItineraryProps) {
   return (
     <section id="itinerary" className="space-y-4 px-4 py-6">
       <p className="text-sm leading-relaxed text-[var(--od-ink-muted)]">
-        10 天 Spain 行程 · Barcelona & Madrid
+        10 天 Barcelona 行程 · 高第建築與地中海風情
       </p>
 
       <div className="space-y-3">
