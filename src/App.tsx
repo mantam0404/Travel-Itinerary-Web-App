@@ -50,6 +50,8 @@ export default function App() {
       <HomePagePreview
         flights={tripData.flights}
         itinerary={tripData.itinerary}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
         onExitPreview={exitPreview}
       />
     );

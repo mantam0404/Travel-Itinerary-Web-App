@@ -5,12 +5,14 @@ import '../../styles/open-design-preview.css';
 interface HomePagePreviewProps {
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
+  isDark: boolean;
+  onToggleTheme: () => void;
   onExitPreview?: () => void;
 }
 
-function IconPlane() {
+function IconPlane({ size = 18 }: { size?: number }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
         d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
         fill="currentColor"
@@ -60,6 +62,19 @@ function IconChevron() {
   );
 }
 
+function IconTrain() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 15.5V7a4 4 0 014-4h8a4 4 0 014 4v8.5M4 11h16M8 19h2M14 19h2M6 15h12v4H6z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 const quickActions = [
   { label: '每日行程', sub: '10 天規劃', icon: IconCalendar },
   { label: '景點地圖', sub: 'Barcelona', icon: IconMap },
@@ -71,113 +86,187 @@ const highlights = [
   {
     name: 'Sagrada Família',
     meta: '第 3 天 · 09:30',
-    image: 'https://picsum.photos/seed/sagrada/640/480',
+    image: 'https://picsum.photos/seed/sagrada-familia/640/480',
   },
   {
     name: 'Park Güell',
     meta: '第 4 天 · 10:00',
-    image: 'https://picsum.photos/seed/parkguell/640/480',
+    image: 'https://picsum.photos/seed/park-guell-barcelona/640/480',
   },
   {
     name: 'Prado Museum',
     meta: '第 7 天 · Madrid',
-    image: 'https://picsum.photos/seed/prado/640/480',
+    image: 'https://picsum.photos/seed/prado-madrid/640/480',
   },
 ];
 
-export function HomePagePreview({ flights, itinerary, onExitPreview }: HomePagePreviewProps) {
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=900&q=80';
+
+export function HomePagePreview({
+  flights,
+  itinerary,
+  isDark,
+  onToggleTheme,
+  onExitPreview,
+}: HomePagePreviewProps) {
   const departure = flights.find((f) => f.type === 'departure');
   const nextDay = itinerary[1];
 
   return (
-    <div className="od-preview relative mx-auto min-h-dvh max-w-lg overflow-x-hidden pb-28">
+    <div
+      className={`od-preview relative mx-auto min-h-dvh max-w-lg overflow-x-hidden pb-36 ${isDark ? 'dark' : ''}`}
+    >
       <div className="od-grain" aria-hidden />
 
-      {onExitPreview && (
-        <button
-          type="button"
-          onClick={onExitPreview}
-          className="fixed top-3 right-3 z-[70] rounded-full bg-black/55 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition hover:bg-black/70"
-        >
-          返回現有版本
-        </button>
-      )}
+      {/* Hero — travel postcard style, self-contained spacing */}
+      <section className="relative overflow-hidden">
+        <div className="relative mx-4 mt-4 overflow-hidden rounded-[24px]">
+          <img
+            src={HERO_IMAGE}
+            alt="Park Güell mosaic view, Barcelona"
+            className="aspect-[4/5] w-full object-cover sm:aspect-[5/6]"
+          />
 
-      {/* Hero */}
-      <section className="relative min-h-[52dvh] overflow-hidden">
-        <img
-          src="https://picsum.photos/seed/barcelona-spain/900/1200"
-          alt="Barcelona skyline"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/70" />
+          {/* Warm sunset travel gradient */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(
+                180deg,
+                var(--od-hero-overlay-top) 0%,
+                var(--od-hero-overlay-mid) 38%,
+                var(--od-hero-overlay-bottom) 100%
+              )`,
+            }}
+          />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 50% at 85% 15%, rgba(244,162,97,0.45) 0%, transparent 60%)',
+            }}
+          />
 
-        <header className="relative z-10 flex items-center justify-between px-5 pt-5">
-          <div>
-            <p className="text-[11px] font-semibold tracking-[0.12em] text-white/75 uppercase">
-              設計預覽 · Open Design
-            </p>
-            <h1 className="mt-1 text-[26px] font-bold leading-tight tracking-[-0.02em] text-white">
-              Spain 旅行行程
-            </h1>
+          {/* Decorative route arc */}
+          <svg
+            className="pointer-events-none absolute top-[38%] right-4 left-4 h-16 w-[calc(100%-2rem)] opacity-70"
+            viewBox="0 0 320 64"
+            fill="none"
+            aria-hidden
+          >
+            <path
+              className="od-hero-route"
+              d="M8 48 C 80 8, 240 8, 312 48"
+              stroke="rgba(255,255,255,0.55)"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <circle cx="8" cy="48" r="4" fill="var(--od-travel-gold)" />
+            <circle cx="160" cy="20" r="3" fill="var(--od-travel-sky)" />
+            <circle cx="312" cy="48" r="4" fill="var(--od-rausch)" />
+          </svg>
+
+          {/* Header inside hero — no overlapping fixed elements */}
+          <div className="absolute top-0 right-0 left-0 z-10 p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-semibold tracking-[0.14em] text-white/70 uppercase">
+                  Spain Trip 2026
+                </p>
+                <h1 className="mt-1 text-[22px] font-bold leading-snug tracking-[-0.02em] text-white sm:text-[24px]">
+                  西班牙旅行行程
+                </h1>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                <button
+                  type="button"
+                  onClick={onToggleTheme}
+                  className="od-theme-btn border-white/25 bg-black/25 text-white backdrop-blur-md"
+                  aria-label={isDark ? '切換至淺色模式' : '切換至深色模式'}
+                  title={isDark ? '淺色模式' : '深色模式'}
+                >
+                  {isDark ? '☀️' : '🌙'}
+                </button>
+                {onExitPreview && (
+                  <button
+                    type="button"
+                    onClick={onExitPreview}
+                    className="rounded-full border border-white/25 bg-black/25 px-3 py-2 text-[11px] font-medium text-white backdrop-blur-md transition hover:bg-black/40"
+                  >
+                    返回
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/15 text-sm font-semibold text-white backdrop-blur-md">
-            ES
-          </div>
-        </header>
 
-        <div className="absolute right-0 bottom-0 left-0 z-10 px-5 pb-6">
-          <div className="od-animate-in">
-            <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-md">
-              2026年10月15日 – 24日
-            </span>
-            <p className="mt-3 max-w-[18ch] text-[28px] font-bold leading-[1.15] tracking-[-0.03em] text-white">
-              你的 Barcelona
-              <br />
-              & Madrid 之旅
-            </p>
-            <p className="mt-2 max-w-[28ch] text-sm leading-relaxed text-white/80">
-              離線優先行程規劃 · 航班、地圖、費用一站整合
-            </p>
+          {/* Hero copy — bottom safe zone */}
+          <div className="absolute right-0 bottom-0 left-0 z-10 p-5 pb-6">
+            <div className="od-animate-in space-y-3">
+              <div className="flex flex-wrap gap-2">
+                <span className="od-hero-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold">
+                  <IconPlane size={12} />
+                  HKG → BCN
+                </span>
+                <span className="od-hero-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold">
+                  <IconTrain />
+                  Barcelona → Madrid
+                </span>
+                <span className="od-hero-chip rounded-full px-3 py-1 text-[11px] font-semibold">
+                  10 天 · 2 城市
+                </span>
+              </div>
+              <p className="text-[26px] font-bold leading-[1.2] tracking-[-0.03em] text-white sm:text-[28px]">
+                探索 Spain 的
+                <br />
+                建築、美食與藝術
+              </p>
+              <p className="max-w-[32ch] text-sm leading-relaxed text-white/85">
+                {formatDateZh('2026-10-15')} – {formatDateZh('2026-10-24')}
+                <span className="mx-1.5 opacity-50">·</span>
+                離線行程 · 地圖 · 費用
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Floating flight card */}
+      {/* Flight card — separate section, no overlap */}
       {departure && (
-        <section className="relative z-20 -mt-8 px-5 od-animate-in od-animate-in-delay-1">
-          <div
-            className="rounded-[20px] bg-white p-4"
-            style={{ boxShadow: 'var(--od-shadow-panel)' }}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
+        <section className="mt-6 px-4 od-animate-in od-animate-in-delay-1">
+          <div className="od-surface-card rounded-[20px] p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
                 <p className="text-xs font-semibold text-[var(--od-ink-muted)]">即將出發</p>
-                <p className="mt-1 text-lg font-bold tracking-[-0.02em]">
+                <p className="mt-1 truncate text-lg font-bold tracking-[-0.02em]">
                   Cathay Pacific {departure.flightNumber}
                 </p>
-                <p className="text-sm text-[var(--od-ink-muted)]">
-                  {formatDateZh(departure.date)} · {departure.route}
+                <p className="mt-0.5 text-sm text-[var(--od-ink-muted)]">
+                  {formatDateZh(departure.date)}
                 </p>
               </div>
-              <div className="rounded-full bg-[#fff0f3] px-3 py-1.5 text-xs font-semibold text-[var(--od-rausch)]">
+              <div className="shrink-0 rounded-full bg-[var(--od-rausch-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--od-rausch)]">
                 {departure.status}
               </div>
             </div>
-            <div className="mt-4 flex items-center justify-between rounded-2xl bg-[var(--od-cloud)] px-4 py-3">
-              <div>
+            <div className="mt-4 flex items-center justify-between gap-2 rounded-2xl bg-[var(--od-cloud)] px-4 py-3">
+              <div className="shrink-0">
                 <p className="text-2xl font-bold tabular-nums">{departure.departureTime}</p>
                 <p className="text-xs font-medium text-[var(--od-ink-muted)]">HKG</p>
               </div>
-              <div className="flex flex-col items-center px-2">
+              <div className="flex min-w-0 flex-1 flex-col items-center px-1">
                 <p className="text-[11px] text-[var(--od-ink-subtle)]">{departure.duration}</p>
-                <div className="my-1 flex items-center gap-1 text-[var(--od-rausch)]">
-                  <span className="h-px w-8 bg-[var(--od-hairline)]" />
+                <div className="my-1 flex w-full max-w-[120px] items-center gap-1 text-[var(--od-rausch)]">
+                  <span className="h-px flex-1 bg-[var(--od-hairline)]" />
                   <IconPlane />
-                  <span className="h-px w-8 bg-[var(--od-hairline)]" />
+                  <span className="h-px flex-1 bg-[var(--od-hairline)]" />
                 </div>
+                <p className="truncate text-[11px] font-medium text-[var(--od-ink-muted)]">
+                  {departure.route}
+                </p>
               </div>
-              <div className="text-right">
+              <div className="shrink-0 text-right">
                 <p className="text-2xl font-bold tabular-nums">{departure.arrivalTime}</p>
                 <p className="text-xs font-medium text-[var(--od-ink-muted)]">BCN</p>
               </div>
@@ -187,25 +276,27 @@ export function HomePagePreview({ flights, itinerary, onExitPreview }: HomePageP
       )}
 
       {/* Quick actions */}
-      <section className="mt-8 px-5 od-animate-in od-animate-in-delay-2">
-        <div className="flex items-end justify-between">
+      <section className="mt-8 px-4 od-animate-in od-animate-in-delay-2">
+        <div className="mb-4 flex items-end justify-between gap-3">
           <h2 className="text-[22px] font-bold tracking-[-0.02em]">快速入口</h2>
-          <span className="text-sm font-medium text-[var(--od-ink-muted)]">4 項功能</span>
+          <span className="shrink-0 text-sm font-medium text-[var(--od-ink-muted)]">4 項功能</span>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {quickActions.map((action) => {
             const Icon = action.icon;
             return (
               <button
                 key={action.label}
                 type="button"
-                className="group rounded-[14px] border border-[var(--od-hairline)] bg-white p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#ffc4d0] active:scale-[0.98]"
+                className="od-surface-card group rounded-[14px] p-4 text-left transition duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fff0f3] text-[var(--od-rausch)] transition group-hover:bg-[var(--od-rausch)] group-hover:text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--od-rausch-soft)] text-[var(--od-rausch)] transition group-hover:bg-[var(--od-rausch)] group-hover:text-white">
                   <Icon />
                 </span>
-                <p className="mt-3 text-[15px] font-semibold">{action.label}</p>
-                <p className="mt-0.5 text-xs text-[var(--od-ink-muted)]">{action.sub}</p>
+                <p className="mt-3 text-[15px] font-semibold leading-snug">{action.label}</p>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--od-ink-muted)]">
+                  {action.sub}
+                </p>
               </button>
             );
           })}
@@ -214,42 +305,41 @@ export function HomePagePreview({ flights, itinerary, onExitPreview }: HomePageP
 
       {/* Up next */}
       {nextDay && (
-        <section className="mt-10 px-5 od-animate-in od-animate-in-delay-3">
-          <div className="flex items-center justify-between">
+        <section className="mt-10 px-4 od-animate-in od-animate-in-delay-3">
+          <div className="mb-4 flex items-center justify-between gap-3">
             <h2 className="text-[22px] font-bold tracking-[-0.02em]">下一站</h2>
             <button
               type="button"
-              className="flex items-center gap-0.5 text-sm font-semibold text-[var(--od-rausch)]"
+              className="flex shrink-0 items-center gap-0.5 text-sm font-semibold text-[var(--od-rausch)]"
             >
               查看行程
               <IconChevron />
             </button>
           </div>
-          <div
-            className="mt-4 overflow-hidden rounded-[20px] border border-[var(--od-hairline)] bg-white"
-            style={{ boxShadow: 'var(--od-shadow-panel)' }}
-          >
-            <div className="relative h-36">
+          <div className="od-surface-card overflow-hidden rounded-[20px]">
+            <div className="relative h-40">
               <img
-                src="https://picsum.photos/seed/barcelona-arrival/800/400"
-                alt="Barcelona"
+                src="https://picsum.photos/seed/barcelona-gothic/800/400"
+                alt="Gothic Quarter, Barcelona"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
-              <div className="absolute bottom-3 left-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+              <div className="absolute right-4 bottom-4 left-4">
                 <p className="text-xs font-semibold text-white/85">{nextDay.dayLabel}</p>
-                <p className="text-lg font-bold text-white">{nextDay.city}</p>
+                <p className="mt-0.5 text-lg font-bold leading-snug text-white">{nextDay.city}</p>
               </div>
             </div>
-            <div className="space-y-3 p-4">
+            <div className="space-y-4 p-4">
               {nextDay.activities.slice(0, 2).map((act, i: number) => (
                 <div key={i} className="flex gap-3">
-                  <span className="w-12 shrink-0 text-xs font-semibold tabular-nums text-[var(--od-rausch)]">
+                  <span className="w-11 shrink-0 pt-0.5 text-xs font-semibold tabular-nums text-[var(--od-rausch)]">
                     {act.time}
                   </span>
-                  <div>
-                    <p className="text-sm font-semibold">{act.title}</p>
-                    <p className="text-xs text-[var(--od-ink-muted)]">{act.location}</p>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold leading-snug">{act.title}</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-[var(--od-ink-muted)]">
+                      {act.location}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -258,42 +348,51 @@ export function HomePagePreview({ flights, itinerary, onExitPreview }: HomePageP
         </section>
       )}
 
-      {/* Highlights horizontal scroll */}
+      {/* Highlights */}
       <section className="mt-10">
-        <div className="flex items-center justify-between px-5">
+        <div className="mb-4 flex items-center justify-between gap-3 px-4">
           <h2 className="text-[22px] font-bold tracking-[-0.02em]">精選景點</h2>
-          <button type="button" className="text-sm font-semibold text-[var(--od-rausch)]">
+          <button
+            type="button"
+            className="shrink-0 text-sm font-semibold text-[var(--od-rausch)]"
+          >
             開啟地圖
           </button>
         </div>
-        <div className="mt-4 flex gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none]">
+        <div className="flex gap-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
           {highlights.map((spot) => (
-            <article key={spot.name} className="w-[68%] shrink-0 sm:w-[240px]">
+            <article key={spot.name} className="w-[68%] shrink-0 sm:w-[220px]">
               <div className="overflow-hidden rounded-[14px]">
-                <img src={spot.image} alt={spot.name} className="aspect-[4/3] w-full object-cover" />
+                <img
+                  src={spot.image}
+                  alt={spot.name}
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
-              <p className="mt-2.5 text-[15px] font-semibold">{spot.name}</p>
-              <p className="text-xs text-[var(--od-ink-muted)]">{spot.meta}</p>
+              <p className="mt-3 text-[15px] font-semibold leading-snug">{spot.name}</p>
+              <p className="mt-1 text-xs leading-relaxed text-[var(--od-ink-muted)]">{spot.meta}</p>
             </article>
           ))}
         </div>
       </section>
 
       {/* Design note */}
-      <section className="mx-5 mt-10 mb-6 rounded-[14px] border border-dashed border-[var(--od-hairline)] bg-[var(--od-cloud)] p-4">
+      <section className="mx-4 mt-10 mb-4 rounded-[14px] border border-dashed border-[var(--od-hairline)] bg-[var(--od-cloud)] p-4">
         <p className="text-xs font-semibold tracking-wide text-[var(--od-rausch)] uppercase">
-          設計方向說明
+          v2 預覽更新
         </p>
         <p className="mt-2 text-sm leading-relaxed text-[var(--od-ink-muted)]">
-          依 Open Design 的 <strong className="text-[var(--od-ink)]">redesign-skill</strong> 與{' '}
-          <strong className="text-[var(--od-ink)]">Airbnb 設計系統</strong> 重新規劃：攝影優先的英雄區、
-          Rausch 珊瑚色強調、圓角卡片、水平捲動景點列，以及更清晰的資訊層級。確認此首頁風格後，我會套用到行程、地圖與費用頁。
+          已加入深／淺色模式切換、旅行路線視覺（HKG → BCN → Madrid）、明信片式英雄區，
+          並修正間距避免元素遮擋文字。確認後將套用到全站頁面。
         </p>
       </section>
 
-      {/* Preview bottom nav */}
-      <nav className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--od-hairline)] bg-white/95 backdrop-blur-lg">
-        <div className="mx-auto flex max-w-lg items-center justify-around px-2 py-2.5">
+      {/* Bottom nav */}
+      <nav
+        className="fixed right-0 bottom-0 left-0 z-50 border-t border-[var(--od-hairline)] backdrop-blur-lg"
+        style={{ background: 'var(--od-nav-bg)' }}
+      >
+        <div className="mx-auto flex max-w-lg items-center justify-around px-2 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           {[
             { label: '首頁', active: true },
             { label: '行程', active: false },
@@ -303,16 +402,13 @@ export function HomePagePreview({ flights, itinerary, onExitPreview }: HomePageP
             <button
               key={tab.label}
               type="button"
-              className={`relative flex flex-col items-center gap-1 px-4 py-1 text-[11px] font-semibold ${
+              className={`flex min-w-[3.5rem] flex-col items-center gap-1 px-3 py-1 text-[11px] font-semibold ${
                 tab.active ? 'text-[var(--od-rausch)]' : 'text-[var(--od-ink-subtle)]'
               }`}
             >
-              <span
-                className={`h-1.5 w-1.5 rounded-full ${tab.active ? 'bg-[var(--od-rausch)]' : 'bg-transparent'}`}
-              />
               {tab.label}
               {tab.active && (
-                <span className="absolute -bottom-0.5 h-0.5 w-8 rounded-full bg-[var(--od-rausch)]" />
+                <span className="h-0.5 w-6 rounded-full bg-[var(--od-rausch)]" />
               )}
             </button>
           ))}
