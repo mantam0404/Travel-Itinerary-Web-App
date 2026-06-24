@@ -1,23 +1,29 @@
 import { useState, useCallback } from 'react';
 import { Layout, type Tab } from './components/Layout';
 import { HomePage } from './components/HomePage';
+import type { NavigateOptions } from './components/HomePage';
 import { Itinerary } from './components/Itinerary';
 import { TravelMap } from './components/TravelMap';
 import { ExpenseTracker } from './components/ExpenseTracker';
 import { useOfflineSync } from './hooks/useOfflineSync';
 import { useTheme } from './hooks/useTheme';
+import type { MapFocusRequest } from './types/navigation';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [expandedDayDate, setExpandedDayDate] = useState<string | null>(null);
+  const [mapFocus, setMapFocus] = useState<MapFocusRequest | null>(null);
   const { tripData, status, syncMeta, loading, performSync } = useOfflineSync();
   const { isDark, toggleTheme } = useTheme();
 
-  const handleNavigate = useCallback((tab: Tab, options?: { dayDate?: string }) => {
+  const handleNavigate = useCallback((tab: Tab, options?: NavigateOptions) => {
     if (tab === 'itinerary' && options?.dayDate) {
       setExpandedDayDate(options.dayDate);
     } else if (tab !== 'itinerary') {
       setExpandedDayDate(null);
+    }
+    if (options?.attractionId) {
+      setMapFocus({ attractionId: options.attractionId, token: Date.now() });
     }
     setActiveTab(tab);
   }, []);
@@ -27,6 +33,11 @@ export default function App() {
       setExpandedDayDate(null);
     }
     setActiveTab(tab);
+  }, []);
+
+  const handleNavigateToAttraction = useCallback((attractionId: string) => {
+    setMapFocus({ attractionId, token: Date.now() });
+    setActiveTab('map');
   }, []);
 
   if (loading || !tripData) {
@@ -68,6 +79,7 @@ export default function App() {
           isDark={isDark}
           expandedDayDate={expandedDayDate}
           onExpandedDayChange={setExpandedDayDate}
+          onNavigateToAttraction={handleNavigateToAttraction}
         />
       )}
       {activeTab === 'map' && (
@@ -75,6 +87,7 @@ export default function App() {
           attractions={tripData.attractions}
           exchangeRate={tripData.exchangeRate}
           isDark={isDark}
+          focusRequest={mapFocus}
         />
       )}
       {activeTab === 'expenses' && (
