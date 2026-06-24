@@ -192,9 +192,30 @@
   border-radius: var(--ln-radius);
   border: 1px solid var(--ln-border-strong);
   background: var(--ln-bg-elevated);
-  color: var(--ln-ink-secondary);
-  font-size: 0.875rem;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  color: var(--ln-ink);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.ln-theme-btn:hover {
+  background: var(--ln-bg-hover);
+  color: var(--ln-ink);
+}
+
+.ln-theme-btn.ln-hero-control {
+  background: var(--ln-hero-control-bg);
+  color: var(--ln-hero-control-ink);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ln-theme-btn.ln-hero-control:hover {
+  background: var(--ln-hero-control-bg);
+  color: var(--ln-hero-control-ink);
+  border-color: var(--ln-border-strong);
 }
 
 .ln-theme-btn:active {

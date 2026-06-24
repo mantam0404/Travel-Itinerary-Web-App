@@ -86,23 +86,52 @@ export function IconMyLocation({ size = 22 }: { size?: number }) {
   );
 }
 
+export function IconSun({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="M12 2.75v2.5M12 18.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2.75 12h2.5M18.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function IconMoon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M20.5 14.25A8.25 8.25 0 0110.5 4.25 7.25 7.25 0 1019.25 16.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ThemeToggleButton({
   isDark,
   onToggle,
+  variant = 'default',
 }: {
   isDark: boolean;
   onToggle: () => void;
-  variant?: 'linear';
+  variant?: 'default' | 'hero';
 }) {
   return (
     <button
       type="button"
       onClick={onToggle}
-      className="ln-theme-btn"
+      className={`ln-theme-btn ln-pressable ${variant === 'hero' ? 'ln-hero-control' : ''}`}
       aria-label={isDark ? '切換至淺色模式' : '切換至深色模式'}
       title={isDark ? '淺色模式' : '深色模式'}
     >
-      {isDark ? '☀️' : '🌙'}
+      {isDark ? <IconSun /> : <IconMoon />}
     </button>
   );
 }

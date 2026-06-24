@@ -53,7 +53,7 @@ export function HomePage({
           <div className="ln-hero-overlay absolute inset-0" />
 
           <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-end gap-2 px-4 pt-4 pb-2 sm:px-6">
-            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
+            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} variant="hero" />
           </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
