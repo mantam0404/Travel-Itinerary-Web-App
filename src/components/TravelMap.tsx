@@ -7,7 +7,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
 import { IconMyLocation } from './icons';
-import { getAttractionImage, MAP_TILES } from '../utils/itineraryImages';
+import { getAttractionImage, getAttractionHeroImage, MAP_TILES } from '../utils/itineraryImages';
 import type { MapFocusRequest } from '../types/navigation';
 import 'leaflet/dist/leaflet.css';
 
@@ -184,6 +184,7 @@ export function TravelMap({
               zoom={13}
               className="h-72 w-full rounded-[10px] sm:h-96"
               scrollWheelZoom={false}
+              zoomControl
             >
               <MapInvalidateOnTheme isDark={isDark} />
               <TileLayer
@@ -266,13 +267,12 @@ export function TravelMap({
 
       {selected && selectedImage && (
         <ScrollReveal delay={40}>
-          <div className="ln-panel overflow-hidden">
-            <img
-              src={selectedImage}
-              alt={selected.name}
-              className="h-36 w-full bg-[var(--ln-map-marker-bg)] object-contain"
-            />
-            <div className="p-4">
+          <div
+            className="ln-map-detail-card ln-panel overflow-hidden"
+            style={{ backgroundImage: `url(${getAttractionHeroImage(selected.id)})` }}
+          >
+            <div className="ln-map-detail-overlay" aria-hidden />
+            <div className="ln-map-detail-body">
               <h3 className="text-lg font-semibold tracking-[-0.02em]">{selected.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
                 {selected.description}

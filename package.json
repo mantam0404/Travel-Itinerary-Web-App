@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "npm run images && tsc -b && vite build",
     "preview": "vite preview",
-    "images": "node scripts/generate-icons.mjs && node scripts/generate-attraction-images.mjs"
+    "images": "node scripts/generate-icons.mjs",
+    "images:attractions": "node scripts/download-attraction-images.mjs",
+    "images:all": "npm run images && npm run images:attractions"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

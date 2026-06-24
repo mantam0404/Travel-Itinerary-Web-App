@@ -18,6 +18,10 @@ export function getAttractionImage(attractionId: string, isDark: boolean): strin
   return `${BASE}images/attractions/${themeFolder(isDark)}/${attractionId}.jpg`;
 }
 
+export function getAttractionHeroImage(attractionId: string): string {
+  return `${BASE}images/attractions/${attractionId}-hero.jpg`;
+}
+
 export const MAP_TILES = {
   light: {
     url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
