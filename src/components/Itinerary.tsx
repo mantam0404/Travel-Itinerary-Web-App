@@ -10,9 +10,16 @@ interface ItineraryProps {
   isDark: boolean;
   expandedDayDate: string | null;
   onExpandedDayChange: (date: string | null) => void;
+  onNavigateToAttraction: (attractionId: string) => void;
 }
 
-export function Itinerary({ days, isDark, expandedDayDate, onExpandedDayChange }: ItineraryProps) {
+export function Itinerary({
+  days,
+  isDark,
+  expandedDayDate,
+  onExpandedDayChange,
+  onNavigateToAttraction,
+}: ItineraryProps) {
   const scrollTargetRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -37,7 +44,7 @@ export function Itinerary({ days, isDark, expandedDayDate, onExpandedDayChange }
     <section id="itinerary" className="space-y-4 px-4 py-6">
       <ScrollReveal>
         <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-          10 天 Barcelona 深度遊 · 美術館、主場館與高第建築
+          10 天 Barcelona 深度遊 · 點擊景點可跳轉至地圖位置
         </p>
       </ScrollReveal>
 
@@ -94,7 +101,19 @@ export function Itinerary({ days, isDark, expandedDayDate, onExpandedDayChange }
                             <p className="ln-tabular text-xs font-medium text-[var(--ln-accent)]">
                               {act.time}
                             </p>
-                            <p className="mt-0.5 text-sm font-medium">{act.title}</p>
+                            {act.attractionId ? (
+                              <button
+                                type="button"
+                                onClick={() => onNavigateToAttraction(act.attractionId!)}
+                                className="ln-pressable mt-0.5 text-left"
+                              >
+                                <p className="text-sm font-medium text-[var(--ln-accent)] underline decoration-[var(--ln-border-strong)] underline-offset-2">
+                                  {act.title} → 地圖
+                                </p>
+                              </button>
+                            ) : (
+                              <p className="mt-0.5 text-sm font-medium">{act.title}</p>
+                            )}
                             <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">{act.location}</p>
                             <p className="mt-1 text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
                               {act.description}

@@ -10,6 +10,7 @@ import { getItineraryDayImage, getHeroImage } from '../utils/itineraryImages';
 
 export interface NavigateOptions {
   dayDate?: string;
+  attractionId?: string;
 }
 
 interface HomePageProps {
