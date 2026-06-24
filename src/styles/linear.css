@@ -77,6 +77,10 @@
   color: var(--ln-hero-ink-secondary);
 }
 
+.ln-label.ln-hero-ink-secondary {
+  color: var(--ln-hero-ink-secondary);
+}
+
 .ln-hero-control {
   border: 1px solid var(--ln-border-strong);
   background: var(--ln-hero-control-bg);
