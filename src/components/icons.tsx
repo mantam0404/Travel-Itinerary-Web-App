@@ -74,6 +74,18 @@ export function IconHome({ size = 20 }: { size?: number }) {
   );
 }
 
+/** Google Maps–style location arrow (near_me) */
+export function IconMyLocation({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M17.27 6.73 13.03 17.59l-2.12-4.24-4.24-2.12 10.86-4.24z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function ThemeToggleButton({
   isDark,
   onToggle,

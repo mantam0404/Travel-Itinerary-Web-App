@@ -29,15 +29,10 @@ const ATTRACTION_DAY_MAP = {
   tibidabo: '2026-10-22',
 };
 
-function cropOffset(id, width, height) {
-  const hash = [...id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const maxLeft = Math.max(0, width - size);
-  const maxTop = Math.max(0, height - size);
-  return {
-    left: Math.floor(((hash * 37) % 997) / 997 * maxLeft),
-    top: Math.floor(((hash * 53) % 991) / 991 * maxTop),
-  };
-}
+const BACKGROUNDS = {
+  dark: { r: 18, g: 20, b: 26, alpha: 1 },
+  light: { r: 246, g: 247, b: 249, alpha: 1 },
+};
 
 for (const theme of ['dark', 'light']) {
   const outDir = path.join(outRoot, theme);
@@ -45,17 +40,13 @@ for (const theme of ['dark', 'light']) {
 
   for (const [attractionId, day] of Object.entries(ATTRACTION_DAY_MAP)) {
     const sourcePath = path.join(tripDir, theme, `day-${day}.jpg`);
-    const meta = await sharp(sourcePath).metadata();
-    const srcWidth = meta.width ?? size;
-    const srcHeight = meta.height ?? size;
-    const cropWidth = Math.min(size, srcWidth);
-    const cropHeight = Math.min(size, srcHeight);
-    const { left, top } = cropOffset(attractionId, srcWidth - cropWidth + 1, srcHeight - cropHeight + 1);
 
     await sharp(sourcePath)
-      .extract({ left, top, width: cropWidth, height: cropHeight })
-      .resize(size, size, { fit: 'cover' })
-      .jpeg({ quality: 82 })
+      .resize(size, size, {
+        fit: 'contain',
+        background: BACKGROUNDS[theme],
+      })
+      .jpeg({ quality: 85 })
       .toFile(path.join(outDir, `${attractionId}.jpg`));
   }
 }

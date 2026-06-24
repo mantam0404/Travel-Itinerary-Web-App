@@ -6,6 +6,7 @@ import { formatEur, formatHkd } from '../data/tripData';
 import { ScrollReveal } from './ScrollReveal';
 import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
+import { IconMyLocation } from './icons';
 import { getAttractionImage, MAP_TILES } from '../utils/itineraryImages';
 import type { MapFocusRequest } from '../types/navigation';
 import 'leaflet/dist/leaflet.css';
@@ -33,6 +34,7 @@ interface UserPosition {
 
 function createImageMarkerIcon(imageUrl: string, isDark: boolean, isSelected: boolean) {
   const ring = isSelected ? (isDark ? '#5e6ad2' : '#4f5cc6') : isDark ? '#2a2d36' : '#ffffff';
+  const markerBg = isDark ? '#12141a' : '#f6f7f9';
   const size = isSelected ? 52 : 44;
 
   return L.divIcon({
@@ -44,8 +46,8 @@ function createImageMarkerIcon(imageUrl: string, isDark: boolean, isSelected: bo
       overflow:hidden;
       box-shadow:0 4px 14px rgba(0,0,0,${isDark ? '0.45' : '0.22'});
       transform:translateY(-4px);
-      background:#111;
-    "><img src="${imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>`,
+      background:${markerBg};
+    "><img src="${imageUrl}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;" /></div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size],
     popupAnchor: [0, -size + 4],
@@ -162,20 +164,9 @@ export function TravelMap({
   return (
     <section id="map" className="ln-leaflet space-y-4 px-4 py-6">
       <ScrollReveal>
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-            地圖隨深／淺色模式切換 · 點擊標記查看景點
-          </p>
-          <button
-            type="button"
-            onClick={handleLocateMe}
-            disabled={locateStatus === 'loading'}
-            className="ln-chip ln-pressable shrink-0 disabled:opacity-60"
-            aria-label="顯示我的位置"
-          >
-            {locateStatus === 'loading' ? '定位中…' : '📍 我的位置'}
-          </button>
-        </div>
+        <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
+          地圖隨深／淺色模式切換 · 點擊標記查看景點
+        </p>
         {locateMessage && (
           <p
             className={`mt-2 text-xs ${locateStatus === 'error' ? 'text-[#c13515]' : 'text-[var(--ln-ink-tertiary)]'}`}
@@ -186,7 +177,7 @@ export function TravelMap({
       </ScrollReveal>
 
       <ScrollReveal delay={80}>
-        <div className="ln-panel overflow-hidden p-1">
+        <div className="ln-panel ln-map-shell overflow-hidden p-1">
           {mapReady && (
             <MapContainer
               center={BARCELONA_CENTER}
@@ -225,7 +216,7 @@ export function TravelMap({
                       <img
                         src={getAttractionImage(attr.id, isDark)}
                         alt={attr.name}
-                        className="h-24 w-full object-cover"
+                        className="h-24 w-full bg-[var(--ln-map-marker-bg)] object-contain"
                       />
                       <div className="p-2">
                         <p className="font-semibold">{attr.name}</p>
@@ -245,6 +236,16 @@ export function TravelMap({
               ))}
             </MapContainer>
           )}
+          <button
+            type="button"
+            onClick={handleLocateMe}
+            disabled={locateStatus === 'loading'}
+            className={`ln-map-locate-btn ln-pressable ${locateStatus === 'loading' ? 'ln-map-locate-btn-loading' : ''}`}
+            aria-label="顯示我的位置"
+            title="我的位置"
+          >
+            <IconMyLocation />
+          </button>
         </div>
       </ScrollReveal>
 
@@ -269,7 +270,7 @@ export function TravelMap({
             <img
               src={selectedImage}
               alt={selected.name}
-              className="h-36 w-full object-cover"
+              className="h-36 w-full bg-[var(--ln-map-marker-bg)] object-contain"
             />
             <div className="p-4">
               <h3 className="text-lg font-semibold tracking-[-0.02em]">{selected.name}</h3>
