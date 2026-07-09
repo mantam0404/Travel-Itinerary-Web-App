@@ -1,3 +1,5 @@
+import { FLIGHT_QUOTE, hkdToEur } from '../constants/flightQuotes';
+
 export interface FlightInfo {
   id: string;
   type: 'departure' | 'return';
@@ -11,6 +13,11 @@ export interface FlightInfo {
   arrivalTime: string;
   duration: string;
   status: string;
+  cabinClass?: string;
+  quoteHkd?: number;
+  quoteSource?: string;
+  quoteUrl?: string;
+  quotedAt?: string;
 }
 
 export interface Attraction {
@@ -44,12 +51,15 @@ export interface ItineraryDay {
 
 export interface ExpenseItem {
   id: string;
-  category: 'accommodation' | 'transportation' | 'tickets';
+  category: 'accommodation' | 'transportation' | 'tickets' | 'flights';
   name: string;
   date: string;
   amountEur: number;
+  amountHkd?: number;
   breakdown: { label: string; amountEur: number }[];
   notes?: string;
+  sourceUrl?: string;
+  quotedAt?: string;
 }
 
 export interface TripData {
@@ -65,8 +75,12 @@ export interface TripData {
 
 export const EUR_TO_HKD = 8.45;
 
+const flightQuoteEur = hkdToEur(FLIGHT_QUOTE.roundTripHkd, EUR_TO_HKD);
+const outboundQuoteEur = hkdToEur(FLIGHT_QUOTE.outboundHkd, EUR_TO_HKD);
+const returnQuoteEur = hkdToEur(FLIGHT_QUOTE.returnHkd, EUR_TO_HKD);
+
 export const defaultTripData: TripData = {
-  version: 3,
+  version: 4,
   lastUpdated: new Date().toISOString(),
   destination: 'Barcelona',
   exchangeRate: EUR_TO_HKD,
@@ -80,10 +94,15 @@ export const defaultTripData: TripData = {
       route: 'HKG → BCN',
       departureAirport: 'Hong Kong International Airport (HKG)',
       arrivalAirport: 'Barcelona El Prat Airport (BCN)',
-      departureTime: '23:55',
-      arrivalTime: '07:15+1',
-      duration: '14h 20m',
-      status: '已確認',
+      departureTime: '00:25',
+      arrivalTime: '08:30+1',
+      duration: '14h 05m',
+      status: '參考報價（未購票）',
+      cabinClass: FLIGHT_QUOTE.cabinClass,
+      quoteHkd: FLIGHT_QUOTE.outboundHkd,
+      quoteSource: FLIGHT_QUOTE.source,
+      quoteUrl: FLIGHT_QUOTE.sourceUrl,
+      quotedAt: FLIGHT_QUOTE.quotedAt,
     },
     {
       id: 'cx318',
@@ -94,10 +113,15 @@ export const defaultTripData: TripData = {
       route: 'BCN → HKG',
       departureAirport: 'Barcelona El Prat Airport (BCN)',
       arrivalAirport: 'Hong Kong International Airport (HKG)',
-      departureTime: '11:30',
-      arrivalTime: '06:45+1',
-      duration: '13h 15m',
-      status: '已確認',
+      departureTime: '13:00',
+      arrivalTime: '07:00+1',
+      duration: '12h 00m',
+      status: '參考報價（未購票）',
+      cabinClass: FLIGHT_QUOTE.cabinClass,
+      quoteHkd: FLIGHT_QUOTE.returnHkd,
+      quoteSource: FLIGHT_QUOTE.source,
+      quoteUrl: FLIGHT_QUOTE.sourceUrl,
+      quotedAt: FLIGHT_QUOTE.quotedAt,
     },
   ],
   attractions: [
@@ -277,7 +301,7 @@ export const defaultTripData: TripData = {
       city: 'Barcelona',
       activities: [
         {
-          time: '23:55',
+          time: '00:25',
           title: '出發航班 CX321',
           location: 'Hong Kong International Airport (HKG)',
           description: '搭乘 Cathay Pacific CX321 前往 Barcelona',
@@ -606,7 +630,7 @@ export const defaultTripData: TripData = {
           costEur: 35,
         },
         {
-          time: '11:30',
+          time: '13:00',
           title: '返程航班 CX318',
           location: 'Barcelona El Prat Airport (BCN)',
           description: '搭乘 Cathay Pacific CX318 返回 Hong Kong',
@@ -617,6 +641,27 @@ export const defaultTripData: TripData = {
     },
   ],
   expenses: [
+    {
+      id: 'flights-cx-roundtrip',
+      category: 'flights',
+      name: '來回機票 CX321 / CX318',
+      date: '2026-10-15',
+      amountEur: flightQuoteEur,
+      amountHkd: FLIGHT_QUOTE.roundTripHkd,
+      breakdown: [
+        {
+          label: `CX321 HKG→BCN（10-15）${FLIGHT_QUOTE.cabinClass} 參考價`,
+          amountEur: outboundQuoteEur,
+        },
+        {
+          label: `CX318 BCN→HKG（10-24）${FLIGHT_QUOTE.cabinClass} 參考價`,
+          amountEur: returnQuoteEur,
+        },
+      ],
+      notes: FLIGHT_QUOTE.notes,
+      sourceUrl: FLIGHT_QUOTE.sourceUrl,
+      quotedAt: FLIGHT_QUOTE.quotedAt,
+    },
     {
       id: 'hotel-barcelona',
       category: 'accommodation',
@@ -754,7 +799,12 @@ export const categoryLabels: Record<ExpenseItem['category'], string> = {
   accommodation: '住宿',
   transportation: '交通',
   tickets: '門票',
+  flights: '機票',
 };
+
+export function formatHkdAmount(amountHkd: number): string {
+  return `HK$${amountHkd.toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+}
 
 export function formatHkd(amountEur: number, rate: number = EUR_TO_HKD): string {
   return `HK$${(amountEur * rate).toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;

@@ -4,6 +4,7 @@ import {
   categoryLabels,
   formatEur,
   formatHkd,
+  formatHkdAmount,
   type ExpenseItem as ExpenseItemType,
 } from '../data/tripData';
 import { ScrollReveal } from './ScrollReveal';
@@ -18,6 +19,7 @@ const categoryEmoji: Record<ExpenseItemType['category'], string> = {
   accommodation: '住宿',
   transportation: '交通',
   tickets: '門票',
+  flights: '機票',
 };
 
 export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) {
@@ -32,7 +34,7 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
       acc.total += e.amountEur;
       return acc;
     },
-    { accommodation: 0, transportation: 0, tickets: 0, total: 0 } as Record<string, number>,
+    { accommodation: 0, transportation: 0, tickets: 0, flights: 0, total: 0 } as Record<string, number>,
   );
 
   const formatAmount = (eur: number) =>
@@ -54,9 +56,9 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
       </ScrollReveal>
 
       <ScrollReveal delay={60}>
-        <div className="ln-panel grid grid-cols-2 gap-3 p-4">
-          <div className="col-span-2 sm:col-span-1">
-            <p className="ln-label">總支出</p>
+        <div className="ln-panel grid grid-cols-2 gap-3 p-4 sm:grid-cols-3">
+          <div className="col-span-2 sm:col-span-3">
+            <p className="ln-label">總支出（含參考機票）</p>
             <p className="ln-tabular mt-1 text-2xl font-semibold text-[var(--ln-accent)]">
               {formatAmount(totals.total)}
             </p>
@@ -64,7 +66,7 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
               <p className="mt-0.5 text-xs text-[var(--ln-ink-tertiary)]">≈ {formatEur(totals.total)}</p>
             )}
           </div>
-          {(['accommodation', 'transportation', 'tickets'] as const).map((cat) => (
+          {(['flights', 'accommodation', 'transportation', 'tickets'] as const).map((cat) => (
             <div key={cat}>
               <p className="text-xs text-[var(--ln-ink-secondary)]">{categoryLabels[cat]}</p>
               <p className="ln-tabular mt-1 text-lg font-semibold">{formatAmount(totals[cat])}</p>
@@ -75,7 +77,7 @@ export function ExpenseTracker({ expenses, exchangeRate }: ExpenseTrackerProps) 
 
       <ScrollReveal delay={100}>
         <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-          {(['all', 'accommodation', 'transportation', 'tickets'] as const).map((cat) => (
+          {(['all', 'flights', 'accommodation', 'transportation', 'tickets'] as const).map((cat) => (
             <button
               key={cat}
               type="button"
@@ -162,6 +164,24 @@ function ExpenseCard({
             </ul>
             {expense.notes && (
               <p className="mt-3 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">{expense.notes}</p>
+            )}
+            {expense.amountHkd && (
+              <p className="mt-2 text-xs font-medium text-[var(--ln-ink-secondary)]">
+                參考報價：{formatHkdAmount(expense.amountHkd)}
+                {expense.quotedAt && (
+                  <span className="text-[var(--ln-ink-tertiary)]"> · 更新於 {expense.quotedAt}</span>
+                )}
+              </p>
+            )}
+            {expense.sourceUrl && (
+              <a
+                href={expense.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-block text-xs text-[var(--ln-accent)] underline underline-offset-2"
+              >
+                在 Google Flights 查看最新價格 →
+              </a>
             )}
           </div>
         </div>
