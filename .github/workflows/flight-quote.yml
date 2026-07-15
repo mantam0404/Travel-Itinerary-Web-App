@@ -1,0 +1,38 @@
+name: Refresh flight quote
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch Google Flights quote
+        run: node scripts/fetch-flight-quote.mjs
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet public/data/flight-quote.json; then
+            echo "No quote change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/flight-quote.json
+          git commit -m "chore: refresh Google Flights reference quote"
+          git push

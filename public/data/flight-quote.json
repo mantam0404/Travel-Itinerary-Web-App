@@ -1,0 +1,18 @@
+{
+  "id": "cx-hkg-bcn-2026-10",
+  "airline": "Cathay Pacific",
+  "outboundFlight": "CX321",
+  "returnFlight": "CX318",
+  "outboundDate": "2026-10-15",
+  "returnDate": "2026-10-24",
+  "currency": "HKD",
+  "roundTripHkd": 11180,
+  "roundTripEur": 1323.08,
+  "outboundHkd": 5590,
+  "returnHkd": 5590,
+  "source": "Google Flights",
+  "sourceUrl": "https://www.google.com/travel/flights?q=Flights%20to%20Barcelona%20from%20Hong%20Kong%20on%202026-10-15%20through%202026-10-24",
+  "quotedAt": "2026-07-09",
+  "note": "參考報價（未購票）— 以 Cathay Pacific 直飛為準",
+  "fetchedAt": "2026-07-15T02:21:56.155Z"
+}
