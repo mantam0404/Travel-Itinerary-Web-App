@@ -57,6 +57,20 @@ export function SyncStatus({ status, syncMeta, onSync, variant = 'default' }: Sy
           })}
         </span>
       )}
+      {syncMeta?.lastFlightQuoteHkd != null && status !== 'syncing' && (
+        <span
+          className={
+            variant === 'hero'
+              ? 'text-white/60'
+              : variant === 'hero-light'
+                ? 'text-[#5c6068]'
+                : 'text-[var(--ln-ink-tertiary)]'
+          }
+        >
+          機票 HK${syncMeta.lastFlightQuoteHkd.toLocaleString('zh-Hant')}
+          {syncMeta.lastFlightQuoteAt ? `（${syncMeta.lastFlightQuoteAt}）` : ''}
+        </span>
+      )}
       {status === 'online' && (
         <button
           type="button"

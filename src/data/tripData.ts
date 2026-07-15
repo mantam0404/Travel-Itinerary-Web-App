@@ -80,7 +80,7 @@ const outboundQuoteEur = hkdToEur(FLIGHT_QUOTE.outboundHkd, EUR_TO_HKD);
 const returnQuoteEur = hkdToEur(FLIGHT_QUOTE.returnHkd, EUR_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 4,
+  version: 5,
   lastUpdated: new Date().toISOString(),
   destination: 'Barcelona',
   exchangeRate: EUR_TO_HKD,

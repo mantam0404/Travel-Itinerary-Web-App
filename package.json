@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run images && tsc -b && vite build",
+    "flight-quote": "node scripts/fetch-flight-quote.mjs",
+    "build": "npm run flight-quote && npm run images && tsc -b && vite build",
     "preview": "vite preview",
     "images": "node scripts/generate-icons.mjs",
     "images:attractions": "node scripts/download-attraction-images.mjs",

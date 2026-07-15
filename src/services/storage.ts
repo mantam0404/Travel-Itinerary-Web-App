@@ -1,5 +1,6 @@
 import localforage from 'localforage';
 import { defaultTripData, type TripData } from '../data/tripData';
+import { syncFlightPrices, type FlightQuoteSyncResult } from './flightPriceSync';
 
 const TRIP_STORE_KEY = 'trip-data';
 const SYNC_META_KEY = 'sync-meta';
@@ -8,6 +9,8 @@ export interface SyncMeta {
   lastSyncedAt: string | null;
   lastLocalUpdate: string;
   pendingSync: boolean;
+  lastFlightQuoteAt: string | null;
+  lastFlightQuoteHkd: number | null;
 }
 
 const tripStore = localforage.createInstance({
@@ -18,6 +21,14 @@ const tripStore = localforage.createInstance({
 const metaStore = localforage.createInstance({
   name: 'spain-travel-app',
   storeName: 'meta',
+});
+
+const defaultSyncMeta = (): SyncMeta => ({
+  lastSyncedAt: null,
+  lastLocalUpdate: new Date().toISOString(),
+  pendingSync: false,
+  lastFlightQuoteAt: null,
+  lastFlightQuoteHkd: null,
 });
 
 export async function loadTripData(): Promise<TripData> {
@@ -31,11 +42,7 @@ export async function loadTripData(): Promise<TripData> {
   }
 
   await tripStore.setItem(TRIP_STORE_KEY, defaultTripData);
-  await metaStore.setItem(SYNC_META_KEY, {
-    lastSyncedAt: null,
-    lastLocalUpdate: new Date().toISOString(),
-    pendingSync: false,
-  } satisfies SyncMeta);
+  await metaStore.setItem(SYNC_META_KEY, defaultSyncMeta());
 
   return defaultTripData;
 }
@@ -44,11 +51,7 @@ export async function saveTripData(data: TripData): Promise<void> {
   const updated = { ...data, lastUpdated: new Date().toISOString() };
   await tripStore.setItem(TRIP_STORE_KEY, updated);
 
-  const meta = (await metaStore.getItem<SyncMeta>(SYNC_META_KEY)) ?? {
-    lastSyncedAt: null,
-    lastLocalUpdate: new Date().toISOString(),
-    pendingSync: false,
-  };
+  const meta = (await metaStore.getItem<SyncMeta>(SYNC_META_KEY)) ?? defaultSyncMeta();
 
   await metaStore.setItem(SYNC_META_KEY, {
     ...meta,
@@ -58,21 +61,22 @@ export async function saveTripData(data: TripData): Promise<void> {
 }
 
 export async function getSyncMeta(): Promise<SyncMeta> {
-  return (
-    (await metaStore.getItem<SyncMeta>(SYNC_META_KEY)) ?? {
-      lastSyncedAt: null,
-      lastLocalUpdate: new Date().toISOString(),
-      pendingSync: false,
-    }
-  );
+  const meta = await metaStore.getItem<SyncMeta>(SYNC_META_KEY);
+  if (!meta) return defaultSyncMeta();
+  return {
+    ...defaultSyncMeta(),
+    ...meta,
+  };
 }
 
-export async function markSynced(): Promise<void> {
+export async function markSynced(flightQuote?: FlightQuoteSyncResult): Promise<void> {
   const meta = await getSyncMeta();
   await metaStore.setItem(SYNC_META_KEY, {
     ...meta,
     lastSyncedAt: new Date().toISOString(),
     pendingSync: false,
+    lastFlightQuoteAt: flightQuote?.quote.quotedAt ?? meta.lastFlightQuoteAt,
+    lastFlightQuoteHkd: flightQuote?.quote.roundTripHkd ?? meta.lastFlightQuoteHkd,
   });
 }
 
@@ -95,21 +99,29 @@ export async function fetchRemoteTripData(): Promise<TripData | null> {
   return null;
 }
 
-export async function syncTripData(): Promise<{ data: TripData; synced: boolean }> {
-  const local = await loadTripData();
+export interface SyncTripResult {
+  data: TripData;
+  synced: boolean;
+  flightQuote?: FlightQuoteSyncResult;
+}
+
+export async function syncTripData(): Promise<SyncTripResult> {
+  let data = await loadTripData();
 
   if (!navigator.onLine) {
-    return { data: local, synced: false };
+    return { data, synced: false };
   }
 
   const remote = await fetchRemoteTripData();
-
-  if (remote && new Date(remote.lastUpdated) > new Date(local.lastUpdated)) {
-    await tripStore.setItem(TRIP_STORE_KEY, remote);
-    await markSynced();
-    return { data: remote, synced: true };
+  if (remote && new Date(remote.lastUpdated) > new Date(data.lastUpdated)) {
+    data = remote;
   }
 
-  await markSynced();
-  return { data: local, synced: true };
+  const { data: withFlights, result: flightQuote } = await syncFlightPrices(data);
+  const stamped = { ...withFlights, lastUpdated: new Date().toISOString() };
+
+  await tripStore.setItem(TRIP_STORE_KEY, stamped);
+  await markSynced(flightQuote);
+
+  return { data: stamped, synced: true, flightQuote };
 }
