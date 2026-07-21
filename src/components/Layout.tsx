@@ -14,7 +14,6 @@ interface LayoutProps {
 
 const tabs: { id: Tab; label: string }[] = [
   { id: 'home', label: '首頁' },
-  { id: 'itinerary', label: '行程' },
   { id: 'map', label: '地圖' },
 ];
 
