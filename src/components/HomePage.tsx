@@ -124,11 +124,7 @@ export function HomePage({
             const highlight = day.activities[0];
             return (
               <ScrollReveal key={day.date} delay={100 + index * 55}>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('itinerary', { dayDate: day.date })}
-                  className="ln-row ln-pressable w-full text-left"
-                >
+                <div className="ln-row w-full">
                   <div className="ln-thumb h-[4.5rem] w-[5.5rem] sm:h-20 sm:w-24">
                     <TripImage
                       key={image}
@@ -153,8 +149,14 @@ export function HomePage({
                       {highlight?.location ? ` · ${highlight.location}` : ''}
                     </p>
                   </div>
-                  <span className="self-center text-sm text-[var(--ln-ink-tertiary)]">›</span>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('itinerary', { dayDate: day.date })}
+                    className="ln-pressable ln-badge shrink-0 self-center px-3 py-1.5 text-xs"
+                  >
+                    查看行程
+                  </button>
+                </div>
               </ScrollReveal>
             );
           })}
