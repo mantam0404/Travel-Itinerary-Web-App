@@ -14,7 +14,7 @@ function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
     <div>
       {label && <p className="ln-label mb-2">{label}</p>}
       <p className="text-sm font-medium text-[var(--ln-ink)]">
-        {leg.airline} {leg.flightNumber}
+        {[leg.airline, leg.flightNumber].filter(Boolean).join(' ')}
       </p>
       <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
         {formatDateZh(leg.date)} · {leg.route}

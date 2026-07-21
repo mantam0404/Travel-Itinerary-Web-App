@@ -86,7 +86,7 @@ const outboundQuoteCny = hkdToBase(FLIGHT_QUOTE.outboundHkd, CNY_TO_HKD);
 const returnQuoteCny = hkdToBase(FLIGHT_QUOTE.returnHkd, CNY_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 12,
+  version: 13,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -97,8 +97,8 @@ export const defaultTripData: TripData = {
       id: 'hsr-out',
       type: 'departure',
       date: '2026-07-25',
-      airline: '廣深港高鐵',
-      flightNumber: '待定',
+      airline: '高鐵',
+      flightNumber: '',
       route: '香港西九龍 → 廣州東',
       originCode: 'WEK',
       destCode: 'GGZ',
@@ -118,8 +118,8 @@ export const defaultTripData: TripData = {
       id: 'hsr-return',
       type: 'return',
       date: '2026-07-26',
-      airline: '城際高鐵',
-      flightNumber: '待定',
+      airline: '高鐵',
+      flightNumber: '',
       route: '廣州東 → 香港西九龍',
       originCode: 'GGZ',
       destCode: 'WEK',

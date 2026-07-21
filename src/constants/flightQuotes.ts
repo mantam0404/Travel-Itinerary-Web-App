@@ -27,7 +27,7 @@ export const FLIGHT_QUOTE = {
   sourceUrl: GOOGLE_FLIGHTS_SEARCH_URL,
   quotedAt: '2026-07-21',
   cabinClass: '二等座',
-  airline: '廣深港高鐵',
+  airline: '高鐵',
   outboundFlight: '待定',
   returnFlight: '待定',
   /** Round-trip reference fare (second class), HKD */

@@ -16,7 +16,7 @@ const RETURN_DATE = '2026-07-26'
 
 const DEFAULT_QUOTE = {
   id: 'hsr-hkg-gz-2026-07',
-  airline: '廣深港高鐵',
+  airline: '高鐵',
   outboundFlight: '待定',
   returnFlight: '待定',
   outboundDate: OUTBOUND_DATE,
