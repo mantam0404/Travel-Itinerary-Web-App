@@ -8,6 +8,7 @@ import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
 import { IconMyLocation } from './icons';
 import { getAttractionImage, getAttractionHeroImage, MAP_TILES } from '../utils/itineraryImages';
+import { YouTubeEmbed } from './YouTubeEmbed';
 import type { MapFocusRequest } from '../types/navigation';
 import 'leaflet/dist/leaflet.css';
 
@@ -293,6 +294,12 @@ export function TravelMap({
                 <p className="mt-3 text-sm leading-relaxed text-[var(--ln-ink-tertiary)]">
                   {selected.tips}
                 </p>
+              )}
+              {selected.youtubeVideoId && (
+                <YouTubeEmbed
+                  videoId={selected.youtubeVideoId}
+                  title={`${selected.name} 介紹影片`}
+                />
               )}
             </div>
           </div>

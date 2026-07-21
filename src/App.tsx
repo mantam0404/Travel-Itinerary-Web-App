@@ -12,13 +12,23 @@ import type { MapFocusRequest } from './types/navigation';
 
 const SPLASH_KEY = 'splash-seen';
 
+function allDayDates(dates: { date: string }[]): Set<string> {
+  return new Set(dates.map((d) => d.date));
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
-  const [expandedDayDate, setExpandedDayDate] = useState<string | null>(null);
+  const [expandedDayDates, setExpandedDayDates] = useState<Set<string>>(() => new Set());
+  const [scrollToDayDate, setScrollToDayDate] = useState<string | null>(null);
   const [mapFocus, setMapFocus] = useState<MapFocusRequest | null>(null);
   const [showSplash, setShowSplash] = useState(() => !sessionStorage.getItem(SPLASH_KEY));
   const { tripData, status, syncMeta, loading, performSync } = useOfflineSync();
   const { isDark, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    if (!tripData?.itinerary.length) return;
+    setExpandedDayDates(allDayDates(tripData.itinerary));
+  }, [tripData]);
 
   useEffect(() => {
     if (!showSplash || loading || !tripData) return;
@@ -31,9 +41,8 @@ export default function App() {
 
   const handleNavigate = useCallback((tab: Tab, options?: NavigateOptions) => {
     if (tab === 'itinerary' && options?.dayDate) {
-      setExpandedDayDate(options.dayDate);
-    } else if (tab !== 'itinerary') {
-      setExpandedDayDate(null);
+      setExpandedDayDates((prev) => new Set([...prev, options.dayDate!]));
+      setScrollToDayDate(options.dayDate);
     }
     if (options?.attractionId) {
       setMapFocus({ attractionId: options.attractionId, token: Date.now() });
@@ -42,15 +51,16 @@ export default function App() {
   }, []);
 
   const handleTabChange = useCallback((tab: Tab) => {
-    if (tab !== 'itinerary') {
-      setExpandedDayDate(null);
-    }
     setActiveTab(tab);
   }, []);
 
   const handleNavigateToAttraction = useCallback((attractionId: string) => {
     setMapFocus({ attractionId, token: Date.now() });
     setActiveTab('map');
+  }, []);
+
+  const handleScrollToDayComplete = useCallback(() => {
+    setScrollToDayDate(null);
   }, []);
 
   if (loading || !tripData) {
@@ -99,9 +109,12 @@ export default function App() {
       {activeTab === 'itinerary' && (
         <Itinerary
           days={tripData.itinerary}
+          attractions={tripData.attractions}
           isDark={isDark}
-          expandedDayDate={expandedDayDate}
-          onExpandedDayChange={setExpandedDayDate}
+          expandedDayDates={expandedDayDates}
+          scrollToDayDate={scrollToDayDate}
+          onExpandedDayDatesChange={setExpandedDayDates}
+          onScrollToDayComplete={handleScrollToDayComplete}
           onNavigateToAttraction={handleNavigateToAttraction}
         />
       )}

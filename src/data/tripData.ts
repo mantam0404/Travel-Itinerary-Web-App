@@ -32,6 +32,7 @@ export interface Attraction {
   openingHours?: string;
   ticketPriceEur?: number;
   tips?: string;
+  youtubeVideoId?: string;
 }
 
 export interface ItineraryActivity {
@@ -85,7 +86,7 @@ const outboundQuoteCny = hkdToBase(FLIGHT_QUOTE.outboundHkd, CNY_TO_HKD);
 const returnQuoteCny = hkdToBase(FLIGHT_QUOTE.returnHkd, CNY_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 8,
+  version: 9,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -145,6 +146,7 @@ export const defaultTripData: TripData = {
       category: '歷史街區',
       openingHours: '全天開放',
       tips: '地鐵 1 號線黃沙站 B 出口步行約 10 分鐘。',
+      youtubeVideoId: '4_sHZgcGNcs',
     },
     {
       id: 'dafo-temple',
@@ -156,6 +158,7 @@ export const defaultTripData: TripData = {
       openingHours: '08:00 – 21:30',
       ticketPriceEur: 0,
       tips: '建議 19:00 前抵達，可同時欣賞日景與亮燈。',
+      youtubeVideoId: 'Kw6e7x8Bw5k',
     },
     {
       id: 'guangzhou-art-museum',
@@ -167,6 +170,7 @@ export const defaultTripData: TripData = {
       openingHours: '09:00 – 17:30',
       ticketPriceEur: 0,
       tips: '週一閉館（法定假日除外），建議提前網上預約。',
+      youtubeVideoId: 'fLkECV3kFPs',
     },
     {
       id: 'canton-tower',
@@ -199,6 +203,7 @@ export const defaultTripData: TripData = {
       openingHours: '19:00 – 22:00',
       ticketPriceEur: 120,
       tips: '現場視乎班次及天氣再決定是否購票，建議預留彈性時間。',
+      youtubeVideoId: 'xmhEeHIP_Zk',
     },
     {
       id: 'diandude-tianhe',
@@ -209,6 +214,7 @@ export const defaultTripData: TripData = {
       category: '餐飲',
       openingHours: '07:00 – 22:00',
       tips: '週末建議提前排隊或網上取號。',
+      youtubeVideoId: 'V1oCVmmM5gM',
     },
   ],
   itinerary: [
