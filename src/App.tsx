@@ -22,7 +22,7 @@ export default function App() {
   const [mapFocus, setMapFocus] = useState<MapFocusRequest | null>(null);
   const [showSplash, setShowSplash] = useState(() => !sessionStorage.getItem(SPLASH_KEY));
   const { tripData, loading } = useOfflineSync();
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     if (!tripData?.itinerary.length) return;
@@ -87,7 +87,6 @@ export default function App() {
       activeTab={activeTab}
       onTabChange={handleTabChange}
       isDark={isDark}
-      onToggleTheme={toggleTheme}
     >
       {activeTab === 'home' && (
         <HomePage
