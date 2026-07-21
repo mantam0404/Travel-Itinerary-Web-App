@@ -187,23 +187,13 @@ export function HomePage({
 
       <ScrollReveal as="section" className="border-t border-[var(--ln-border)] px-4 py-6 sm:px-6" delay={120}>
         <p className="ln-label mb-3">快速前往</p>
-        <div className="grid grid-cols-2 gap-2">
-          {(
-            [
-              { label: '景點地圖', tab: 'map' as Tab },
-              { label: '費用預算', tab: 'expenses' as Tab },
-            ] as const
-          ).map((item) => (
-            <button
-              key={item.tab}
-              type="button"
-              onClick={() => onNavigate(item.tab)}
-              className="ln-panel ln-pressable px-4 py-3 text-left text-sm font-medium hover:bg-[var(--ln-bg-hover)]"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => onNavigate('map')}
+          className="ln-panel ln-pressable w-full px-4 py-3 text-left text-sm font-medium hover:bg-[var(--ln-bg-hover)]"
+        >
+          景點地圖
+        </button>
       </ScrollReveal>
     </>
   );
