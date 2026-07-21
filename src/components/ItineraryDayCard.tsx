@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { Attraction, ItineraryDay } from '../data/tripData';
-import { formatDateZh, formatEur } from '../data/tripData';
+import { formatDateZh } from '../data/tripData';
 import { IconChevron } from './icons';
 import { TripImage } from './TripImage';
 import { YouTubeEmbed } from './YouTubeEmbed';
@@ -120,13 +120,6 @@ export function ItineraryDayCard({
                       <p className="mt-2 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">
                         <span className="font-medium text-[var(--ln-ink-secondary)]">交通：</span>
                         {act.transport}
-                      </p>
-                    )}
-                    {act.costEur !== undefined && act.costEur > 0 && (
-                      <p className="mt-1">
-                        <span className="ln-badge-neutral ln-badge ln-tabular">
-                          費用 {formatEur(act.costEur)}
-                        </span>
                       </p>
                     )}
                   </div>
