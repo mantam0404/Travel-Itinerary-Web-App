@@ -9,6 +9,34 @@ import type { SyncMeta } from '../services/storage';
 import { getItineraryDayImage, getItineraryDayImageFallback, getHeroImage } from '../utils/itineraryImages';
 import { TripImage } from './TripImage';
 
+function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
+  return (
+    <div>
+      {label && <p className="ln-label mb-2">{label}</p>}
+      <p className="text-sm font-medium text-[var(--ln-ink)]">
+        {leg.airline} {leg.flightNumber}
+      </p>
+      <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
+        {formatDateZh(leg.date)} · {leg.route}
+      </p>
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <div>
+          <p className="ln-tabular text-2xl font-semibold">{leg.departureTime}</p>
+          <p className="text-xs text-[var(--ln-ink-tertiary)]">{leg.originCode ?? '—'}</p>
+        </div>
+        <div className="flex-1 text-center">
+          <p className="text-[10px] text-[var(--ln-ink-tertiary)]">{leg.duration}</p>
+          <div className="mx-auto mt-1.5 h-px w-full max-w-[80px] bg-[var(--ln-border-strong)]" />
+        </div>
+        <div className="text-right">
+          <p className="ln-tabular text-2xl font-semibold">{leg.arrivalTime}</p>
+          <p className="text-xs text-[var(--ln-ink-tertiary)]">{leg.destCode ?? '—'}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export interface NavigateOptions {
   dayDate?: string;
   attractionId?: string;
@@ -97,37 +125,11 @@ export function HomePage({
             <span className="ln-badge">{departure.status}</span>
           </div>
           <div className="ln-panel p-4">
-            <p className="text-sm font-medium text-[var(--ln-ink)]">
-              {departure.airline} {departure.flightNumber}
-            </p>
-            <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
-              {formatDateZh(departure.date)} · {departure.route}
-            </p>
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <div>
-                <p className="ln-tabular text-2xl font-semibold">{departure.departureTime}</p>
-                <p className="text-xs text-[var(--ln-ink-tertiary)]">{departure.originCode ?? '—'}</p>
-              </div>
-              <div className="flex-1 text-center">
-                <p className="text-[10px] text-[var(--ln-ink-tertiary)]">{departure.duration}</p>
-                <div className="mx-auto mt-1.5 h-px w-full max-w-[80px] bg-[var(--ln-border-strong)]" />
-              </div>
-              <div className="text-right">
-                <p className="ln-tabular text-2xl font-semibold">{departure.arrivalTime}</p>
-                <p className="text-xs text-[var(--ln-ink-tertiary)]">{departure.destCode ?? '—'}</p>
-              </div>
-            </div>
+            <TransportLeg leg={departure} label={returnFlight ? '去程' : undefined} />
             {returnFlight && (
               <>
                 <hr className="ln-divider my-4" />
-                <p className="text-xs text-[var(--ln-ink-tertiary)]">回程</p>
-                <p className="mt-1 text-sm font-medium">
-                  {returnFlight.flightNumber} · {formatDateZh(returnFlight.date)}
-                </p>
-                <p className="ln-tabular mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
-                  {returnFlight.departureTime} {returnFlight.originCode ?? '—'} → {returnFlight.arrivalTime}{' '}
-                  {returnFlight.destCode ?? '—'}
-                </p>
+                <TransportLeg leg={returnFlight} label="回程" />
               </>
             )}
           </div>
