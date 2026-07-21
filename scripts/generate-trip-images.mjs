@@ -3,6 +3,7 @@
  */
 import { copyFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -15,16 +16,22 @@ const DAY_SOURCES = {
   '2026-07-26': 'canton-tower-hero.jpg',
 };
 
+const HERO_SOURCE = 'guangzhou-hero.png';
+
 async function copy(src, dest) {
   await mkdir(path.dirname(dest), { recursive: true });
   await copyFile(src, dest);
 }
 
-const heroSrc = path.join(attractions, 'canton-tower-hero.jpg');
+const heroSrc = path.join(attractions, HERO_SOURCE);
 
 for (const theme of ['dark', 'light']) {
   const tripDir = path.join(trip, theme);
-  await copy(heroSrc, path.join(tripDir, 'hero.jpg'));
+  await mkdir(tripDir, { recursive: true });
+  await sharp(heroSrc)
+    .resize(1200, 750, { fit: 'cover', position: 'centre' })
+    .jpeg({ quality: 85 })
+    .toFile(path.join(tripDir, 'hero.jpg'));
 
   for (const [date, source] of Object.entries(DAY_SOURCES)) {
     await copy(path.join(attractions, source), path.join(tripDir, `day-${date}.jpg`));

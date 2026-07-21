@@ -76,8 +76,8 @@ export function HomePage({
           <TripImage
             key={heroImage}
             src={heroImage}
-            fallback={`${import.meta.env.BASE_URL}images/attractions/canton-tower-hero.jpg`}
-            alt="廣州天際線與廣州塔"
+            fallback={`${import.meta.env.BASE_URL}images/attractions/guangzhou-hero.png`}
+            alt="廣州旅行行程封面"
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out"
             loading="eager"
           />
