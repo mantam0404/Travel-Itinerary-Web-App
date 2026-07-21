@@ -112,7 +112,6 @@ export default function App() {
       {activeTab === 'map' && (
         <TravelMap
           attractions={tripData.attractions}
-          exchangeRate={tripData.exchangeRate}
           mapCenter={tripData.mapCenter}
           isDark={isDark}
           focusRequest={mapFocus}

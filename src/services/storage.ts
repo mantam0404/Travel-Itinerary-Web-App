@@ -60,15 +60,6 @@ function migrateTripData(cached: TripData): TripData {
     }
   }
 
-  for (const expense of next.expenses) {
-    for (const line of expense.breakdown) {
-      if (line.label.includes('廣州南')) {
-        line.label = line.label.replaceAll('廣州南', '廣州東');
-        changed = true;
-      }
-    }
-  }
-
   if (!changed) return cached;
 
   return {

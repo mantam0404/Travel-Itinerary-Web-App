@@ -1,4 +1,4 @@
-import { FLIGHT_QUOTE, hkdToBase } from '../constants/flightQuotes';
+import { FLIGHT_QUOTE } from '../constants/flightQuotes';
 
 export interface FlightInfo {
   id: string;
@@ -30,7 +30,6 @@ export interface Attraction {
   lng: number;
   category: string;
   openingHours?: string;
-  ticketPriceEur?: number;
   tips?: string;
   youtubeVideoId?: string;
 }
@@ -42,7 +41,6 @@ export interface ItineraryActivity {
   description: string;
   attractionId?: string;
   transport?: string;
-  costEur?: number;
 }
 
 export interface ItineraryDay {
@@ -50,19 +48,6 @@ export interface ItineraryDay {
   dayLabel: string;
   city: string;
   activities: ItineraryActivity[];
-}
-
-export interface ExpenseItem {
-  id: string;
-  category: 'accommodation' | 'transportation' | 'tickets' | 'flights';
-  name: string;
-  date: string;
-  amountEur: number;
-  amountHkd?: number;
-  breakdown: { label: string; amountEur: number }[];
-  notes?: string;
-  sourceUrl?: string;
-  quotedAt?: string;
 }
 
 export interface TripData {
@@ -75,18 +60,13 @@ export interface TripData {
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
   attractions: Attraction[];
-  expenses: ExpenseItem[];
 }
 
 export const BASE_CURRENCY = 'CNY' as const;
 export const CNY_TO_HKD = 1.08;
 
-const hsrQuoteCny = hkdToBase(FLIGHT_QUOTE.roundTripHkd, CNY_TO_HKD);
-const outboundQuoteCny = hkdToBase(FLIGHT_QUOTE.outboundHkd, CNY_TO_HKD);
-const returnQuoteCny = hkdToBase(FLIGHT_QUOTE.returnHkd, CNY_TO_HKD);
-
 export const defaultTripData: TripData = {
-  version: 13,
+  version: 14,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -156,7 +136,6 @@ export const defaultTripData: TripData = {
       lng: 113.2683,
       category: '寺廟',
       openingHours: '08:00 – 21:30',
-      ticketPriceEur: 0,
       tips: '建議 19:00 前抵達，可同時欣賞日景與亮燈。',
       youtubeVideoId: 'Kw6e7x8Bw5k',
     },
@@ -168,7 +147,6 @@ export const defaultTripData: TripData = {
       lng: 113.2777,
       category: '博物館',
       openingHours: '09:00 – 17:30',
-      ticketPriceEur: 0,
       tips: '週一閉館（法定假日除外），建議提前網上預約。',
       youtubeVideoId: 'fLkECV3kFPs',
     },
@@ -180,7 +158,6 @@ export const defaultTripData: TripData = {
       lng: 113.3245,
       category: '地標',
       openingHours: '09:30 – 22:30',
-      ticketPriceEur: 150,
       tips: '日景與夜景各有特色，本次安排下午日景。',
     },
     {
@@ -201,7 +178,6 @@ export const defaultTripData: TripData = {
       lng: 113.2612,
       category: '體驗',
       openingHours: '19:00 – 22:00',
-      ticketPriceEur: 120,
       tips: '現場視乎班次及天氣再決定是否購票，建議預留彈性時間。',
       youtubeVideoId: 'xmhEeHIP_Zk',
     },
@@ -229,7 +205,6 @@ export const defaultTripData: TripData = {
           location: '香港西九龍站',
           description: '提前抵達車站，辦理出入境及安檢',
           transport: '港鐵／步行',
-          costEur: 0,
         },
         {
           time: '08:30',
@@ -237,7 +212,6 @@ export const defaultTripData: TripData = {
           location: '香港西九龍 → 廣州東',
           description: '搭乘高鐵前往廣州（預計 10:00 抵達）',
           transport: '二等座（車次待購票）',
-          costEur: 0,
         },
         {
           time: '10:30',
@@ -245,7 +219,6 @@ export const defaultTripData: TripData = {
           location: '天河北區酒店',
           description: '抵達廣州東站後前往酒店，辦理入住或寄放行李',
           transport: '地鐵／的士',
-          costEur: 15,
         },
         {
           time: '12:00',
@@ -254,7 +227,6 @@ export const defaultTripData: TripData = {
           description: '品嚐蝦餃、燒賣、腸粉等粵式點心',
           attractionId: 'diandude-tianhe',
           transport: '步行',
-          costEur: 80,
         },
         {
           time: '14:00',
@@ -263,7 +235,6 @@ export const defaultTripData: TripData = {
           description: '漫步恩寧路騎樓街，打卡粵劇藝術博物館及網紅巷弄',
           attractionId: 'yongqing-fang',
           transport: '地鐵 1 號線黃沙站',
-          costEur: 4,
         },
         {
           time: '18:30',
@@ -272,7 +243,6 @@ export const defaultTripData: TripData = {
           description: '參觀古寺，等候 19:00 亮燈',
           attractionId: 'dafo-temple',
           transport: '地鐵 1 號線公園前站／北京路站',
-          costEur: 4,
         },
         {
           time: '19:30',
@@ -280,7 +250,6 @@ export const defaultTripData: TripData = {
           location: '北京路商圈',
           description: '大佛寺附近用膳',
           transport: '步行',
-          costEur: 60,
         },
         {
           time: '20:30',
@@ -289,7 +258,6 @@ export const defaultTripData: TripData = {
           description: '現場視乎班次及天氣再決定是否上船',
           attractionId: 'pearl-river-cruise',
           transport: '地鐵／的士',
-          costEur: 0,
         },
       ],
     },
@@ -304,7 +272,6 @@ export const defaultTripData: TripData = {
           location: '天河北區',
           description: '酒店或附近茶樓早餐',
           transport: '步行',
-          costEur: 30,
         },
         {
           time: '10:00',
@@ -313,7 +280,6 @@ export const defaultTripData: TripData = {
           description: '參觀新館展覽（建議提前預約）',
           attractionId: 'guangzhou-art-museum',
           transport: '地鐵／的士',
-          costEur: 6,
         },
         {
           time: '13:00',
@@ -322,7 +288,6 @@ export const defaultTripData: TripData = {
           description: '登塔觀光層，俯瞰珠江新城日間景色',
           attractionId: 'canton-tower',
           transport: '地鐵 3 號線／APM 線',
-          costEur: 154,
         },
         {
           time: '14:30',
@@ -330,7 +295,6 @@ export const defaultTripData: TripData = {
           location: '廣州塔附近',
           description: '塔下或花城廣場周邊用餐',
           transport: '步行',
-          costEur: 50,
         },
         {
           time: '15:30',
@@ -338,7 +302,6 @@ export const defaultTripData: TripData = {
           location: '天河北區酒店',
           description: '辦理退房，攜行李前往廣州東站',
           transport: '地鐵 3 號線轉 1 號線',
-          costEur: 4,
         },
         {
           time: '16:00',
@@ -347,7 +310,6 @@ export const defaultTripData: TripData = {
           description: '在車站商圈閒逛，等候返程列車',
           attractionId: 'guangzhou-east-station',
           transport: '地鐵 1 號線／3 號線廣州東站',
-          costEur: 4,
         },
         {
           time: '16:46',
@@ -355,98 +317,11 @@ export const defaultTripData: TripData = {
           location: '廣州東 → 香港西九龍',
           description: '搭乘城際高鐵返回香港（16:46 出發，18:31 抵達）',
           transport: '二等座（車次待購票）',
-          costEur: 0,
         },
       ],
     },
   ],
-  expenses: [
-    {
-      id: 'flights-cx-roundtrip',
-      category: 'flights',
-      name: '來回高鐵票',
-      date: '2026-07-25',
-      amountEur: hsrQuoteCny,
-      amountHkd: FLIGHT_QUOTE.roundTripHkd,
-      breakdown: [
-        {
-          label: `西九龍→廣州東（07-25 08:30）${FLIGHT_QUOTE.cabinClass} 參考價`,
-          amountEur: outboundQuoteCny,
-        },
-        {
-          label: `廣州東→西九龍（07-26 16:46）${FLIGHT_QUOTE.cabinClass} 參考價`,
-          amountEur: returnQuoteCny,
-        },
-      ],
-      notes: FLIGHT_QUOTE.notes,
-      sourceUrl: FLIGHT_QUOTE.sourceUrl,
-      quotedAt: FLIGHT_QUOTE.quotedAt,
-    },
-    {
-      id: 'hotel-guangzhou',
-      category: 'accommodation',
-      name: '天河北區酒店（1 晚）',
-      date: '2026-07-25',
-      amountEur: 550,
-      breakdown: [
-        { label: '房費（1 晚 × ¥500/晚）', amountEur: 500 },
-        { label: '服務費及稅項', amountEur: 50 },
-      ],
-      notes: '近點都德天河北店，方便第 1 天午餐及第 2 天早餐',
-    },
-    {
-      id: 'metro-transport',
-      category: 'transportation',
-      name: '廣州地鐵及交通',
-      date: '2026-07-25',
-      amountEur: 35,
-      breakdown: [{ label: '地鐵單程票（全程約 6–8 次）', amountEur: 35 }],
-      notes: '單程約 ¥3–5',
-    },
-    {
-      id: 'canton-tower-ticket',
-      category: 'tickets',
-      name: '廣州塔觀光票',
-      date: '2026-07-26',
-      amountEur: 150,
-      breakdown: [{ label: '觀光層門票（日景）', amountEur: 150 }],
-    },
-    {
-      id: 'pearl-river-ticket',
-      category: 'tickets',
-      name: '珠江夜游（可選）',
-      date: '2026-07-25',
-      amountEur: 120,
-      breakdown: [{ label: '標準船票（現場視情況購買）', amountEur: 120 }],
-      notes: '尚未確定，到場後視班次再決定',
-    },
-  ],
 };
-
-export const categoryLabels: Record<ExpenseItem['category'], string> = {
-  accommodation: '住宿',
-  transportation: '交通',
-  tickets: '門票',
-  flights: '高鐵票',
-};
-
-export function formatHkdAmount(amountHkd: number): string {
-  return `HK$${amountHkd.toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-}
-
-export function formatHkd(amountBase: number, rate: number = CNY_TO_HKD): string {
-  return `HK$${(amountBase * rate).toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-}
-
-export function formatBase(amount: number, currency: TripData['baseCurrency'] = BASE_CURRENCY): string {
-  const symbol = currency === 'CNY' ? '¥' : '€';
-  return `${symbol}${amount.toLocaleString('zh-Hant', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-}
-
-/** @deprecated Use formatBase — kept for component compatibility */
-export function formatEur(amount: number): string {
-  return formatBase(amount, BASE_CURRENCY);
-}
 
 export function formatDateZh(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');

@@ -101,7 +101,7 @@ export function HomePage({
               廣州旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              2 日 1 夜快閃 · 離線行程、地圖與費用追蹤
+              2 日 1 夜快閃 · 離線行程與地圖
             </p>
           </div>
         </div>

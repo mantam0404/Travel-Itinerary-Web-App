@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import type { Attraction } from '../data/tripData';
-import { formatEur, formatHkd } from '../data/tripData';
 import { ScrollReveal } from './ScrollReveal';
 import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
@@ -14,7 +13,6 @@ import 'leaflet/dist/leaflet.css';
 
 interface TravelMapProps {
   attractions: Attraction[];
-  exchangeRate: number;
   mapCenter: { lat: number; lng: number };
   isDark: boolean;
   focusRequest?: MapFocusRequest | null;
@@ -56,7 +54,6 @@ function createImageMarkerIcon(imageUrl: string, isDark: boolean, isSelected: bo
 
 export function TravelMap({
   attractions,
-  exchangeRate,
   mapCenter,
   isDark,
   focusRequest,
@@ -224,14 +221,6 @@ export function TravelMap({
                       <div className="p-2">
                         <p className="font-semibold">{attr.name}</p>
                         <p className="text-xs text-[var(--ln-ink-secondary)]">{attr.category}</p>
-                        {attr.ticketPriceEur && (
-                          <p className="mt-1 text-sm">
-                            門票：{formatHkd(attr.ticketPriceEur, exchangeRate)}{' '}
-                            <span className="text-[var(--ln-ink-tertiary)]">
-                              ({formatEur(attr.ticketPriceEur)})
-                            </span>
-                          </p>
-                        )}
                       </div>
                     </div>
                   </Popup>
@@ -282,12 +271,6 @@ export function TravelMap({
               <div className="mt-3 flex flex-wrap gap-2 text-sm">
                 {selected.openingHours && (
                   <span className="ln-badge-neutral ln-badge">{selected.openingHours}</span>
-                )}
-                {selected.ticketPriceEur && (
-                  <span className="ln-badge">
-                    {formatHkd(selected.ticketPriceEur, exchangeRate)} (
-                    {formatEur(selected.ticketPriceEur)})
-                  </span>
                 )}
               </div>
               {selected.tips && (
