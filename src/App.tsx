@@ -21,7 +21,7 @@ export default function App() {
   const [scrollToDayDate, setScrollToDayDate] = useState<string | null>(null);
   const [mapFocus, setMapFocus] = useState<MapFocusRequest | null>(null);
   const [showSplash, setShowSplash] = useState(() => !sessionStorage.getItem(SPLASH_KEY));
-  const { tripData, status, syncMeta, loading, performSync } = useOfflineSync();
+  const { tripData, loading } = useOfflineSync();
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -86,9 +86,6 @@ export default function App() {
       <Layout
       activeTab={activeTab}
       onTabChange={handleTabChange}
-      status={status}
-      syncMeta={syncMeta}
-      onSync={performSync}
       isDark={isDark}
       onToggleTheme={toggleTheme}
     >

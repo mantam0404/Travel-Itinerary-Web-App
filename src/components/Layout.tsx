@@ -1,8 +1,5 @@
 import type { ReactNode } from 'react';
-import { SyncStatus } from './SyncStatus';
 import { ThemeToggleButton } from './icons';
-import type { ConnectionStatus } from '../hooks/useOfflineSync';
-import type { SyncMeta } from '../services/storage';
 import '../styles/linear.css';
 
 export type Tab = 'home' | 'itinerary' | 'map';
@@ -11,9 +8,6 @@ interface LayoutProps {
   children: ReactNode;
   activeTab: Tab;
   onTabChange: (tab: Tab) => void;
-  status: ConnectionStatus;
-  syncMeta: SyncMeta | null;
-  onSync: () => void;
   isDark: boolean;
   onToggleTheme: () => void;
 }
@@ -33,9 +27,6 @@ export function Layout({
   children,
   activeTab,
   onTabChange,
-  status,
-  syncMeta,
-  onSync,
   isDark,
   onToggleTheme,
 }: LayoutProps) {
@@ -50,7 +41,6 @@ export function Layout({
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
               <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
-              <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} />
             </div>
             <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
           </div>
