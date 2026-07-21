@@ -44,7 +44,7 @@ export function Itinerary({
     <section id="itinerary" className="space-y-4 px-4 py-6">
       <ScrollReveal>
         <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-          4 天 Guangzhou 周末遊 · 點擊景點可跳轉至地圖位置
+          2 日 1 夜 Guangzhou 快閃 · 點擊景點可跳轉至地圖位置
         </p>
       </ScrollReveal>
 

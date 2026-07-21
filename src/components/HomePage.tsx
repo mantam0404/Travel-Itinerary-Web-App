@@ -59,12 +59,12 @@ export function HomePage({
           </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label ln-hero-ink-secondary">Guangzhou · Nov 6–9, 2026</p>
+            <p className="ln-label ln-hero-ink-secondary">Guangzhou · Jul 25–26, 2026</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
               廣州旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              4 天周末快閃 · 離線行程、地圖與費用追蹤
+              2 日 1 夜快閃 · 離線行程、地圖與費用追蹤
             </p>
             <div className="mt-3">
               <SyncStatus
@@ -80,9 +80,9 @@ export function HomePage({
 
       <ScrollReveal as="section" className="border-b border-[var(--ln-border)] px-4 py-4 sm:px-6">
         <div className="flex flex-wrap gap-2">
-          <span className="ln-badge-neutral ln-badge">4 天行程</span>
+          <span className="ln-badge-neutral ln-badge">2 日 1 夜</span>
           <span className="ln-badge-neutral ln-badge">{destination}</span>
-          <span className="ln-badge">G80 / G653</span>
+          <span className="ln-badge">西九龍 ↔ 廣州東</span>
           <span className="ln-badge-neutral ln-badge">離線優先</span>
         </div>
       </ScrollReveal>

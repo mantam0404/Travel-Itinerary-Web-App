@@ -1,45 +1,33 @@
 {
-  "updated": "2026-07-21T14:51:30.677Z",
+  "updated": "2026-07-21T14:59:25.454Z",
   "sources": {
+    "yongqing-fang": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Guangzhou_Liwan_Enning_Lu_20211026.164621.jpg/960px-Guangzhou_Liwan_Enning_Lu_20211026.164621.jpg",
+      "title": "File:Guangzhou Liwan Enning Lu 20211026.164621.jpg"
+    },
+    "dafo-temple": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Shanmen%2C_Guangzhou_Dafo_Temple.jpg/960px-Shanmen%2C_Guangzhou_Dafo_Temple.jpg",
+      "title": "File:Shanmen, Guangzhou Dafo Temple.jpg"
+    },
+    "guangzhou-art-museum": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Aerial_View%2C_Guangzhou_Museum_of_Art_20241027-A.jpg/960px-Aerial_View%2C_Guangzhou_Museum_of_Art_20241027-A.jpg",
+      "title": "File:Aerial View, Guangzhou Museum of Art 20241027-A.jpg"
+    },
     "canton-tower": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Canton_Tower%28Look_up%29.JPG/960px-Canton_Tower%28Look_up%29.JPG",
       "title": "File:Canton Tower(Look up).JPG"
     },
-    "shamian-island": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Shamian_Island%2C_Guangzhou_%285929144006%29.jpg/960px-Shamian_Island%2C_Guangzhou_%285929144006%29.jpg",
-      "title": "File:Shamian Island, Guangzhou (5929144006).jpg"
-    },
-    "chen-clan-hall": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Chen_Clan_Ancestral_Hall_2025.06_03.jpg/960px-Chen_Clan_Ancestral_Hall_2025.06_03.jpg",
-      "title": "File:Chen Clan Ancestral Hall 2025.06 03.jpg"
-    },
-    "yuexiu-park": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Yuexiu_Park_Main_Gate_20260518.jpg/960px-Yuexiu_Park_Main_Gate_20260518.jpg",
-      "title": "File:Yuexiu Park Main Gate 20260518.jpg"
-    },
-    "beijing-road": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Beijing_Lu_Pedestrian_Street.JPG/960px-Beijing_Lu_Pedestrian_Street.JPG",
-      "title": "File:Beijing Lu Pedestrian Street.JPG"
-    },
-    "sacred-heart-cathedral": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Sacred_Heart_Cathedral_Guangzhou_front_facade_2026_dllu.jpg/960px-Sacred_Heart_Cathedral_Guangzhou_front_facade_2026_dllu.jpg",
-      "title": "File:Sacred Heart Cathedral Guangzhou front facade 2026 dllu.jpg"
-    },
-    "zhujiang-new-town": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Zhujiang_New_Town_of_Guangzhou_02.jpg/960px-Zhujiang_New_Town_of_Guangzhou_02.jpg",
-      "title": "File:Zhujiang New Town of Guangzhou 02.jpg"
+    "guangzhou-east-station": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/GUANGZHOU_EAST_RAILWAY_STATION_%282%29.jpg/960px-GUANGZHOU_EAST_RAILWAY_STATION_%282%29.jpg",
+      "title": "File:GUANGZHOU EAST RAILWAY STATION (2).jpg"
     },
     "pearl-river-cruise": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg/960px-The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg",
       "title": "File:The beautiful night scene near the Pearl River in Guangzhou, China.jpg"
     },
-    "liurong-temple": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Liurong_Temple_Guangzhou_-_panoramio.jpg",
-      "title": "File:Liurong Temple Guangzhou - panoramio.jpg"
-    },
-    "nanyue-king-museum": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Museum_of_the_Western_Han_Dynasty_Mausoleum_of_the_Nanyue_King_20230505.jpg/960px-Museum_of_the_Western_Han_Dynasty_Mausoleum_of_the_Nanyue_King_20230505.jpg",
-      "title": "File:Museum of the Western Han Dynasty Mausoleum of the Nanyue King 20230505.jpg"
+    "diandude-tianhe": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Dim_sum_collection_in_Cantonese_restaurant.jpg/960px-Dim_sum_collection_in_Cantonese_restaurant.jpg",
+      "title": "File:Dim sum collection in Cantonese restaurant.jpg"
     }
   }
 }
