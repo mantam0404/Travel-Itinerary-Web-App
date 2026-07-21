@@ -109,9 +109,8 @@ export function HomePage({
 
       {departure && (
         <ScrollReveal as="section" className="px-4 py-6 sm:px-6" delay={60} id="flights">
-          <div className="mb-3 flex items-center justify-between gap-3">
+          <div className="mb-3">
             <p className="ln-label">交通資訊</p>
-            <span className="ln-badge">{departure.status}</span>
           </div>
           <div className="ln-panel p-4">
             <TransportLeg leg={departure} label={returnFlight ? '去程' : undefined} />
