@@ -35,7 +35,7 @@ export const FLIGHT_QUOTE = {
   outboundHkd: 247,
   returnHkd: 247,
   notes:
-    '參考 MTR 高鐵及 12306 同期二等座票價。去程西九龍→廣州南、回程廣州東→西九龍（車次待購票時確認）。尚未購票，實際價格會浮動。',
+    '參考 MTR 高鐵及 12306 同期二等座票價。來回均為西九龍↔廣州東（車次待購票時確認）。尚未購票，實際價格會浮動。',
 } as const;
 
 export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {

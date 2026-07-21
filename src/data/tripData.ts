@@ -86,7 +86,7 @@ const outboundQuoteCny = hkdToBase(FLIGHT_QUOTE.outboundHkd, CNY_TO_HKD);
 const returnQuoteCny = hkdToBase(FLIGHT_QUOTE.returnHkd, CNY_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 9,
+  version: 10,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -99,11 +99,11 @@ export const defaultTripData: TripData = {
       date: '2026-07-25',
       airline: '廣深港高鐵',
       flightNumber: '待定',
-      route: '香港西九龍 → 廣州南',
+      route: '香港西九龍 → 廣州東',
       originCode: 'WEK',
-      destCode: 'GZN',
+      destCode: 'GGZ',
       departureAirport: '香港西九龍站',
-      arrivalAirport: '廣州南站',
+      arrivalAirport: '廣州東站',
       departureTime: '08:30',
       arrivalTime: '10:00',
       duration: '約 1 小時 30 分',
@@ -234,7 +234,7 @@ export const defaultTripData: TripData = {
         {
           time: '08:30',
           title: '高鐵出發',
-          location: '香港西九龍 → 廣州南',
+          location: '香港西九龍 → 廣州東',
           description: '搭乘高鐵前往廣州（預計 10:00 抵達）',
           transport: '二等座（車次待購票）',
           costEur: 0,
@@ -243,7 +243,7 @@ export const defaultTripData: TripData = {
           time: '10:30',
           title: '酒店寄放行李',
           location: '天河北區酒店',
-          description: '抵達酒店辦理入住或寄放行李',
+          description: '抵達廣州東站後前往酒店，辦理入住或寄放行李',
           transport: '地鐵／的士',
           costEur: 15,
         },
@@ -370,7 +370,7 @@ export const defaultTripData: TripData = {
       amountHkd: FLIGHT_QUOTE.roundTripHkd,
       breakdown: [
         {
-          label: `西九龍→廣州南（07-25 08:30）${FLIGHT_QUOTE.cabinClass} 參考價`,
+          label: `西九龍→廣州東（07-25 08:30）${FLIGHT_QUOTE.cabinClass} 參考價`,
           amountEur: outboundQuoteCny,
         },
         {

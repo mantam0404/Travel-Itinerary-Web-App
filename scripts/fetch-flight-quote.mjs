@@ -29,7 +29,7 @@ const DEFAULT_QUOTE = {
   source: 'MTR 高鐵 / 12306',
   sourceUrl: 'https://www.highspeed.mtr.com.hk/en/main/index.html',
   quotedAt: new Date().toISOString().slice(0, 10),
-  note: '參考報價（未購票）— 西九龍↔廣州東／廣州南 二等座',
+  note: '參考報價（未購票）— 西九龍↔廣州東 二等座',
   fetchedAt: new Date().toISOString(),
   cabinClass: '二等座',
 }
