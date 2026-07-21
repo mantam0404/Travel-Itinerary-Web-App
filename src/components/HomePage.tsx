@@ -154,8 +154,9 @@ export function HomePage({
                 headerAction={
                   <button
                     type="button"
-                    onClick={() => onNavigate('itinerary', { dayDate: day.date })}
+                    onClick={() => toggleDay(day.date)}
                     className="ln-pressable ln-badge shrink-0 self-center px-3 py-1.5 text-xs"
+                    aria-expanded={expandedDayDates.has(day.date)}
                   >
                     查看行程
                   </button>
