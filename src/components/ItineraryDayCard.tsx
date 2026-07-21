@@ -116,12 +116,6 @@ export function ItineraryDayCard({
                         title={`${attraction.name} 介紹影片`}
                       />
                     )}
-                    {act.transport && (
-                      <p className="mt-2 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">
-                        <span className="font-medium text-[var(--ln-ink-secondary)]">交通：</span>
-                        {act.transport}
-                      </p>
-                    )}
                   </div>
                 );
               })}
