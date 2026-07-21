@@ -1,10 +1,7 @@
 import type { FlightInfo, ItineraryDay } from '../data/tripData';
 import { formatDateZh } from '../data/tripData';
 import type { Tab } from './Layout';
-import { SyncStatus } from './SyncStatus';
 import { ScrollReveal } from './ScrollReveal';
-import type { ConnectionStatus } from '../hooks/useOfflineSync';
-import type { SyncMeta } from '../services/storage';
 import { getItineraryDayImage, getItineraryDayImageFallback, getHeroImage } from '../utils/itineraryImages';
 import { TripImage } from './TripImage';
 
@@ -46,9 +43,6 @@ interface HomePageProps {
   itinerary: ItineraryDay[];
   isDark: boolean;
   onNavigate: (tab: Tab, options?: NavigateOptions) => void;
-  status: ConnectionStatus;
-  syncMeta: SyncMeta | null;
-  onSync: () => void;
 }
 
 export function HomePage({
@@ -56,9 +50,6 @@ export function HomePage({
   itinerary,
   isDark,
   onNavigate,
-  status,
-  syncMeta,
-  onSync,
 }: HomePageProps) {
   const departure = flights.find((f) => f.type === 'departure');
   const returnFlight = flights.find((f) => f.type === 'return');
@@ -88,14 +79,6 @@ export function HomePage({
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
               2 日 1 夜快閃 · 離線行程、地圖與費用追蹤
             </p>
-            <div className="mt-3">
-              <SyncStatus
-                status={status}
-                syncMeta={syncMeta}
-                onSync={onSync}
-                variant={isDark ? 'hero' : 'hero-light'}
-              />
-            </div>
           </div>
         </div>
       </section>

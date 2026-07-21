@@ -98,9 +98,6 @@ export default function App() {
           itinerary={tripData.itinerary}
           isDark={isDark}
           onNavigate={handleNavigate}
-          status={status}
-          syncMeta={syncMeta}
-          onSync={performSync}
         />
       )}
       {activeTab === 'itinerary' && (
