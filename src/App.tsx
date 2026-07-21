@@ -96,6 +96,7 @@ export default function App() {
         <HomePage
           flights={tripData.flights}
           itinerary={tripData.itinerary}
+          attractions={tripData.attractions}
           isDark={isDark}
           onNavigate={handleNavigate}
         />

@@ -1,9 +1,15 @@
-import type { FlightInfo, ItineraryDay } from '../data/tripData';
+import { useEffect, useState } from 'react';
+import type { Attraction, FlightInfo, ItineraryDay } from '../data/tripData';
 import { formatDateZh } from '../data/tripData';
 import type { Tab } from './Layout';
 import { ScrollReveal } from './ScrollReveal';
-import { getItineraryDayImage, getItineraryDayImageFallback, getHeroImage } from '../utils/itineraryImages';
+import { ItineraryDayCard } from './ItineraryDayCard';
+import { getHeroImage } from '../utils/itineraryImages';
 import { TripImage } from './TripImage';
+
+function allDayDates(days: ItineraryDay[]): Set<string> {
+  return new Set(days.map((day) => day.date));
+}
 
 function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
   return (
@@ -41,6 +47,7 @@ export interface NavigateOptions {
 interface HomePageProps {
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
+  attractions: Attraction[];
   isDark: boolean;
   onNavigate: (tab: Tab, options?: NavigateOptions) => void;
 }
@@ -48,12 +55,29 @@ interface HomePageProps {
 export function HomePage({
   flights,
   itinerary,
+  attractions,
   isDark,
   onNavigate,
 }: HomePageProps) {
   const departure = flights.find((f) => f.type === 'departure');
   const returnFlight = flights.find((f) => f.type === 'return');
   const heroImage = getHeroImage(isDark);
+  const [expandedDayDates, setExpandedDayDates] = useState<Set<string>>(() => allDayDates(itinerary));
+
+  useEffect(() => {
+    setExpandedDayDates(allDayDates(itinerary));
+  }, [itinerary]);
+
+  const toggleDay = (date: string) => {
+    const next = new Set(expandedDayDates);
+    if (next.has(date)) next.delete(date);
+    else next.add(date);
+    setExpandedDayDates(next);
+  };
+
+  const handleNavigateToAttraction = (attractionId: string) => {
+    onNavigate('map', { attractionId });
+  };
 
   return (
     <>
@@ -109,7 +133,7 @@ export function HomePage({
             </div>
             <button
               type="button"
-              onClick={() => onNavigate('itinerary')}
+              onClick={() => setExpandedDayDates(allDayDates(itinerary))}
               className="ln-pressable text-sm font-medium text-[var(--ln-accent)]"
             >
               展開全部 →
@@ -118,37 +142,16 @@ export function HomePage({
         </ScrollReveal>
 
         <div className="space-y-2">
-          {itinerary.map((day, index) => {
-            const image = getItineraryDayImage(day, isDark);
-            const imageFallback = getItineraryDayImageFallback(day, isDark);
-            const highlight = day.activities[0];
-            return (
-              <ScrollReveal key={day.date} delay={100 + index * 55}>
-                <div className="ln-row w-full">
-                  <div className="ln-thumb h-[4.5rem] w-[5.5rem] sm:h-20 sm:w-24">
-                    <TripImage
-                      key={image}
-                      src={image}
-                      fallback={imageFallback}
-                      alt={highlight?.title ?? day.city}
-                      className="h-full w-full object-cover transition-opacity duration-500 ease-out"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1 py-0.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="ln-badge-neutral ln-badge">{day.dayLabel}</span>
-                      <span className="text-[10px] text-[var(--ln-ink-tertiary)]">
-                        {formatDateZh(day.date)}
-                      </span>
-                    </div>
-                    <p className="mt-1.5 truncate text-sm font-medium text-[var(--ln-ink)]">
-                      {highlight?.title ?? day.city}
-                    </p>
-                    <p className="mt-0.5 truncate text-xs text-[var(--ln-ink-secondary)]">
-                      {day.city}
-                      {highlight?.location ? ` · ${highlight.location}` : ''}
-                    </p>
-                  </div>
+          {itinerary.map((day, index) => (
+            <ScrollReveal key={day.date} delay={100 + index * 55}>
+              <ItineraryDayCard
+                day={day}
+                attractions={attractions}
+                isDark={isDark}
+                isOpen={expandedDayDates.has(day.date)}
+                onToggle={() => toggleDay(day.date)}
+                onNavigateToAttraction={handleNavigateToAttraction}
+                headerAction={
                   <button
                     type="button"
                     onClick={() => onNavigate('itinerary', { dayDate: day.date })}
@@ -156,10 +159,10 @@ export function HomePage({
                   >
                     查看行程
                   </button>
-                </div>
-              </ScrollReveal>
-            );
-          })}
+                }
+              />
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
