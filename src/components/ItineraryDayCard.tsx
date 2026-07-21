@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import type { Attraction, ItineraryDay } from '../data/tripData';
 import { formatDateZh, formatEur } from '../data/tripData';
@@ -15,7 +14,6 @@ interface ItineraryDayCardProps {
   onToggle: () => void;
   onNavigateToAttraction: (attractionId: string) => void;
   id?: string;
-  headerAction?: ReactNode;
 }
 
 export function ItineraryDayCard({
@@ -26,7 +24,6 @@ export function ItineraryDayCard({
   onToggle,
   onNavigateToAttraction,
   id,
-  headerAction,
 }: ItineraryDayCardProps) {
   const attractionById = useMemo(
     () => new Map(attractions.map((a) => [a.id, a])),
@@ -70,7 +67,6 @@ export function ItineraryDayCard({
             </p>
           </div>
         </button>
-        {headerAction}
         <button
           type="button"
           onClick={onToggle}

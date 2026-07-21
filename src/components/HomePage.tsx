@@ -151,16 +151,6 @@ export function HomePage({
                 isOpen={expandedDayDates.has(day.date)}
                 onToggle={() => toggleDay(day.date)}
                 onNavigateToAttraction={handleNavigateToAttraction}
-                headerAction={
-                  <button
-                    type="button"
-                    onClick={() => toggleDay(day.date)}
-                    className="ln-pressable ln-badge shrink-0 self-center px-3 py-1.5 text-xs"
-                    aria-expanded={expandedDayDates.has(day.date)}
-                  >
-                    查看行程
-                  </button>
-                }
               />
             </ScrollReveal>
           ))}
