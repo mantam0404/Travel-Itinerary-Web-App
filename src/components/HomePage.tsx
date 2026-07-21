@@ -1,5 +1,5 @@
 import type { FlightInfo, ItineraryDay } from '../data/tripData';
-import { formatDateZh, formatHkdAmount } from '../data/tripData';
+import { formatDateZh } from '../data/tripData';
 import type { Tab } from './Layout';
 import { ThemeToggleButton } from './icons';
 import { SyncStatus } from './SyncStatus';
@@ -117,15 +117,6 @@ export function HomePage({
                 <p className="text-xs text-[var(--ln-ink-tertiary)]">{departure.destCode ?? '—'}</p>
               </div>
             </div>
-            {departure.quoteHkd && returnFlight?.quoteHkd && (
-              <p className="mt-4 text-xs text-[var(--ln-ink-secondary)]">
-                參考來回二等座票價：
-                <span className="ml-1 font-medium text-[var(--ln-accent)]">
-                  {formatHkdAmount(departure.quoteHkd + returnFlight.quoteHkd)}
-                </span>
-                <span className="text-[var(--ln-ink-tertiary)]">（未購票）</span>
-              </p>
-            )}
             {returnFlight && (
               <>
                 <hr className="ln-divider my-4" />
