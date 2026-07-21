@@ -54,7 +54,7 @@ export function ItineraryDayCard({
           <div className="min-w-0 flex-1 py-0.5">
             <div className="flex flex-wrap items-center gap-2">
               <span className="ln-badge-neutral ln-badge">{day.dayLabel}</span>
-              <span className="text-[10px] text-[var(--ln-ink-tertiary)]">
+              <span className="text-xs text-[var(--ln-ink-tertiary)]">
                 {formatDateZh(day.date)}
               </span>
             </div>

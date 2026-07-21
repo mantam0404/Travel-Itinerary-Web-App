@@ -27,7 +27,7 @@ function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
           <p className="text-xs text-[var(--ln-ink-tertiary)]">{leg.originCode ?? '—'}</p>
         </div>
         <div className="flex-1 text-center">
-          <p className="text-[10px] text-[var(--ln-ink-tertiary)]">{leg.duration}</p>
+          <p className="text-xs text-[var(--ln-ink-tertiary)]">{leg.duration}</p>
           <div className="mx-auto mt-1.5 h-px w-full max-w-[80px] bg-[var(--ln-border-strong)]" />
         </div>
         <div className="text-right">
