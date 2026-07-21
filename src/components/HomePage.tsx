@@ -1,7 +1,6 @@
 import type { FlightInfo, ItineraryDay } from '../data/tripData';
 import { formatDateZh } from '../data/tripData';
 import type { Tab } from './Layout';
-import { ThemeToggleButton } from './icons';
 import { SyncStatus } from './SyncStatus';
 import { ScrollReveal } from './ScrollReveal';
 import type { ConnectionStatus } from '../hooks/useOfflineSync';
@@ -46,7 +45,6 @@ interface HomePageProps {
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
   isDark: boolean;
-  onToggleTheme: () => void;
   onNavigate: (tab: Tab, options?: NavigateOptions) => void;
   status: ConnectionStatus;
   syncMeta: SyncMeta | null;
@@ -57,7 +55,6 @@ export function HomePage({
   flights,
   itinerary,
   isDark,
-  onToggleTheme,
   onNavigate,
   status,
   syncMeta,
@@ -82,10 +79,6 @@ export function HomePage({
             loading="eager"
           />
           <div className="ln-hero-overlay absolute inset-0" />
-
-          <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-end gap-2 px-4 pt-4 pb-2 sm:px-6">
-            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} variant="hero" />
-          </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
             <p className="ln-label ln-hero-ink-secondary">廣州 · 2026年7月25–26日</p>

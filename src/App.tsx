@@ -97,7 +97,6 @@ export default function App() {
           flights={tripData.flights}
           itinerary={tripData.itinerary}
           isDark={isDark}
-          onToggleTheme={toggleTheme}
           onNavigate={handleNavigate}
           status={status}
           syncMeta={syncMeta}
