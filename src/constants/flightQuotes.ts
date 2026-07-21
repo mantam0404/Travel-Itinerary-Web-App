@@ -1,6 +1,6 @@
-/** Google Flights reference quote for HKG ↔ BCN (Oct 15–24, 2026) */
+/** Reference fare for Hong Kong West Kowloon ↔ Guangzhou South HSR (Nov 6–9, 2026) */
 export const GOOGLE_FLIGHTS_SEARCH_URL =
-  'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20BCN%20on%202026-10-15%20through%202026-10-24';
+  'https://www.highspeed.mtr.com.hk/en/main/index.html';
 
 export interface FlightQuote {
   id?: string;
@@ -23,28 +23,28 @@ export interface FlightQuote {
 }
 
 export const FLIGHT_QUOTE = {
-  source: 'Google Flights',
+  source: 'MTR 高鐵 / 12306',
   sourceUrl: GOOGLE_FLIGHTS_SEARCH_URL,
-  quotedAt: '2026-07-09',
-  cabinClass: 'Economy',
-  airline: 'Cathay Pacific',
-  outboundFlight: 'CX321',
-  returnFlight: 'CX318',
-  /** Round-trip reference fare (direct CX321 + CX318), HKD */
-  roundTripHkd: 11180,
-  outboundHkd: 5590,
-  returnHkd: 5590,
+  quotedAt: '2026-07-21',
+  cabinClass: '二等座',
+  airline: '廣深港高鐵',
+  outboundFlight: 'G80',
+  returnFlight: 'G653',
+  /** Round-trip reference fare (second class), HKD */
+  roundTripHkd: 494,
+  outboundHkd: 247,
+  returnHkd: 247,
   notes:
-    '參考 Google Flights 及 Cathay Pacific 官網同期直航經濟艙報價（10 月旺季）。尚未購票，實際價格會浮動，預訂前請再查詢。',
+    '參考 MTR 高鐵及 12306 同期二等座票價（廣州南↔西九龍）。尚未購票，實際價格會浮動，預訂前請再查詢。',
 } as const;
 
 export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {
-  id: 'cx-hkg-bcn-2026-10',
+  id: 'hsr-hkg-can-2026-11',
   airline: FLIGHT_QUOTE.airline,
   outboundFlight: FLIGHT_QUOTE.outboundFlight,
   returnFlight: FLIGHT_QUOTE.returnFlight,
-  outboundDate: '2026-10-15',
-  returnDate: '2026-10-24',
+  outboundDate: '2026-11-06',
+  returnDate: '2026-11-09',
   currency: 'HKD',
   roundTripHkd: FLIGHT_QUOTE.roundTripHkd,
   outboundHkd: FLIGHT_QUOTE.outboundHkd,
@@ -56,6 +56,11 @@ export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {
   note: FLIGHT_QUOTE.notes,
 };
 
-export function hkdToEur(amountHkd: number, rate: number): number {
+export function hkdToBase(amountHkd: number, rate: number): number {
   return Math.round((amountHkd / rate) * 100) / 100;
+}
+
+/** @deprecated Use hkdToBase — kept for flight price sync compatibility */
+export function hkdToEur(amountHkd: number, rate: number): number {
+  return hkdToBase(amountHkd, rate);
 }

@@ -85,6 +85,7 @@ export default function App() {
     >
       {activeTab === 'home' && (
         <HomePage
+          destination={tripData.destination}
           flights={tripData.flights}
           itinerary={tripData.itinerary}
           isDark={isDark}
@@ -108,12 +109,17 @@ export default function App() {
         <TravelMap
           attractions={tripData.attractions}
           exchangeRate={tripData.exchangeRate}
+          mapCenter={tripData.mapCenter}
           isDark={isDark}
           focusRequest={mapFocus}
         />
       )}
       {activeTab === 'expenses' && (
-        <ExpenseTracker expenses={tripData.expenses} exchangeRate={tripData.exchangeRate} />
+        <ExpenseTracker
+          expenses={tripData.expenses}
+          exchangeRate={tripData.exchangeRate}
+          baseCurrency={tripData.baseCurrency}
+        />
       )}
     </Layout>
     </>

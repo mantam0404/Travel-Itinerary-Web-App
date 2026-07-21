@@ -14,11 +14,10 @@ import 'leaflet/dist/leaflet.css';
 interface TravelMapProps {
   attractions: Attraction[];
   exchangeRate: number;
+  mapCenter: { lat: number; lng: number };
   isDark: boolean;
   focusRequest?: MapFocusRequest | null;
 }
-
-const BARCELONA_CENTER: [number, number] = [41.3874, 2.1686];
 
 interface FlyCoords {
   lat: number;
@@ -57,9 +56,11 @@ function createImageMarkerIcon(imageUrl: string, isDark: boolean, isSelected: bo
 export function TravelMap({
   attractions,
   exchangeRate,
+  mapCenter,
   isDark,
   focusRequest,
 }: TravelMapProps) {
+  const mapCenterCoords: [number, number] = [mapCenter.lat, mapCenter.lng];
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [flyCoords, setFlyCoords] = useState<FlyCoords | null>(null);
@@ -180,7 +181,7 @@ export function TravelMap({
         <div className="ln-panel ln-map-shell overflow-hidden p-1">
           {mapReady && (
             <MapContainer
-              center={BARCELONA_CENTER}
+              center={mapCenterCoords}
               zoom={13}
               className="h-72 w-full rounded-[10px] sm:h-96"
               scrollWheelZoom={false}

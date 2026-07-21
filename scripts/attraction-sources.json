@@ -1,66 +1,42 @@
 {
-  "sagrada-familia": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Barcelona_-_Exterior_of_the_Apse_of_the_Sagrada_Fam%C3%ADlia_-_Western_exposure.jpg/960px-Barcelona_-_Exterior_of_the_Apse_of_the_Sagrada_Fam%C3%ADlia_-_Western_exposure.jpg",
-    "title": "File:Barcelona - Exterior of the Apse of the Sagrada Fam\u00edlia - Western exposure.jpg"
+  "canton-tower": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Canton_Tower%28Look_up%29.JPG/960px-Canton_Tower%28Look_up%29.JPG",
+    "title": "File:Canton Tower(Look up).JPG"
   },
-  "casa-batllo": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Casa_Batllo_Barcelona_%28219998303%29.jpeg/960px-Casa_Batllo_Barcelona_%28219998303%29.jpeg",
-    "title": "File:Casa Batllo Barcelona (219998303).jpeg"
+  "shamian-island": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Shamian_Island%2C_Guangzhou_%285929144006%29.jpg/960px-Shamian_Island%2C_Guangzhou_%285929144006%29.jpg",
+    "title": "File:Shamian Island, Guangzhou (5929144006).jpg"
   },
-  "park-guell": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Barcelona_Parc_G%C3%BCell_Drache.jpg/960px-Barcelona_Parc_G%C3%BCell_Drache.jpg",
-    "title": "File:Barcelona Parc G\u00fcell Drache.jpg"
+  "chen-clan-hall": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Chen_Clan_Ancestral_Hall_2025.06_03.jpg/960px-Chen_Clan_Ancestral_Hall_2025.06_03.jpg",
+    "title": "File:Chen Clan Ancestral Hall 2025.06 03.jpg"
   },
-  "la-rambla": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/02006_44570082_La_Rambla_From_The_Cable_Car.jpg/960px-02006_44570082_La_Rambla_From_The_Cable_Car.jpg",
-    "title": "File:02006 44570082 La Rambla From The Cable Car.jpg"
+  "yuexiu-park": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Yuexiu_Park_Main_Gate_20260518.jpg/960px-Yuexiu_Park_Main_Gate_20260518.jpg",
+    "title": "File:Yuexiu Park Main Gate 20260518.jpg"
   },
-  "gothic-quarter": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Gothic_Quarter%2C_Barcelona_%2815%29_%2830442722553%29.jpg/960px-Gothic_Quarter%2C_Barcelona_%2815%29_%2830442722553%29.jpg",
-    "title": "File:Gothic Quarter, Barcelona (15) (30442722553).jpg"
+  "beijing-road": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Beijing_Lu_Pedestrian_Street.JPG/960px-Beijing_Lu_Pedestrian_Street.JPG",
+    "title": "File:Beijing Lu Pedestrian Street.JPG"
   },
-  "montjuic": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/089_Font_M%C3%A0gica_de_Montju%C3%AFc_%28Barcelona%29.jpg/960px-089_Font_M%C3%A0gica_de_Montju%C3%AFc_%28Barcelona%29.jpg",
-    "title": "File:089 Font M\u00e0gica de Montju\u00efc (Barcelona).jpg"
+  "sacred-heart-cathedral": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Sacred_Heart_Cathedral_Guangzhou_front_facade_2026_dllu.jpg/960px-Sacred_Heart_Cathedral_Guangzhou_front_facade_2026_dllu.jpg",
+    "title": "File:Sacred Heart Cathedral Guangzhou front facade 2026 dllu.jpg"
   },
-  "boqueria": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/%22La_Boqueria%22_Market_%28Barcelona%2C_Spain%29.JPG/960px-%22La_Boqueria%22_Market_%28Barcelona%2C_Spain%29.JPG",
-    "title": "File:\"La Boqueria\" Market (Barcelona, Spain).JPG"
+  "zhujiang-new-town": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Zhujiang_New_Town_of_Guangzhou_02.jpg/960px-Zhujiang_New_Town_of_Guangzhou_02.jpg",
+    "title": "File:Zhujiang New Town of Guangzhou 02.jpg"
   },
-  "barceloneta": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Beach%2C_Barcelona_%28P1170712%29.jpg/960px-Beach%2C_Barcelona_%28P1170712%29.jpg",
-    "title": "File:Beach, Barcelona (P1170712).jpg"
+  "pearl-river-cruise": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg/960px-The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg",
+    "title": "File:The beautiful night scene near the Pearl River in Guangzhou, China.jpg"
   },
-  "casa-mila": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Casa_Mil%C3%A0%2C_general_view.jpg/960px-Casa_Mil%C3%A0%2C_general_view.jpg",
-    "title": "File:Casa Milà, general view.jpg"
+  "liurong-temple": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Liurong_Temple_Guangzhou_-_panoramio.jpg",
+    "title": "File:Liurong Temple Guangzhou - panoramio.jpg"
   },
-  "picasso-museum": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/432_Museu_Picasso%2C_Palau_Finestres%2C_c._Montcada_23_%28Barcelona%29.jpg/960px-432_Museu_Picasso%2C_Palau_Finestres%2C_c._Montcada_23_%28Barcelona%29.jpg",
-    "title": "File:432 Museu Picasso, Palau Finestres, c. Montcada 23 (Barcelona).jpg"
-  },
-  "el-born": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Afternoon_sun_in_the_district_of_El_Borne%2C_Barcelona_%284480743655%29.jpg/960px-Afternoon_sun_in_the_district_of_El_Borne%2C_Barcelona_%284480743655%29.jpg",
-    "title": "File:Afternoon sun in the district of El Borne, Barcelona (4480743655).jpg"
-  },
-  "tibidabo": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/%28Barcelona%29_El_Tibidabo%2C_l%27observatori_Fabra_-_exposici%C3%B3_sud-est.jpg/960px-%28Barcelona%29_El_Tibidabo%2C_l%27observatori_Fabra_-_exposici%C3%B3_sud-est.jpg",
-    "title": "File:(Barcelona) El Tibidabo, l'observatori Fabra - exposici\u00f3 sud-est.jpg"
-  },
-  "mnac": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Exterior_del_MNAC-Barcelona.jpg/960px-Exterior_del_MNAC-Barcelona.jpg",
-    "title": "File:Exterior del MNAC-Barcelona.jpg"
-  },
-  "joan-miro": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/2001-12-Fundacio-Joan-Miro-Barcelona-Josep-Lluis-Sert.jpg/960px-2001-12-Fundacio-Joan-Miro-Barcelona-Josep-Lluis-Sert.jpg",
-    "title": "File:2001-12-Fundacio-Joan-Miro-Barcelona-Josep-Lluis-Sert.jpg"
-  },
-  "macba": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/2001-12-Museu-d-Art-Contemporani-de-Barcelona-1.jpg/960px-2001-12-Museu-d-Art-Contemporani-de-Barcelona-1.jpg",
-    "title": "File:2001-12-Museu-d-Art-Contemporani-de-Barcelona-1.jpg"
-  },
-  "camp-nou": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2014._Camp_Nou._M%C3%A9s_que_un_club._Barcelona_B40.jpg/960px-2014._Camp_Nou._M%C3%A9s_que_un_club._Barcelona_B40.jpg",
-    "title": "File:2014. Camp Nou. M\u00e9s que un club. Barcelona B40.jpg"
+  "nanyue-king-museum": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Museum_of_the_Western_Han_Dynasty_Mausoleum_of_the_Nanyue_King_20230505.jpg/960px-Museum_of_the_Western_Han_Dynasty_Mausoleum_of_the_Nanyue_King_20230505.jpg",
+    "title": "File:Museum of the Western Han Dynasty Mausoleum of the Nanyue King 20230505.jpg"
   }
 }

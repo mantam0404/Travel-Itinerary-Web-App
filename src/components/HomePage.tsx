@@ -14,6 +14,7 @@ export interface NavigateOptions {
 }
 
 interface HomePageProps {
+  destination: string;
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
   isDark: boolean;
@@ -25,6 +26,7 @@ interface HomePageProps {
 }
 
 export function HomePage({
+  destination,
   flights,
   itinerary,
   isDark,
@@ -47,7 +49,7 @@ export function HomePage({
           <img
             key={heroImage}
             src={heroImage}
-            alt="Barcelona skyline with Sagrada Família"
+            alt="Guangzhou skyline with Canton Tower"
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out"
           />
           <div className="ln-hero-overlay absolute inset-0" />
@@ -57,12 +59,12 @@ export function HomePage({
           </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label ln-hero-ink-secondary">Barcelona · Oct 15–24, 2026</p>
+            <p className="ln-label ln-hero-ink-secondary">Guangzhou · Nov 6–9, 2026</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
-              巴塞隆納旅行行程
+              廣州旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              10 天深度漫遊 · 離線行程、地圖與費用追蹤
+              4 天周末快閃 · 離線行程、地圖與費用追蹤
             </p>
             <div className="mt-3">
               <SyncStatus
@@ -78,9 +80,9 @@ export function HomePage({
 
       <ScrollReveal as="section" className="border-b border-[var(--ln-border)] px-4 py-4 sm:px-6">
         <div className="flex flex-wrap gap-2">
-          <span className="ln-badge-neutral ln-badge">10 天行程</span>
-          <span className="ln-badge-neutral ln-badge">Barcelona</span>
-          <span className="ln-badge">CX321 / CX318</span>
+          <span className="ln-badge-neutral ln-badge">4 天行程</span>
+          <span className="ln-badge-neutral ln-badge">{destination}</span>
+          <span className="ln-badge">G80 / G653</span>
           <span className="ln-badge-neutral ln-badge">離線優先</span>
         </div>
       </ScrollReveal>
@@ -88,12 +90,12 @@ export function HomePage({
       {departure && (
         <ScrollReveal as="section" className="px-4 py-6 sm:px-6" delay={60} id="flights">
           <div className="mb-3 flex items-center justify-between gap-3">
-            <p className="ln-label">航班資訊</p>
+            <p className="ln-label">交通資訊</p>
             <span className="ln-badge">{departure.status}</span>
           </div>
           <div className="ln-panel p-4">
             <p className="text-sm font-medium text-[var(--ln-ink)]">
-              Cathay Pacific {departure.flightNumber}
+              {departure.airline} {departure.flightNumber}
             </p>
             <p className="mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
               {formatDateZh(departure.date)} · {departure.route}
@@ -101,7 +103,7 @@ export function HomePage({
             <div className="mt-4 flex items-center justify-between gap-3">
               <div>
                 <p className="ln-tabular text-2xl font-semibold">{departure.departureTime}</p>
-                <p className="text-xs text-[var(--ln-ink-tertiary)]">HKG</p>
+                <p className="text-xs text-[var(--ln-ink-tertiary)]">{departure.originCode ?? '—'}</p>
               </div>
               <div className="flex-1 text-center">
                 <p className="text-[10px] text-[var(--ln-ink-tertiary)]">{departure.duration}</p>
@@ -109,12 +111,12 @@ export function HomePage({
               </div>
               <div className="text-right">
                 <p className="ln-tabular text-2xl font-semibold">{departure.arrivalTime}</p>
-                <p className="text-xs text-[var(--ln-ink-tertiary)]">BCN</p>
+                <p className="text-xs text-[var(--ln-ink-tertiary)]">{departure.destCode ?? '—'}</p>
               </div>
             </div>
             {departure.quoteHkd && returnFlight?.quoteHkd && (
               <p className="mt-4 text-xs text-[var(--ln-ink-secondary)]">
-                Google Flights 參考來回經濟艙：
+                參考來回二等座票價：
                 <span className="ml-1 font-medium text-[var(--ln-accent)]">
                   {formatHkdAmount(departure.quoteHkd + returnFlight.quoteHkd)}
                 </span>
@@ -129,7 +131,8 @@ export function HomePage({
                   {returnFlight.flightNumber} · {formatDateZh(returnFlight.date)}
                 </p>
                 <p className="ln-tabular mt-0.5 text-xs text-[var(--ln-ink-secondary)]">
-                  {returnFlight.departureTime} BCN → {returnFlight.arrivalTime} HKG
+                  {returnFlight.departureTime} {returnFlight.originCode ?? '—'} → {returnFlight.arrivalTime}{' '}
+                  {returnFlight.destCode ?? '—'}
                 </p>
               </>
             )}

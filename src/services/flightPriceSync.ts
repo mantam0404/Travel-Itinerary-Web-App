@@ -65,11 +65,11 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       sourceUrl: quote.sourceUrl,
       breakdown: [
         {
-          label: `${quote.outboundFlight} HKG→BCN（10-15）${cabin} 參考價`,
+          label: `${quote.outboundFlight} 西九龍→廣州南（${quote.outboundDate?.slice(5) ?? ''}）${cabin} 參考價`,
           amountEur: outboundEur,
         },
         {
-          label: `${quote.returnFlight} BCN→HKG（10-24）${cabin} 參考價`,
+          label: `${quote.returnFlight} 廣州南→西九龍（${quote.returnDate?.slice(5) ?? ''}）${cabin} 參考價`,
           amountEur: returnEur,
         },
       ],
