@@ -95,7 +95,6 @@ export default function App() {
     >
       {activeTab === 'home' && (
         <HomePage
-          destination={tripData.destination}
           flights={tripData.flights}
           itinerary={tripData.itinerary}
           isDark={isDark}

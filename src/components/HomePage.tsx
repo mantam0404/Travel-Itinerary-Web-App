@@ -43,7 +43,6 @@ export interface NavigateOptions {
 }
 
 interface HomePageProps {
-  destination: string;
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
   isDark: boolean;
@@ -55,7 +54,6 @@ interface HomePageProps {
 }
 
 export function HomePage({
-  destination,
   flights,
   itinerary,
   isDark,
@@ -108,15 +106,6 @@ export function HomePage({
           </div>
         </div>
       </section>
-
-      <ScrollReveal as="section" className="border-b border-[var(--ln-border)] px-4 py-4 sm:px-6">
-        <div className="flex flex-wrap gap-2">
-          <span className="ln-badge-neutral ln-badge">2 日 1 夜</span>
-          <span className="ln-badge-neutral ln-badge">{destination}</span>
-          <span className="ln-badge">西九龍 ↔ 廣州東</span>
-          <span className="ln-badge-neutral ln-badge">離線優先</span>
-        </div>
-      </ScrollReveal>
 
       {departure && (
         <ScrollReveal as="section" className="px-4 py-6 sm:px-6" delay={60} id="flights">
