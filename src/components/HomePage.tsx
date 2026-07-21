@@ -6,7 +6,8 @@ import { SyncStatus } from './SyncStatus';
 import { ScrollReveal } from './ScrollReveal';
 import type { ConnectionStatus } from '../hooks/useOfflineSync';
 import type { SyncMeta } from '../services/storage';
-import { getItineraryDayImage, getHeroImage } from '../utils/itineraryImages';
+import { getItineraryDayImage, getItineraryDayImageFallback, getHeroImage } from '../utils/itineraryImages';
+import { TripImage } from './TripImage';
 
 export interface NavigateOptions {
   dayDate?: string;
@@ -46,11 +47,13 @@ export function HomePage({
 
       <section className="ln-fade relative w-full overflow-hidden">
         <div className="relative aspect-[5/4] w-full sm:aspect-[16/10]">
-          <img
+          <TripImage
             key={heroImage}
             src={heroImage}
-            alt="Guangzhou skyline with Canton Tower"
+            fallback={`${import.meta.env.BASE_URL}images/attractions/canton-tower-hero.jpg`}
+            alt="廣州天際線與廣州塔"
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out"
+            loading="eager"
           />
           <div className="ln-hero-overlay absolute inset-0" />
 
@@ -59,7 +62,7 @@ export function HomePage({
           </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label ln-hero-ink-secondary">Guangzhou · Jul 25–26, 2026</p>
+            <p className="ln-label ln-hero-ink-secondary">廣州 · 2026年7月25–26日</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
               廣州旅行行程
             </h1>
@@ -160,6 +163,7 @@ export function HomePage({
         <div className="space-y-2">
           {itinerary.map((day, index) => {
             const image = getItineraryDayImage(day, isDark);
+            const imageFallback = getItineraryDayImageFallback(day, isDark);
             const highlight = day.activities[0];
             return (
               <ScrollReveal key={day.date} delay={100 + index * 55}>
@@ -169,12 +173,12 @@ export function HomePage({
                   className="ln-row ln-pressable w-full text-left"
                 >
                   <div className="ln-thumb h-[4.5rem] w-[5.5rem] sm:h-20 sm:w-24">
-                    <img
+                    <TripImage
                       key={image}
                       src={image}
+                      fallback={imageFallback}
                       alt={highlight?.title ?? day.city}
                       className="h-full w-full object-cover transition-opacity duration-500 ease-out"
-                      loading="lazy"
                     />
                   </div>
                   <div className="min-w-0 flex-1 py-0.5">

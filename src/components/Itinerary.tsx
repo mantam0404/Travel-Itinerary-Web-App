@@ -3,7 +3,8 @@ import type { ItineraryDay } from '../data/tripData';
 import { formatDateZh, formatEur } from '../data/tripData';
 import { IconChevron } from './icons';
 import { ScrollReveal } from './ScrollReveal';
-import { getItineraryDayImage } from '../utils/itineraryImages';
+import { getItineraryDayImage, getItineraryDayImageFallback } from '../utils/itineraryImages';
+import { TripImage } from './TripImage';
 
 interface ItineraryProps {
   days: ItineraryDay[];
@@ -44,7 +45,7 @@ export function Itinerary({
     <section id="itinerary" className="space-y-4 px-4 py-6">
       <ScrollReveal>
         <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-          2 日 1 夜 Guangzhou 快閃 · 點擊景點可跳轉至地圖位置
+          2 日 1 夜廣州快閃 · 點擊景點可跳轉至地圖位置
         </p>
       </ScrollReveal>
 
@@ -52,6 +53,7 @@ export function Itinerary({
         {days.map((day, index) => {
           const isOpen = expandedDayDate === day.date;
           const image = getItineraryDayImage(day, isDark);
+          const imageFallback = getItineraryDayImageFallback(day, isDark);
           const highlight = day.activities[0];
 
           return (
@@ -67,12 +69,12 @@ export function Itinerary({
                   aria-expanded={isOpen}
                 >
                   <div className="ln-thumb h-16 w-20 shrink-0">
-                    <img
+                    <TripImage
                       key={image}
                       src={image}
+                      fallback={imageFallback}
                       alt={highlight?.title ?? day.city}
                       className="h-full w-full object-cover transition-opacity duration-500"
-                      loading="lazy"
                     />
                   </div>
                   <div className="min-w-0 flex-1">

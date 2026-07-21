@@ -66,7 +66,7 @@ export function SplashScreen({ isDark, ready, onComplete }: SplashScreenProps) {
             </defs>
           </svg>
         </div>
-        <p className="ln-splash-eyebrow">Guangzhou · Jul 25–26, 2026</p>
+        <p className="ln-splash-eyebrow">廣州 · 2026年7月25–26日</p>
         <h1 className="ln-splash-title">廣州旅行行程</h1>
         <p className="ln-splash-subtitle">2 日 1 夜 · 離線行程 · 地圖 · 費用追蹤</p>
         <div className="ln-splash-loader" aria-hidden>

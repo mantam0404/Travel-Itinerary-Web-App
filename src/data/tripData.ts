@@ -85,9 +85,9 @@ const outboundQuoteCny = hkdToBase(FLIGHT_QUOTE.outboundHkd, CNY_TO_HKD);
 const returnQuoteCny = hkdToBase(FLIGHT_QUOTE.returnHkd, CNY_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 7,
+  version: 8,
   lastUpdated: new Date().toISOString(),
-  destination: 'Guangzhou',
+  destination: '廣州',
   baseCurrency: BASE_CURRENCY,
   exchangeRate: CNY_TO_HKD,
   mapCenter: { lat: 23.128, lng: 113.272 },
@@ -101,11 +101,11 @@ export const defaultTripData: TripData = {
       route: '香港西九龍 → 廣州南',
       originCode: 'WEK',
       destCode: 'GZN',
-      departureAirport: 'Hong Kong West Kowloon Station',
-      arrivalAirport: 'Guangzhou South Station',
+      departureAirport: '香港西九龍站',
+      arrivalAirport: '廣州南站',
       departureTime: '08:30',
       arrivalTime: '10:00',
-      duration: '約 1h 30m',
+      duration: '約 1 小時 30 分',
       status: '參考票價（未購票）',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.outboundHkd,
@@ -122,11 +122,11 @@ export const defaultTripData: TripData = {
       route: '廣州東 → 香港西九龍',
       originCode: 'GGZ',
       destCode: 'WEK',
-      departureAirport: 'Guangzhou East Station',
-      arrivalAirport: 'Hong Kong West Kowloon Station',
+      departureAirport: '廣州東站',
+      arrivalAirport: '香港西九龍站',
       departureTime: '16:09',
       arrivalTime: '17:30',
-      duration: '約 1h 20m',
+      duration: '約 1 小時 20 分',
       status: '參考票價（未購票）',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.returnHkd,
@@ -138,7 +138,7 @@ export const defaultTripData: TripData = {
   attractions: [
     {
       id: 'yongqing-fang',
-      name: 'Yongqing Fang',
+      name: '永慶坊',
       description: '西關恩寧路歷史街區，騎樓、粵劇博物館與文青小店雲集。',
       lat: 23.1197,
       lng: 113.2439,
@@ -148,7 +148,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'dafo-temple',
-      name: 'Dafo Temple',
+      name: '大佛寺',
       description: '北京路商圈內的千年古寺，晚間 19:00 亮燈後尤為壯觀。',
       lat: 23.1258,
       lng: 113.2683,
@@ -159,7 +159,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'guangzhou-art-museum',
-      name: 'Guangzhou Art Museum',
+      name: '廣州藝術博物院',
       description: '廣州藝術博物院（新館），嶺南畫派與當代藝術展覽。',
       lat: 23.1408,
       lng: 113.2777,
@@ -170,7 +170,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'canton-tower',
-      name: 'Canton Tower',
+      name: '廣州塔',
       description: '廣州地標「小蠻腰」，日間登塔可俯瞰珠江新城全景。',
       lat: 23.1066,
       lng: 113.3245,
@@ -181,7 +181,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'guangzhou-east-station',
-      name: 'Guangzhou East Station',
+      name: '廣州東站',
       description: '廣州東站商圈，返程前可順道逛商場及解決晚餐。',
       lat: 23.1507,
       lng: 113.3242,
@@ -191,7 +191,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'pearl-river-cruise',
-      name: 'Pearl River Night Cruise',
+      name: '珠江夜游',
       description: '珠江夜游，兩岸燈光與廣州塔倒影交織。',
       lat: 23.1145,
       lng: 113.2612,
@@ -202,7 +202,7 @@ export const defaultTripData: TripData = {
     },
     {
       id: 'diandude-tianhe',
-      name: 'Dian Dou De (Tianhe)',
+      name: '點都德（天河北店）',
       description: '點都德天河北店，經典粵式點心與飲茶。',
       lat: 23.141,
       lng: 113.327,
@@ -215,12 +215,12 @@ export const defaultTripData: TripData = {
     {
       date: '2026-07-25',
       dayLabel: '第 1 天',
-      city: 'Guangzhou',
+      city: '廣州',
       activities: [
         {
           time: '07:45',
           title: '前往西九龍站',
-          location: 'Hong Kong West Kowloon Station',
+          location: '香港西九龍站',
           description: '提前抵達車站，辦理出入境及安檢',
           transport: '港鐵／步行',
           costEur: 0,
@@ -228,7 +228,7 @@ export const defaultTripData: TripData = {
         {
           time: '08:30',
           title: '高鐵出發',
-          location: 'Hong Kong West Kowloon → Guangzhou South',
+          location: '香港西九龍 → 廣州南',
           description: '搭乘高鐵前往廣州（預計 10:00 抵達）',
           transport: '二等座（車次待購票）',
           costEur: 0,
@@ -253,7 +253,7 @@ export const defaultTripData: TripData = {
         {
           time: '14:00',
           title: '永慶坊',
-          location: 'Yongqing Fang',
+          location: '永慶坊',
           description: '漫步恩寧路騎樓街，打卡粵劇藝術博物館及網紅巷弄',
           attractionId: 'yongqing-fang',
           transport: '地鐵 1 號線黃沙站',
@@ -262,7 +262,7 @@ export const defaultTripData: TripData = {
         {
           time: '18:30',
           title: '大佛寺',
-          location: 'Dafo Temple',
+          location: '大佛寺',
           description: '參觀古寺，等候 19:00 亮燈',
           attractionId: 'dafo-temple',
           transport: '地鐵 1 號線公園前站／北京路站',
@@ -279,7 +279,7 @@ export const defaultTripData: TripData = {
         {
           time: '20:30',
           title: '珠江夜游（視情況）',
-          location: 'Pearl River Night Cruise',
+          location: '珠江夜游碼頭',
           description: '現場視乎班次及天氣再決定是否上船',
           attractionId: 'pearl-river-cruise',
           transport: '地鐵／的士',
@@ -290,7 +290,7 @@ export const defaultTripData: TripData = {
     {
       date: '2026-07-26',
       dayLabel: '第 2 天',
-      city: 'Guangzhou',
+      city: '廣州',
       activities: [
         {
           time: '08:30',
@@ -303,7 +303,7 @@ export const defaultTripData: TripData = {
         {
           time: '10:00',
           title: '廣州藝術博物院',
-          location: 'Guangzhou Art Museum',
+          location: '廣州藝術博物院',
           description: '參觀新館展覽（建議提前預約）',
           attractionId: 'guangzhou-art-museum',
           transport: '地鐵／的士',
@@ -312,7 +312,7 @@ export const defaultTripData: TripData = {
         {
           time: '13:00',
           title: '廣州塔日景',
-          location: 'Canton Tower',
+          location: '廣州塔',
           description: '登塔觀光層，俯瞰珠江新城日間景色',
           attractionId: 'canton-tower',
           transport: '地鐵 3 號線／APM 線',
@@ -337,7 +337,7 @@ export const defaultTripData: TripData = {
         {
           time: '16:00',
           title: '廣州東站',
-          location: 'Guangzhou East Station',
+          location: '廣州東站',
           description: '在車站商圈閒逛，等候返程列車',
           attractionId: 'guangzhou-east-station',
           transport: '地鐵 1 號線／3 號線廣州東站',
@@ -346,7 +346,7 @@ export const defaultTripData: TripData = {
         {
           time: '16:09',
           title: '高鐵返程',
-          location: 'Guangzhou East → Hong Kong West Kowloon',
+          location: '廣州東 → 香港西九龍',
           description: '搭乘高鐵返回香港',
           transport: '二等座（車次待購票）',
           costEur: 0,
@@ -382,8 +382,11 @@ export const defaultTripData: TripData = {
       name: '天河北區酒店（1 晚）',
       date: '2026-07-25',
       amountEur: 550,
-      breakdown: [{ label: '房費（1 晚 × ¥500/晚）', amountEur: 500 }, { label: '服務費及稅項', amountEur: 50 }],
-      notes: '近點都德天河北店，方便 Day 1 午餐及 Day 2 早餐',
+      breakdown: [
+        { label: '房費（1 晚 × ¥500/晚）', amountEur: 500 },
+        { label: '服務費及稅項', amountEur: 50 },
+      ],
+      notes: '近點都德天河北店，方便第 1 天午餐及第 2 天早餐',
     },
     {
       id: 'metro-transport',
