@@ -253,13 +253,13 @@ export function TravelMap({
       </ScrollReveal>
 
       <ScrollReveal delay={120}>
-        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+        <div className="flex flex-wrap gap-2 pb-1">
           {attractions.map((attr) => (
             <button
               key={attr.id}
               type="button"
               onClick={() => selectAttraction(attr.id === selectedId ? null : attr.id)}
-              className={`ln-chip ln-pressable shrink-0 ${selectedId === attr.id ? 'ln-chip-active' : ''}`}
+              className={`ln-chip ln-pressable ${selectedId === attr.id ? 'ln-chip-active' : ''}`}
             >
               {attr.name}
             </button>
