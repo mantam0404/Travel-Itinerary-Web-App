@@ -10,8 +10,27 @@ export function getHeroImage(isDark: boolean): string {
   return `${BASE}images/trip/${themeFolder(isDark)}/hero.jpg`;
 }
 
-export function getItineraryDayImage(day: { date: string }, isDark: boolean): string {
+export function getItineraryDayImage(
+  day: { date: string; activities?: { attractionId?: string }[] },
+  isDark: boolean,
+): string {
   return `${BASE}images/trip/${themeFolder(isDark)}/day-${day.date}.jpg`;
+}
+
+/** Fallback when a per-day trip image is missing from the bundle. */
+export function getItineraryDayImageFallback(
+  day: { date: string; activities?: { attractionId?: string }[] },
+  isDark: boolean,
+): string {
+  if (day.date === '2026-07-25') {
+    return `${BASE}images/attractions/day-2026-07-25-cover.jpg`;
+  }
+  if (day.date === '2026-07-26') {
+    return `${BASE}images/attractions/day-2026-07-26-cover.jpg`;
+  }
+  const attractionId = day.activities?.find((a) => a.attractionId)?.attractionId;
+  if (attractionId) return getAttractionHeroImage(attractionId);
+  return getHeroImage(isDark);
 }
 
 export function getAttractionImage(attractionId: string, isDark: boolean): string {

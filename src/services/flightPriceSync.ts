@@ -1,8 +1,7 @@
-import { DEFAULT_FLIGHT_QUOTE, hkdToEur, type FlightQuote } from '../constants/flightQuotes';
+import { DEFAULT_FLIGHT_QUOTE, type FlightQuote } from '../constants/flightQuotes';
 import type { TripData } from '../data/tripData';
 
 const QUOTE_URL = `${import.meta.env.BASE_URL}data/flight-quote.json`;
-const FLIGHT_EXPENSE_ID = 'flights-cx-roundtrip';
 
 export interface FlightQuoteSyncResult {
   updated: boolean;
@@ -25,13 +24,10 @@ export async function fetchLatestFlightQuote(): Promise<FlightQuote | null> {
   }
 }
 
-/** Apply quote to trip flights + expense line (reference only — status stays 未購票). */
+/** Apply quote to trip flights (reference only — status stays 未購票). */
 export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): TripData {
   const next = structuredClone(data);
   const cabin = quote.cabinClass ?? 'Economy';
-  const roundTripEur = hkdToEur(quote.roundTripHkd, next.exchangeRate);
-  const outboundEur = hkdToEur(quote.outboundHkd, next.exchangeRate);
-  const returnEur = hkdToEur(quote.returnHkd, next.exchangeRate);
 
   for (const flight of next.flights) {
     if (flight.type === 'departure') {
@@ -40,8 +36,6 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
       flight.status = '參考報價（未購票）';
-      flight.flightNumber = quote.outboundFlight;
-      flight.airline = quote.airline;
       flight.cabinClass = cabin;
     } else if (flight.type === 'return') {
       flight.quoteHkd = quote.returnHkd;
@@ -49,32 +43,8 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
       flight.status = '參考報價（未購票）';
-      flight.flightNumber = quote.returnFlight;
-      flight.airline = quote.airline;
       flight.cabinClass = cabin;
     }
-  }
-
-  const idx = next.expenses.findIndex((e) => e.id === FLIGHT_EXPENSE_ID);
-  if (idx >= 0) {
-    next.expenses[idx] = {
-      ...next.expenses[idx],
-      amountEur: roundTripEur,
-      amountHkd: quote.roundTripHkd,
-      quotedAt: quote.quotedAt,
-      sourceUrl: quote.sourceUrl,
-      breakdown: [
-        {
-          label: `${quote.outboundFlight} HKG→BCN（10-15）${cabin} 參考價`,
-          amountEur: outboundEur,
-        },
-        {
-          label: `${quote.returnFlight} BCN→HKG（10-24）${cabin} 參考價`,
-          amountEur: returnEur,
-        },
-      ],
-      notes: quote.note,
-    };
   }
 
   return next;
@@ -84,9 +54,8 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
 export async function syncFlightPrices(
   data: TripData,
 ): Promise<{ data: TripData; result: FlightQuoteSyncResult }> {
-  const existing = data.expenses.find((e) => e.id === FLIGHT_EXPENSE_ID);
-  const previousHkd = existing?.amountHkd;
   const departure = data.flights.find((f) => f.type === 'departure');
+  const previousHkd = departure?.quoteHkd;
 
   const remote = await fetchLatestFlightQuote();
   const quote = remote ?? DEFAULT_FLIGHT_QUOTE;

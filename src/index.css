@@ -3,6 +3,8 @@
 
 @layer base {
   html {
+    /* 長者友善：全站字級較預設大 20% */
+    font-size: 120%;
     -webkit-tap-highlight-color: transparent;
   }
 
