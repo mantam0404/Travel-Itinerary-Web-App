@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'CNY' as const;
 export const CNY_TO_HKD = 1.08;
 
 export const defaultTripData: TripData = {
-  version: 18,
+  version: 19,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,

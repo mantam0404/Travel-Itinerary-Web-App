@@ -13,7 +13,7 @@ const trip = path.join(root, 'public/images/trip');
 
 const DAY_SOURCES = {
   '2026-07-25': 'day-2026-07-25-cover.jpg',
-  '2026-07-26': 'canton-tower-hero.jpg',
+  '2026-07-26': 'day-2026-07-26-cover.jpg',
 };
 
 const HERO_SOURCE = 'guangzhou-hero.png';
