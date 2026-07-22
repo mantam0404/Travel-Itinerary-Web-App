@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'CNY' as const;
 export const CNY_TO_HKD = 1.08;
 
 export const defaultTripData: TripData = {
-  version: 14,
+  version: 15,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -283,17 +283,16 @@ export const defaultTripData: TripData = {
         },
         {
           time: '13:00',
-          title: '廣州塔日景',
-          location: '廣州塔',
-          description: '登塔觀光層，俯瞰珠江新城日間景色',
-          attractionId: 'canton-tower',
-          transport: '地鐵 3 號線／APM 線',
+          title: '博物館附近散步',
+          location: '廣州藝術博物院附近',
+          description: '參觀完博物館之後喺附近行吓',
+          transport: '步行',
         },
         {
           time: '14:30',
           title: '午餐',
-          location: '廣州塔附近',
-          description: '塔下或花城廣場周邊用餐',
+          location: '藝術博物院附近',
+          description: '博物館周邊用餐',
           transport: '步行',
         },
         {
