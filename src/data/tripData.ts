@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'CNY' as const;
 export const CNY_TO_HKD = 1.08;
 
 export const defaultTripData: TripData = {
-  version: 15,
+  version: 17,
   lastUpdated: new Date().toISOString(),
   destination: '廣州',
   baseCurrency: BASE_CURRENCY,
@@ -77,7 +77,7 @@ export const defaultTripData: TripData = {
       id: 'hsr-out',
       type: 'departure',
       date: '2026-07-25',
-      airline: '高鐵',
+      airline: '搭高鐵',
       flightNumber: '',
       route: '香港西九龍 → 廣州東',
       originCode: 'WEK',
@@ -98,7 +98,7 @@ export const defaultTripData: TripData = {
       id: 'hsr-return',
       type: 'return',
       date: '2026-07-26',
-      airline: '高鐵',
+      airline: '搭高鐵',
       flightNumber: '',
       route: '廣州東 → 香港西九龍',
       originCode: 'GGZ',
@@ -312,9 +312,9 @@ export const defaultTripData: TripData = {
         },
         {
           time: '16:46',
-          title: '城際高鐵返程',
+          title: '高鐵返程',
           location: '廣州東 → 香港西九龍',
-          description: '搭乘城際高鐵返回香港（16:46 出發，18:31 抵達）',
+          description: '搭乘高鐵返回香港（16:46 出發，18:31 抵達）',
           transport: '二等座（車次待購票）',
         },
       ],

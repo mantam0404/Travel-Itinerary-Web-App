@@ -36,8 +36,6 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
       flight.status = '參考報價（未購票）';
-      flight.flightNumber = quote.outboundFlight;
-      flight.airline = quote.airline;
       flight.cabinClass = cabin;
     } else if (flight.type === 'return') {
       flight.quoteHkd = quote.returnHkd;
@@ -45,8 +43,6 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
       flight.status = '參考報價（未購票）';
-      flight.flightNumber = quote.returnFlight;
-      flight.airline = quote.airline;
       flight.cabinClass = cabin;
     }
   }
