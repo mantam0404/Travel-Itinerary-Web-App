@@ -168,7 +168,7 @@ export const defaultTripData: TripData = {
       lng: 113.3242,
       category: '交通樞紐',
       openingHours: '全天開放',
-      tips: '返程城際高鐵 16:46 開出，建議 15:30 前抵達車站。',
+      tips: '返程高鐵 16:46 開出，建議 15:30 前抵達車站。',
     },
     {
       id: 'pearl-river-cruise',
