@@ -22,6 +22,9 @@ export function getItineraryDayImageFallback(
   day: { date: string; activities?: { attractionId?: string }[] },
   isDark: boolean,
 ): string {
+  if (day.date === '2026-07-25') {
+    return `${BASE}images/attractions/day-2026-07-25-cover.jpg`;
+  }
   const attractionId = day.activities?.find((a) => a.attractionId)?.attractionId;
   if (attractionId) return getAttractionHeroImage(attractionId);
   return getHeroImage(isDark);

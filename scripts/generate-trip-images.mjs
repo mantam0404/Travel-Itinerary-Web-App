@@ -1,7 +1,7 @@
 /**
  * Generates Guangzhou trip hero + per-day images from attraction photos.
  */
-import { copyFile, mkdir } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
@@ -12,16 +12,11 @@ const attractions = path.join(root, 'public/images/attractions');
 const trip = path.join(root, 'public/images/trip');
 
 const DAY_SOURCES = {
-  '2026-07-25': 'yongqing-fang-hero.jpg',
+  '2026-07-25': 'day-2026-07-25-cover.jpg',
   '2026-07-26': 'canton-tower-hero.jpg',
 };
 
 const HERO_SOURCE = 'guangzhou-hero.png';
-
-async function copy(src, dest) {
-  await mkdir(path.dirname(dest), { recursive: true });
-  await copyFile(src, dest);
-}
 
 const heroSrc = path.join(attractions, HERO_SOURCE);
 
@@ -34,7 +29,10 @@ for (const theme of ['dark', 'light']) {
     .toFile(path.join(tripDir, 'hero.jpg'));
 
   for (const [date, source] of Object.entries(DAY_SOURCES)) {
-    await copy(path.join(attractions, source), path.join(tripDir, `day-${date}.jpg`));
+    await sharp(path.join(attractions, source))
+      .resize(480, 384, { fit: 'cover', position: 'centre' })
+      .jpeg({ quality: 85 })
+      .toFile(path.join(tripDir, `day-${date}.jpg`));
   }
 }
 
