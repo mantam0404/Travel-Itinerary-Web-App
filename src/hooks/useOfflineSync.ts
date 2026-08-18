@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { TripData } from '../data/tripData';
-import { loadTripData, saveTripData, syncTripData, getSyncMeta, type SyncMeta } from '../services/storage';
+import { loadTripData, saveTripData, syncTripData, getSyncMeta, isValidPortugalTripData, type SyncMeta } from '../services/storage';
+import { defaultTripData } from '../data/tripData';
 
 export type ConnectionStatus = 'online' | 'offline' | 'syncing';
 
@@ -13,7 +14,11 @@ export function useOfflineSync() {
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
-    const data = await loadTripData();
+    let data = await loadTripData();
+    if (!isValidPortugalTripData(data)) {
+      data = defaultTripData;
+      await saveTripData(data);
+    }
     const meta = await getSyncMeta();
     setTripData(data);
     setSyncMeta(meta);

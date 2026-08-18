@@ -43,6 +43,8 @@ export default defineConfig({
       },
       workbox: {
         cacheId: 'portugal-trip-2026-10',
+        skipWaiting: true,
+        clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,svg,woff2}'],
         runtimeCaching: [
           {

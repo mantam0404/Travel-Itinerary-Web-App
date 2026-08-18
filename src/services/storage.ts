@@ -2,7 +2,7 @@ import localforage from 'localforage';
 import { defaultTripData, type TripData } from '../data/tripData';
 import { syncFlightPrices, type FlightQuoteSyncResult } from './flightPriceSync';
 
-const TRIP_STORE_KEY = 'trip-data';
+const TRIP_STORE_KEY = 'trip-data-portugal-10d9n';
 const SYNC_META_KEY = 'sync-meta';
 
 export interface SyncMeta {
@@ -37,16 +37,29 @@ function isPortugalTrip(data: TripData): boolean {
   if (data.itinerary.length !== 10) return false;
   if (data.itinerary[0]?.date !== '2026-10-15') return false;
   if (data.itinerary.at(-1)?.date !== '2026-10-24') return false;
-  const hasGuangzhou = data.itinerary.some(
+
+  const guangzhouText = /廣州|广州|永慶坊|大佛寺|珠江|點都德|西九龍|高鐵/;
+  const hasGuangzhouItinerary = data.itinerary.some(
     (day) =>
-      day.city.includes('廣州') ||
-      day.city.includes('广州') ||
-      day.activities.some((a) => a.location.includes('西九龍') || a.title.includes('高鐵')),
+      guangzhouText.test(day.city) ||
+      day.activities.some((a) => guangzhouText.test(a.location) || guangzhouText.test(a.title)),
   );
-  return !hasGuangzhou;
+  if (hasGuangzhouItinerary) return false;
+
+  const hasGuangzhouAttractions = data.attractions.some(
+    (a) => guangzhouText.test(a.name) || guangzhouText.test(a.id),
+  );
+  if (hasGuangzhouAttractions) return false;
+
+  const requiredIds = ['lisbon-airport', 'belem-tower', 'porto-ribeira', 'sintra-pena'];
+  return requiredIds.every((id) => data.attractions.some((a) => a.id === id));
 }
 
-/** Wipe Guangzhou / Spain IndexedDB — same gh-pages origin shares storage. */
+export function isValidPortugalTripData(data: TripData): boolean {
+  return isPortugalTrip(data);
+}
+
+/** Wipe legacy Guangzhou / Spain IndexedDB — same gh-pages origin shares storage. */
 async function purgeLegacyTripStores(): Promise<void> {
   for (const name of ['spain-travel-app', 'guangzhou-travel-app']) {
     try {
