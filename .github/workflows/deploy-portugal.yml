@@ -37,4 +37,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
-          commit_message: 'deploy: Portugal 6D5N trip (cursor/portugal-trip-a2de)'
+          commit_message: 'deploy: Portugal 10D9N trip (cursor/portugal-trip-a2de)'

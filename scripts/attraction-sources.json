@@ -1,34 +1,86 @@
 {
-  "alfama": {
-    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_BW_2018-10-03_12-02-15.jpg?width=960",
-    "title": "File:Lisbon BW 2018-10-03 12-02-15.jpg"
+  "lisbon-airport": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/20210724_164942_Lisbon_Portela_Airport_Terminal_1.jpg?width=960",
+    "title": "File:20210724 164942 Lisbon Portela Airport Terminal 1.jpg"
   },
-  "belem-tower": {
-    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_Torre_de_Bel%C3%A9m_BW_2018-10-03_16-33-21.jpg?width=960",
-    "title": "File:Lisbon Torre de Belém BW 2018-10-03 16-33-21.jpg"
+  "praca-comercio": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Arco_Triunfal_da_Rua_Augusta%2C_Plaza_del_Comercio%2C_Lisboa%2C_Portugal%2C_2012-05-12%2C_DD_02.JPG?width=960",
+    "title": "File:Arco Triunfal da Rua Augusta, Plaza del Comercio, Lisboa, Portugal, 2012-05-12, DD 02.JPG"
   },
   "jeronimos-monastery": {
     "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cloister_of_the_Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m%2C_Lisbon%2C_20250604_1308_9180.jpg?width=960",
     "title": "File:Cloister of the Jerónimos Monastery in Belém, Lisbon, 20250604 1308 9180.jpg"
   },
+  "belem-tower": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_Torre_de_Bel%C3%A9m_BW_2018-10-03_16-33-21.jpg?width=960",
+    "title": "File:Lisbon Torre de Belém BW 2018-10-03 16-33-21.jpg"
+  },
+  "pasteis-belem": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Past%C3%A9is_de_Bel%C3%A9m_-_Lisbon.jpg?width=960",
+    "title": "File:Pastéis de Belém - Lisbon.jpg"
+  },
+  "lx-factory": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/LX_Factory_Lisbon_%2843450748850%29.jpg?width=960",
+    "title": "File:LX Factory Lisbon (43450748850).jpg"
+  },
   "sintra-pena": {
     "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Nacional_da_Pena%2C_Sintra%2C_Portugal%2C_2019-05-25%2C_DD_128.jpg?width=960",
     "title": "File:Palacio Nacional da Pena, Sintra, Portugal, 2019-05-25, DD 128.jpg"
+  },
+  "regaleira": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Quinta_da_Regaleira%2C_Sintra%2C_Portugal%2C_2019-05-25%2C_DD_46.jpg?width=960",
+    "title": "File:Quinta da Regaleira, Sintra, Portugal, 2019-05-25, DD 46.jpg"
   },
   "lisbon-castle": {
     "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Castelo_de_S%C3%A3o_Jorge%2C_Lisbon%2C_20250604_1706_9397.jpg?width=960",
     "title": "File:Castelo de São Jorge, Lisbon, 20250604 1706 9397.jpg"
   },
+  "miradouro-portas-sol": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Alfama_from_Miradouro_das_Portas_do_Sol%2C_Lisbon.jpg?width=960",
+    "title": "File:Alfama from Miradouro das Portas do Sol, Lisbon.jpg"
+  },
+  "alfama": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_BW_2018-10-03_12-02-15.jpg?width=960",
+    "title": "File:Lisbon BW 2018-10-03 12-02-15.jpg"
+  },
   "porto-ribeira": {
     "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cais_da_Ribeira%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_03.JPG?width=960",
     "title": "File:Cais da Ribeira, Oporto, Portugal, 2012-05-09, DD 03.JPG"
   },
-  "livraria-lello": {
-    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Livraria_Lello%2C_External_view%2C_Porto.jpg?width=960",
-    "title": "File:Livraria Lello, External view, Porto.jpg"
+  "dom-luis-bridge": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bridge_Ponte_Dom_Lu%C3%ADs_I_in_Porto%2C_Portugal.jpg?width=960",
+    "title": "File:Bridge Ponte Dom Luís I in Porto, Portugal.jpg"
   },
-  "lisbon-airport": {
-    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/20210724_164942_Lisbon_Portela_Airport_Terminal_1.jpg?width=960",
-    "title": "File:20210724 164942 Lisbon Portela Airport Terminal 1.jpg"
+  "livraria-lello": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Exterior_view_of_Livraria_Lello_01.jpg?width=960",
+    "title": "File:Exterior view of Livraria Lello 01.jpg"
+  },
+  "sao-bento-station": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bahnhof_Porto_S%C3%A3o_Bento_-_am_Abend.jpg?width=960",
+    "title": "File:Bahnhof Porto São Bento - am Abend.jpg"
+  },
+  "clerigos-tower": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Porto_April_2019-1.jpg?width=960",
+    "title": "File:Porto April 2019-1.jpg"
+  },
+  "vila-nova-gaia": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bodega_Cal%C3%A9m%2C_Vila_Nova_de_Gaia%2C_Portugal%2C_2012-05-09%2C_DD_03.JPG?width=960",
+    "title": "File:Bodega Calém, Vila Nova de Gaia, Portugal, 2012-05-09, DD 03.JPG"
+  },
+  "douro-valley": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Douro_Valley%2C_Portugal_%2853973809872%29.jpg?width=960",
+    "title": "File:Douro Valley, Portugal (53973809872).jpg"
+  },
+  "timeout-market": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lobster%2C_Time_Out_Market_Lisboa_%2850661858143%29.jpg?width=960",
+    "title": "File:Lobster, Time Out Market Lisboa (50661858143).jpg"
+  },
+  "cascais": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/2019-06-09_Praia_Da_Rainha_seen_by_Largo_Praia_Da_Rainha_Cascais.jpg?width=960",
+    "title": "File:2019-06-09 Praia Da Rainha seen by Largo Praia Da Rainha Cascais.jpg"
+  },
+  "boca-inferno": {
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/A_dram%C3%A1tica_%27Boca_do_Inferno%27.JPG?width=960",
+    "title": "File:A dramática 'Boca do Inferno'.JPG"
   }
 }

@@ -52,7 +52,7 @@ export function Itinerary({
     <section id="itinerary" className="space-y-4 px-4 py-6">
       <ScrollReveal>
         <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
-          6 日 5 夜葡萄牙之旅 · 點擊景點可跳轉至地圖位置
+          10 日 9 夜葡萄牙之旅 · 點擊景點可跳轉至地圖位置
         </p>
       </ScrollReveal>
 

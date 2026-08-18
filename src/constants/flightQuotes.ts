@@ -1,6 +1,6 @@
-/** Google Flights reference quote for HKG ↔ LIS (Oct 15–20, 2026) */
+/** Google Flights reference quote for HKG ↔ LIS (Oct 15–24, 2026) */
 export const GOOGLE_FLIGHTS_SEARCH_URL =
-  'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-20';
+  'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-24';
 
 export interface FlightQuote {
   id?: string;
@@ -27,15 +27,15 @@ export const FLIGHT_QUOTE = {
   sourceUrl: GOOGLE_FLIGHTS_SEARCH_URL,
   quotedAt: '2026-07-22',
   cabinClass: '經濟艙',
-  airline: '國泰航空',
-  outboundFlight: '待定',
-  returnFlight: '待定',
+  airline: '阿聯酋航空',
+  outboundFlight: 'EK381 · EK191',
+  returnFlight: 'EK192 · EK382',
   /** Round-trip reference fare (economy), HKD */
   roundTripHkd: 9800,
   outboundHkd: 4900,
   returnHkd: 4900,
   notes:
-    '參考 Google Flights 香港↔里斯本經濟艙報價（10 月旺季，含轉機）。尚未購票，實際價格會浮動。',
+    '阿聯酋航空 EK381/EK191 去程、EK192/EK382 回程（迪拜轉機）。參考 Google Flights 報價，實際以已訂機票為準。',
 } as const;
 
 export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {
@@ -44,7 +44,7 @@ export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {
   outboundFlight: FLIGHT_QUOTE.outboundFlight,
   returnFlight: FLIGHT_QUOTE.returnFlight,
   outboundDate: '2026-10-15',
-  returnDate: '2026-10-20',
+  returnDate: '2026-10-24',
   currency: 'HKD',
   roundTripHkd: FLIGHT_QUOTE.roundTripHkd,
   outboundHkd: FLIGHT_QUOTE.outboundHkd,

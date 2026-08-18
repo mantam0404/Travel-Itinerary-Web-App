@@ -11,13 +11,13 @@ const OUT = join(ROOT, 'public/data/flight-quote.json')
 
 const EUR_TO_HKD = 8.45
 const OUTBOUND_DATE = '2026-10-15'
-const RETURN_DATE = '2026-10-20'
+const RETURN_DATE = '2026-10-24'
 
 const DEFAULT_QUOTE = {
   id: 'hkg-lis-2026-10',
-  airline: '國泰航空',
-  outboundFlight: '待定',
-  returnFlight: '待定',
+  airline: '阿聯酋航空',
+  outboundFlight: 'EK381 · EK191',
+  returnFlight: 'EK192 · EK382',
   outboundDate: OUTBOUND_DATE,
   returnDate: RETURN_DATE,
   currency: 'HKD',
@@ -27,7 +27,7 @@ const DEFAULT_QUOTE = {
   returnHkd: 4900,
   source: 'Google Flights',
   sourceUrl:
-    'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-20',
+    'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-24',
   quotedAt: new Date().toISOString().slice(0, 10),
   note: '參考報價（未購票）— 香港↔里斯本 經濟艙',
   fetchedAt: new Date().toISOString(),

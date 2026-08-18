@@ -12,12 +12,16 @@ const attractions = path.join(root, 'public/images/attractions');
 const trip = path.join(root, 'public/images/trip');
 
 const DAY_SOURCES = {
-  '2026-10-15': 'alfama-hero.jpg',
+  '2026-10-15': 'praca-comercio-hero.jpg',
   '2026-10-16': 'belem-tower-hero.jpg',
   '2026-10-17': 'sintra-pena-hero.jpg',
   '2026-10-18': 'lisbon-castle-hero.jpg',
   '2026-10-19': 'porto-ribeira-hero.jpg',
-  '2026-10-20': 'lisbon-airport-hero.jpg',
+  '2026-10-20': 'livraria-lello-hero.jpg',
+  '2026-10-21': 'douro-valley-hero.jpg',
+  '2026-10-22': 'timeout-market-hero.jpg',
+  '2026-10-23': 'cascais-hero.jpg',
+  '2026-10-24': 'lisbon-airport-hero.jpg',
 };
 
 const HERO_SOURCE = 'belem-tower-hero.jpg';
