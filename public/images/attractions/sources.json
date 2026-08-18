@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T09:41:16.452Z",
+  "updated": "2026-08-18T10:17:25.768Z",
   "sources": {
     "lisbon-airport": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/20210724_164942_Lisbon_Portela_Airport_Terminal_1.jpg?width=960",
@@ -84,6 +84,10 @@
     "boca-inferno": {
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/A_dram%C3%A1tica_%27Boca_do_Inferno%27.JPG?width=960",
       "title": "File:A dramática 'Boca do Inferno'.JPG"
+    },
+    "aveiro": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/20200203_Moliceiro_5440.jpg?width=960",
+      "title": "File:20200203 Moliceiro 5440.jpg"
     }
   }
 }

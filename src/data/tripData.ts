@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'EUR' as const;
 export const EUR_TO_HKD = 8.45;
 
 export const defaultTripData: TripData = {
-  version: 5,
+  version: 6,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -296,6 +296,16 @@ export const defaultTripData: TripData = {
       category: '自然風光',
       openingHours: '依一日遊行程',
       tips: '建議參加含接送的一日遊，省心且可品酒。',
+    },
+    {
+      id: 'aveiro',
+      name: '阿威羅水鄉',
+      description: 'Aveiro「威尼斯」水鄉小鎮，彩色 Moliceiro 小船穿梭運河兩岸。',
+      lat: 40.6405,
+      lng: -8.6538,
+      category: '水鄉小鎮',
+      openingHours: '全天開放',
+      tips: '從 Porto São Bento 站搭 CP 郊區火車約 1 小時，單程約 €3.80。',
     },
     {
       id: 'timeout-market',
@@ -549,22 +559,41 @@ export const defaultTripData: TripData = {
     {
       date: '2026-10-21',
       dayLabel: '第 7 天',
-      city: '波圖近郊',
+      city: '阿威羅 Aveiro',
       activities: [
         {
           time: '09:00',
-          title: '【方案 A】杜羅河谷酒莊',
-          location: 'Douro Valley',
-          description: '參加杜羅河谷一日遊（含接送），品酒並欣賞酒莊梯田風光。建議提前預訂一日遊行程。',
-          attractionId: 'douro-valley',
+          title: '前往阿威羅',
+          location: 'Porto São Bento 站',
+          description:
+            '從 São Bento 站搭 CP 郊區火車前往阿威羅（約 1 小時）。火車單程約 €3.80，現場買票或刷卡即可。',
+          attractionId: 'sao-bento-station',
         },
         {
-          time: '09:00',
-          title: '【方案 B】阿威羅水鄉',
+          time: '10:30',
+          title: '阿威羅水鄉漫步',
           location: 'Aveiro',
-          description:
-            'São Bento 站搭 CP 郊區火車（約 1 小時）前往阿威羅水鄉小鎮。火車單程約 €3.80，現場買或刷卡即可。',
-          attractionId: 'sao-bento-station',
+          description: '沿運河漫步，欣賞彩色 Moliceiro 小船與新藝術風格建築，感受「葡萄牙威尼斯」氛圍。',
+          attractionId: 'aveiro',
+        },
+        {
+          time: '12:30',
+          title: '午餐',
+          location: '阿威羅老城',
+          description: '老城運河旁餐廳品嚐 Ovos Moles（蛋黃甜點）等當地特色。',
+        },
+        {
+          time: '15:00',
+          title: '自由探索',
+          location: '阿威羅',
+          description: '可選搭 Moliceiro 遊船、參觀 Costa Nova 彩色條紋小屋，或老城區自由漫遊。',
+          attractionId: 'aveiro',
+        },
+        {
+          time: '18:00',
+          title: '返回波圖',
+          location: '波圖',
+          description: '搭乘 CP 火車返回波圖飯店。',
         },
       ],
     },
@@ -598,28 +627,41 @@ export const defaultTripData: TripData = {
     {
       date: '2026-10-23',
       dayLabel: '第 9 天',
-      city: '里斯本周邊',
+      city: '卡斯凱什 Cascais',
       activities: [
         {
           time: '09:00',
-          title: '【方案 A】卡斯凱什濱海小鎮',
+          title: '前往卡斯凱什',
           location: 'Cascais',
           description:
             'Lisboa Cais do Sodré 站搭 CP 火車（約 40 分鐘）。單程約 €2.40，直接刷感應信用卡進站，不需買卡。',
           attractionId: 'cascais',
         },
         {
-          time: '11:30',
-          title: '【方案 A】地獄之口',
+          time: '10:30',
+          title: '濱海小鎮漫步',
+          location: '卡斯凱什',
+          description: '漫步漁港、海濱步道與沙灘，感受悠閒濱海小鎮氛圍。',
+          attractionId: 'cascais',
+        },
+        {
+          time: '12:30',
+          title: '午餐',
+          location: '卡斯凱什',
+          description: '海濱餐廳品嚐新鮮海鮮。',
+        },
+        {
+          time: '14:30',
+          title: '地獄之口',
           location: 'Boca do Inferno',
-          description: '卡斯凱什海岸懸崖洞穴，海浪衝擊形成壯觀景觀，與卡斯凱什同日安排。',
+          description: '海岸懸崖洞穴，海浪衝擊形成壯觀景觀。從市中心步行或搭公車約 20 分鐘。',
           attractionId: 'boca-inferno',
         },
         {
-          time: '09:00',
-          title: '【方案 B】自由大道購物',
-          location: 'Avenida da Liberdade',
-          description: '自由大道（Avenida da Liberdade）購物，並漫遊 Príncipe Real 街區。市區搭地鐵或步行即可。',
+          time: '17:00',
+          title: '返回里斯本',
+          location: '里斯本',
+          description: '搭乘 CP 火車返回里斯本飯店。',
         },
       ],
     },
