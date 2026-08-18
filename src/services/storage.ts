@@ -33,7 +33,29 @@ const defaultSyncMeta = (): SyncMeta => ({
 });
 
 function isPortugalTrip(data: TripData): boolean {
-  return data.destination === '葡萄牙' && data.baseCurrency === 'EUR';
+  if (data.destination !== '葡萄牙' || data.baseCurrency !== 'EUR') return false;
+  if (data.itinerary.length !== 10) return false;
+  if (data.itinerary[0]?.date !== '2026-10-15') return false;
+  if (data.itinerary.at(-1)?.date !== '2026-10-24') return false;
+  const hasGuangzhou = data.itinerary.some(
+    (day) =>
+      day.city.includes('廣州') ||
+      day.city.includes('广州') ||
+      day.activities.some((a) => a.location.includes('西九龍') || a.title.includes('高鐵')),
+  );
+  return !hasGuangzhou;
+}
+
+/** Wipe Guangzhou / Spain IndexedDB — same gh-pages origin shares storage. */
+async function purgeLegacyTripStores(): Promise<void> {
+  for (const name of ['spain-travel-app', 'guangzhou-travel-app']) {
+    try {
+      await localforage.createInstance({ name, storeName: 'trip' }).clear();
+      await localforage.createInstance({ name, storeName: 'meta' }).clear();
+    } catch {
+      /* ignore */
+    }
+  }
 }
 
 function migrateTripData(cached: TripData): TripData {
@@ -44,6 +66,8 @@ function migrateTripData(cached: TripData): TripData {
 }
 
 export async function loadTripData(): Promise<TripData> {
+  await purgeLegacyTripStores();
+
   const cached = await tripStore.getItem<TripData>(TRIP_STORE_KEY);
   if (cached) {
     if (cached.version < defaultTripData.version) {

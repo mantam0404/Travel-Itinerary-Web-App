@@ -5,10 +5,9 @@ import App from './App';
 import './index.css';
 
 registerSW({
+  immediate: true,
   onNeedRefresh() {
-    if (confirm('有新版本可用，是否立即更新？')) {
-      window.location.reload();
-    }
+    window.location.reload();
   },
   onOfflineReady() {
     console.info('應用程式已可離線使用');

@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'EUR' as const;
 export const EUR_TO_HKD = 8.45;
 
 export const defaultTripData: TripData = {
-  version: 3,
+  version: 4,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
