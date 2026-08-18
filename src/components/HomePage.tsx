@@ -96,12 +96,12 @@ export function HomePage({
           <div className="ln-hero-overlay absolute inset-0" />
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label ln-hero-ink-secondary">葡萄牙 · 2026年10月15–20日</p>
+            <p className="ln-label ln-hero-ink-secondary">葡萄牙 · 2026年10月15–24日</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
               葡萄牙旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              6 日 5 夜 · 離線行程與地圖
+              10 日 9 夜 · 離線行程與地圖
             </p>
           </div>
         </div>
