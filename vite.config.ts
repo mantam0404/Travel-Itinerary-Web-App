@@ -14,9 +14,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
-        name: '巴塞隆納旅行行程',
-        short_name: 'Barcelona',
-        description: '巴塞隆納旅行離線行程規劃應用程式',
+        name: '廣州旅行行程',
+        short_name: 'Guangzhou',
+        description: '廣州旅行離線行程規劃應用程式',
         theme_color: '#08090a',
         background_color: '#08090a',
         display: 'standalone',

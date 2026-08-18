@@ -2,23 +2,21 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import type { Attraction } from '../data/tripData';
-import { formatEur, formatHkd } from '../data/tripData';
 import { ScrollReveal } from './ScrollReveal';
 import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
 import { IconMyLocation } from './icons';
 import { getAttractionImage, getAttractionHeroImage, MAP_TILES } from '../utils/itineraryImages';
+import { YouTubeEmbed } from './YouTubeEmbed';
 import type { MapFocusRequest } from '../types/navigation';
 import 'leaflet/dist/leaflet.css';
 
 interface TravelMapProps {
   attractions: Attraction[];
-  exchangeRate: number;
+  mapCenter: { lat: number; lng: number };
   isDark: boolean;
   focusRequest?: MapFocusRequest | null;
 }
-
-const BARCELONA_CENTER: [number, number] = [41.3874, 2.1686];
 
 interface FlyCoords {
   lat: number;
@@ -56,10 +54,11 @@ function createImageMarkerIcon(imageUrl: string, isDark: boolean, isSelected: bo
 
 export function TravelMap({
   attractions,
-  exchangeRate,
+  mapCenter,
   isDark,
   focusRequest,
 }: TravelMapProps) {
+  const mapCenterCoords: [number, number] = [mapCenter.lat, mapCenter.lng];
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [flyCoords, setFlyCoords] = useState<FlyCoords | null>(null);
@@ -180,7 +179,7 @@ export function TravelMap({
         <div className="ln-panel ln-map-shell overflow-hidden p-1">
           {mapReady && (
             <MapContainer
-              center={BARCELONA_CENTER}
+              center={mapCenterCoords}
               zoom={13}
               className="h-72 w-full rounded-[10px] sm:h-96"
               scrollWheelZoom={false}
@@ -222,14 +221,6 @@ export function TravelMap({
                       <div className="p-2">
                         <p className="font-semibold">{attr.name}</p>
                         <p className="text-xs text-[var(--ln-ink-secondary)]">{attr.category}</p>
-                        {attr.ticketPriceEur && (
-                          <p className="mt-1 text-sm">
-                            門票：{formatHkd(attr.ticketPriceEur, exchangeRate)}{' '}
-                            <span className="text-[var(--ln-ink-tertiary)]">
-                              ({formatEur(attr.ticketPriceEur)})
-                            </span>
-                          </p>
-                        )}
                       </div>
                     </div>
                   </Popup>
@@ -251,13 +242,13 @@ export function TravelMap({
       </ScrollReveal>
 
       <ScrollReveal delay={120}>
-        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+        <div className="flex flex-wrap gap-2 pb-1">
           {attractions.map((attr) => (
             <button
               key={attr.id}
               type="button"
               onClick={() => selectAttraction(attr.id === selectedId ? null : attr.id)}
-              className={`ln-chip ln-pressable shrink-0 ${selectedId === attr.id ? 'ln-chip-active' : ''}`}
+              className={`ln-chip ln-pressable ${selectedId === attr.id ? 'ln-chip-active' : ''}`}
             >
               {attr.name}
             </button>
@@ -281,17 +272,17 @@ export function TravelMap({
                 {selected.openingHours && (
                   <span className="ln-badge-neutral ln-badge">{selected.openingHours}</span>
                 )}
-                {selected.ticketPriceEur && (
-                  <span className="ln-badge">
-                    {formatHkd(selected.ticketPriceEur, exchangeRate)} (
-                    {formatEur(selected.ticketPriceEur)})
-                  </span>
-                )}
               </div>
               {selected.tips && (
                 <p className="mt-3 text-sm leading-relaxed text-[var(--ln-ink-tertiary)]">
                   {selected.tips}
                 </p>
+              )}
+              {selected.youtubeVideoId && (
+                <YouTubeEmbed
+                  videoId={selected.youtubeVideoId}
+                  title={`${selected.name} 介紹影片`}
+                />
               )}
             </div>
           </div>

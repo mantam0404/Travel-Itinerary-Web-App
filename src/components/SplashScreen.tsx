@@ -41,7 +41,7 @@ export function SplashScreen({ isDark, ready, onComplete }: SplashScreenProps) {
       className={`ln-splash ${isDark ? '' : 'ln-splash-light'} ${phase === 'exit' ? 'ln-splash-exit' : ''}`}
       role="status"
       aria-live="polite"
-      aria-label="載入巴塞隆納旅行行程"
+      aria-label="載入廣州旅行行程"
     >
       <div className="ln-splash-glow" aria-hidden />
       <div className="ln-splash-content">
@@ -66,9 +66,9 @@ export function SplashScreen({ isDark, ready, onComplete }: SplashScreenProps) {
             </defs>
           </svg>
         </div>
-        <p className="ln-splash-eyebrow">Barcelona · Oct 15–24, 2026</p>
-        <h1 className="ln-splash-title">巴塞隆納旅行行程</h1>
-        <p className="ln-splash-subtitle">離線行程 · 地圖 · 費用追蹤</p>
+        <p className="ln-splash-eyebrow">廣州 · 2026年7月25–26日</p>
+        <h1 className="ln-splash-title">廣州旅行行程</h1>
+        <p className="ln-splash-subtitle">2 日 1 夜 · 離線行程 · 地圖</p>
         <div className="ln-splash-loader" aria-hidden>
           <span />
           <span />

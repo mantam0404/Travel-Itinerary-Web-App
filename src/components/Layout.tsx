@@ -1,45 +1,30 @@
 import type { ReactNode } from 'react';
-import { SyncStatus } from './SyncStatus';
-import { ThemeToggleButton } from './icons';
-import type { ConnectionStatus } from '../hooks/useOfflineSync';
-import type { SyncMeta } from '../services/storage';
 import '../styles/linear.css';
 
-export type Tab = 'home' | 'itinerary' | 'map' | 'expenses';
+export type Tab = 'home' | 'itinerary' | 'map';
 
 interface LayoutProps {
   children: ReactNode;
   activeTab: Tab;
   onTabChange: (tab: Tab) => void;
-  status: ConnectionStatus;
-  syncMeta: SyncMeta | null;
-  onSync: () => void;
   isDark: boolean;
-  onToggleTheme: () => void;
 }
 
 const tabs: { id: Tab; label: string }[] = [
   { id: 'home', label: '首頁' },
-  { id: 'itinerary', label: '行程' },
   { id: 'map', label: '地圖' },
-  { id: 'expenses', label: '費用' },
 ];
 
 const pageTitles: Record<Exclude<Tab, 'home'>, string> = {
   itinerary: '每日行程',
   map: '景點地圖',
-  expenses: '費用與預算',
 };
 
 export function Layout({
   children,
   activeTab,
   onTabChange,
-  status,
-  syncMeta,
-  onSync,
   isDark,
-  onToggleTheme,
 }: LayoutProps) {
   return (
     <div
@@ -49,13 +34,7 @@ export function Layout({
 
       {activeTab !== 'home' && (
         <header className="ln-fade sticky top-0 z-40 border-b border-[var(--ln-border)] bg-[var(--ln-nav-bg)] px-4 py-4 backdrop-blur-xl">
-          <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
-              <SyncStatus status={status} syncMeta={syncMeta} onSync={onSync} />
-            </div>
-            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
-          </div>
+          <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
         </header>
       )}
 

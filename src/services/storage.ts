@@ -31,12 +31,55 @@ const defaultSyncMeta = (): SyncMeta => ({
   lastFlightQuoteHkd: null,
 });
 
+/** Patch stale cached routes (e.g. 廣州南 → 廣州東). */
+function migrateTripData(cached: TripData): TripData {
+  let changed = false;
+  const next = structuredClone(cached);
+
+  for (const flight of next.flights) {
+    if (flight.route.includes('廣州南')) {
+      flight.route = flight.route.replaceAll('廣州南', '廣州東');
+      changed = true;
+    }
+    if (flight.arrivalAirport.includes('廣州南')) {
+      flight.arrivalAirport = flight.arrivalAirport.replaceAll('廣州南', '廣州東');
+      changed = true;
+    }
+    if (flight.destCode === 'GZN') {
+      flight.destCode = 'GGZ';
+      changed = true;
+    }
+  }
+
+  for (const day of next.itinerary) {
+    for (const act of day.activities) {
+      if (act.location.includes('廣州南')) {
+        act.location = act.location.replaceAll('廣州南', '廣州東');
+        changed = true;
+      }
+    }
+  }
+
+  if (!changed) return cached;
+
+  return {
+    ...next,
+    version: defaultTripData.version,
+    lastUpdated: new Date().toISOString(),
+  };
+}
+
 export async function loadTripData(): Promise<TripData> {
   const cached = await tripStore.getItem<TripData>(TRIP_STORE_KEY);
   if (cached) {
     if (cached.version < defaultTripData.version) {
       await tripStore.setItem(TRIP_STORE_KEY, defaultTripData);
       return defaultTripData;
+    }
+    const migrated = migrateTripData(cached);
+    if (migrated !== cached) {
+      await tripStore.setItem(TRIP_STORE_KEY, migrated);
+      return migrated;
     }
     return cached;
   }
