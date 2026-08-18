@@ -13,13 +13,14 @@ export interface SyncMeta {
   lastFlightQuoteHkd: number | null;
 }
 
+/** Isolated from Guangzhou / Spain branches — same gh-pages URL shares origin. */
 const tripStore = localforage.createInstance({
-  name: 'spain-travel-app',
+  name: 'portugal-travel-app',
   storeName: 'trip',
 });
 
 const metaStore = localforage.createInstance({
-  name: 'spain-travel-app',
+  name: 'portugal-travel-app',
   storeName: 'meta',
 });
 
@@ -31,8 +32,14 @@ const defaultSyncMeta = (): SyncMeta => ({
   lastFlightQuoteHkd: null,
 });
 
-/** No content migrations for Portugal branch — version bump resets stale cache. */
+function isPortugalTrip(data: TripData): boolean {
+  return data.destination === '葡萄牙' && data.baseCurrency === 'EUR';
+}
+
 function migrateTripData(cached: TripData): TripData {
+  if (!isPortugalTrip(cached)) {
+    return defaultTripData;
+  }
   return cached;
 }
 

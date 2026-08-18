@@ -24,10 +24,13 @@ export async function fetchLatestFlightQuote(): Promise<FlightQuote | null> {
   }
 }
 
-/** Apply quote to trip flights (reference only — status stays 未購票). */
+/** Merge quote fares into trip flights; preserve booked status and Emirates flight numbers. */
 export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): TripData {
   const next = structuredClone(data);
   const cabin = quote.cabinClass ?? 'Economy';
+  const airline = quote.airline?.trim();
+  const outboundFlight = quote.outboundFlight?.trim();
+  const returnFlight = quote.returnFlight?.trim();
 
   for (const flight of next.flights) {
     if (flight.type === 'departure') {
@@ -35,15 +38,19 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
       flight.quoteSource = quote.source;
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
-      flight.status = '參考報價（未購票）';
       flight.cabinClass = cabin;
+      if (airline) flight.airline = airline;
+      if (outboundFlight && outboundFlight !== '待定') flight.flightNumber = outboundFlight;
+      if (flight.status !== '已訂位') flight.status = '參考報價（未購票）';
     } else if (flight.type === 'return') {
       flight.quoteHkd = quote.returnHkd;
       flight.quoteSource = quote.source;
       flight.quoteUrl = quote.sourceUrl;
       flight.quotedAt = quote.quotedAt;
-      flight.status = '參考報價（未購票）';
       flight.cabinClass = cabin;
+      if (airline) flight.airline = airline;
+      if (returnFlight && returnFlight !== '待定') flight.flightNumber = returnFlight;
+      if (flight.status !== '已訂位') flight.status = '參考報價（未購票）';
     }
   }
 
