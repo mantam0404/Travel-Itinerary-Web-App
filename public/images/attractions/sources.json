@@ -1,33 +1,37 @@
 {
-  "updated": "2026-07-21T14:59:25.454Z",
+  "updated": "2026-08-18T09:30:16.258Z",
   "sources": {
-    "yongqing-fang": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Guangzhou_Liwan_Enning_Lu_20211026.164621.jpg/960px-Guangzhou_Liwan_Enning_Lu_20211026.164621.jpg",
-      "title": "File:Guangzhou Liwan Enning Lu 20211026.164621.jpg"
+    "alfama": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_BW_2018-10-03_12-02-15.jpg?width=960",
+      "title": "File:Lisbon BW 2018-10-03 12-02-15.jpg"
     },
-    "dafo-temple": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Shanmen%2C_Guangzhou_Dafo_Temple.jpg/960px-Shanmen%2C_Guangzhou_Dafo_Temple.jpg",
-      "title": "File:Shanmen, Guangzhou Dafo Temple.jpg"
+    "belem-tower": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon_Torre_de_Bel%C3%A9m_BW_2018-10-03_16-33-21.jpg?width=960",
+      "title": "File:Lisbon Torre de Belém BW 2018-10-03 16-33-21.jpg"
     },
-    "guangzhou-art-museum": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Aerial_View%2C_Guangzhou_Museum_of_Art_20241027-A.jpg/960px-Aerial_View%2C_Guangzhou_Museum_of_Art_20241027-A.jpg",
-      "title": "File:Aerial View, Guangzhou Museum of Art 20241027-A.jpg"
+    "jeronimos-monastery": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cloister_of_the_Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m%2C_Lisbon%2C_20250604_1308_9180.jpg?width=960",
+      "title": "File:Cloister of the Jerónimos Monastery in Belém, Lisbon, 20250604 1308 9180.jpg"
     },
-    "canton-tower": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Canton_Tower%28Look_up%29.JPG/960px-Canton_Tower%28Look_up%29.JPG",
-      "title": "File:Canton Tower(Look up).JPG"
+    "sintra-pena": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Nacional_da_Pena%2C_Sintra%2C_Portugal%2C_2019-05-25%2C_DD_128.jpg?width=960",
+      "title": "File:Palacio Nacional da Pena, Sintra, Portugal, 2019-05-25, DD 128.jpg"
     },
-    "guangzhou-east-station": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/GUANGZHOU_EAST_RAILWAY_STATION_%282%29.jpg/960px-GUANGZHOU_EAST_RAILWAY_STATION_%282%29.jpg",
-      "title": "File:GUANGZHOU EAST RAILWAY STATION (2).jpg"
+    "lisbon-castle": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Castelo_de_S%C3%A3o_Jorge%2C_Lisbon%2C_20250604_1706_9397.jpg?width=960",
+      "title": "File:Castelo de São Jorge, Lisbon, 20250604 1706 9397.jpg"
     },
-    "pearl-river-cruise": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg/960px-The_beautiful_night_scene_near_the_Pearl_River_in_Guangzhou%2C_China.jpg",
-      "title": "File:The beautiful night scene near the Pearl River in Guangzhou, China.jpg"
+    "porto-ribeira": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cais_da_Ribeira%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_03.JPG?width=960",
+      "title": "File:Cais da Ribeira, Oporto, Portugal, 2012-05-09, DD 03.JPG"
     },
-    "diandude-tianhe": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Dim_sum_collection_in_Cantonese_restaurant.jpg/960px-Dim_sum_collection_in_Cantonese_restaurant.jpg",
-      "title": "File:Dim sum collection in Cantonese restaurant.jpg"
+    "livraria-lello": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Livraria_Lello%2C_External_view%2C_Porto.jpg?width=960",
+      "title": "File:Livraria Lello, External view, Porto.jpg"
+    },
+    "lisbon-airport": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/20210724_164942_Lisbon_Portela_Airport_Terminal_1.jpg?width=960",
+      "title": "File:20210724 164942 Lisbon Portela Airport Terminal 1.jpg"
     }
   }
 }

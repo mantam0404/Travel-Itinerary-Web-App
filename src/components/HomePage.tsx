@@ -88,20 +88,20 @@ export function HomePage({
           <TripImage
             key={heroImage}
             src={heroImage}
-            fallback={`${import.meta.env.BASE_URL}images/attractions/guangzhou-hero.png`}
-            alt="廣州旅行行程封面"
+            fallback={`${import.meta.env.BASE_URL}images/attractions/belem-tower-hero.jpg`}
+            alt="葡萄牙旅行行程封面"
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out"
             loading="eager"
           />
           <div className="ln-hero-overlay absolute inset-0" />
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
-            <p className="ln-label ln-hero-ink-secondary">廣州 · 2026年7月25–26日</p>
+            <p className="ln-label ln-hero-ink-secondary">葡萄牙 · 2026年10月15–20日</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
-              廣州旅行行程
+              葡萄牙旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              2 日 1 夜快閃 · 離線行程與地圖
+              6 日 5 夜 · 離線行程與地圖
             </p>
           </div>
         </div>
