@@ -1,6 +1,5 @@
 /**
- * Writes public/data/flight-quote.json with HSR reference fare.
- * Guangzhou 2D1N branch — static reference, updated on sync.
+ * Writes public/data/flight-quote.json with Portugal flight reference fare.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
@@ -10,28 +9,29 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const OUT = join(ROOT, 'public/data/flight-quote.json')
 
-const CNY_TO_HKD = 1.08
-const OUTBOUND_DATE = '2026-07-25'
-const RETURN_DATE = '2026-07-26'
+const EUR_TO_HKD = 8.45
+const OUTBOUND_DATE = '2026-10-15'
+const RETURN_DATE = '2026-10-20'
 
 const DEFAULT_QUOTE = {
-  id: 'hsr-hkg-gz-2026-07',
-  airline: '高鐵',
+  id: 'hkg-lis-2026-10',
+  airline: '國泰航空',
   outboundFlight: '待定',
   returnFlight: '待定',
   outboundDate: OUTBOUND_DATE,
   returnDate: RETURN_DATE,
   currency: 'HKD',
-  roundTripHkd: 494,
-  roundTripEur: Math.round((494 / CNY_TO_HKD) * 100) / 100,
-  outboundHkd: 247,
-  returnHkd: 247,
-  source: 'MTR 高鐵 / 12306',
-  sourceUrl: 'https://www.highspeed.mtr.com.hk/en/main/index.html',
+  roundTripHkd: 9800,
+  roundTripEur: Math.round((9800 / EUR_TO_HKD) * 100) / 100,
+  outboundHkd: 4900,
+  returnHkd: 4900,
+  source: 'Google Flights',
+  sourceUrl:
+    'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-20',
   quotedAt: new Date().toISOString().slice(0, 10),
-  note: '參考報價（未購票）— 西九龍↔廣州東 二等座',
+  note: '參考報價（未購票）— 香港↔里斯本 經濟艙',
   fetchedAt: new Date().toISOString(),
-  cabinClass: '二等座',
+  cabinClass: '經濟艙',
 }
 
 async function main() {

@@ -1,6 +1,6 @@
-/** Reference fare for Hong Kong West Kowloon ↔ Guangzhou HSR (Jul 25–26, 2026) */
+/** Google Flights reference quote for HKG ↔ LIS (Oct 15–20, 2026) */
 export const GOOGLE_FLIGHTS_SEARCH_URL =
-  'https://www.highspeed.mtr.com.hk/en/main/index.html';
+  'https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-20';
 
 export interface FlightQuote {
   id?: string;
@@ -23,28 +23,28 @@ export interface FlightQuote {
 }
 
 export const FLIGHT_QUOTE = {
-  source: 'MTR 高鐵 / 12306',
+  source: 'Google Flights',
   sourceUrl: GOOGLE_FLIGHTS_SEARCH_URL,
-  quotedAt: '2026-07-21',
-  cabinClass: '二等座',
-  airline: '高鐵',
+  quotedAt: '2026-07-22',
+  cabinClass: '經濟艙',
+  airline: '國泰航空',
   outboundFlight: '待定',
   returnFlight: '待定',
-  /** Round-trip reference fare (second class), HKD */
-  roundTripHkd: 494,
-  outboundHkd: 247,
-  returnHkd: 247,
+  /** Round-trip reference fare (economy), HKD */
+  roundTripHkd: 9800,
+  outboundHkd: 4900,
+  returnHkd: 4900,
   notes:
-    '參考 MTR 高鐵及 12306 同期二等座票價。來回均為西九龍↔廣州東（車次待購票時確認）。尚未購票，實際價格會浮動。',
+    '參考 Google Flights 香港↔里斯本經濟艙報價（10 月旺季，含轉機）。尚未購票，實際價格會浮動。',
 } as const;
 
 export const DEFAULT_FLIGHT_QUOTE: FlightQuote = {
-  id: 'hsr-hkg-gz-2026-07',
+  id: 'hkg-lis-2026-10',
   airline: FLIGHT_QUOTE.airline,
   outboundFlight: FLIGHT_QUOTE.outboundFlight,
   returnFlight: FLIGHT_QUOTE.returnFlight,
-  outboundDate: '2026-07-25',
-  returnDate: '2026-07-26',
+  outboundDate: '2026-10-15',
+  returnDate: '2026-10-20',
   currency: 'HKD',
   roundTripHkd: FLIGHT_QUOTE.roundTripHkd,
   outboundHkd: FLIGHT_QUOTE.outboundHkd,

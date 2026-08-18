@@ -1,5 +1,5 @@
 /**
- * Generates Guangzhou trip hero + per-day images from attraction photos.
+ * Generates Portugal trip hero + per-day images from attraction photos.
  */
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -12,11 +12,15 @@ const attractions = path.join(root, 'public/images/attractions');
 const trip = path.join(root, 'public/images/trip');
 
 const DAY_SOURCES = {
-  '2026-07-25': 'day-2026-07-25-cover.jpg',
-  '2026-07-26': 'day-2026-07-26-cover.jpg',
+  '2026-10-15': 'alfama-hero.jpg',
+  '2026-10-16': 'belem-tower-hero.jpg',
+  '2026-10-17': 'sintra-pena-hero.jpg',
+  '2026-10-18': 'lisbon-castle-hero.jpg',
+  '2026-10-19': 'porto-ribeira-hero.jpg',
+  '2026-10-20': 'lisbon-airport-hero.jpg',
 };
 
-const HERO_SOURCE = 'guangzhou-hero.png';
+const HERO_SOURCE = 'belem-tower-hero.jpg';
 
 const heroSrc = path.join(attractions, HERO_SOURCE);
 
@@ -36,4 +40,4 @@ for (const theme of ['dark', 'light']) {
   }
 }
 
-console.log('Generated Guangzhou trip hero + day images');
+console.log('Generated Portugal trip hero + day images');
