@@ -66,7 +66,7 @@ export const BASE_CURRENCY = 'EUR' as const;
 export const EUR_TO_HKD = 8.45;
 
 export const defaultTripData: TripData = {
-  version: 6,
+  version: 7,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -84,9 +84,9 @@ export const defaultTripData: TripData = {
       destCode: 'LIS',
       departureAirport: '香港國際機場',
       arrivalAirport: '里斯本機場',
-      departureTime: '00:05',
+      departureTime: '00:40',
       arrivalTime: '12:35',
-      duration: '約 16 小時（迪拜轉機）',
+      duration: '約 16 小時（迪拜轉機 EK381→EK191）',
       status: '已訂位',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.outboundHkd,
@@ -106,8 +106,8 @@ export const defaultTripData: TripData = {
       departureAirport: '里斯本機場',
       arrivalAirport: '香港國際機場',
       departureTime: '14:15',
-      arrivalTime: '07:15+1',
-      duration: '約 15 小時（迪拜轉機）',
+      arrivalTime: '15:25+1',
+      duration: '約 21 小時（迪拜轉機 EK192→EK382）',
       status: '已訂位',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.returnHkd,
@@ -349,7 +349,7 @@ export const defaultTripData: TripData = {
           title: 'EK191 抵達里斯本',
           location: '里斯本機場 LIS',
           description:
-            '搭乘 EK381（香港出發）經迪拜轉機 EK191，約 12:35 抵達。機場入境大廳 Ask Me Lisboa 櫃檯領取實體「48 小時里斯本卡」（先不啟用）。飯店 ➔ 機場建議 Uber/Bolt 直達（約 20–30 分鐘）。',
+            '10/15 00:40 香港出發 EK381（04:25 抵迪拜）轉 EK191（07:25 起飛），約 12:35 抵達里斯本。機場入境大廳 Ask Me Lisboa 櫃檯領取實體「48 小時里斯本卡」（先不啟用）。飯店 ➔ 機場建議 Uber/Bolt 直達（約 20–30 分鐘）。',
           attractionId: 'lisbon-airport',
         },
         {
@@ -682,7 +682,7 @@ export const defaultTripData: TripData = {
           time: '14:15',
           title: 'EK192 起飛返港',
           location: '里斯本 → 香港',
-          description: '搭乘 EK192（14:15 起飛）經迪拜轉機 EK382 返回香港。',
+          description: '搭乘 EK192（14:15 起飛）經迪拜轉機 EK382，10/25 約 15:25 抵達香港。',
         },
       ],
     },
