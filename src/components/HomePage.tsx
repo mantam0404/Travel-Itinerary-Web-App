@@ -12,6 +12,36 @@ function allDayDates(days: ItineraryDay[]): Set<string> {
   return new Set(days.map((day) => day.date));
 }
 
+/** Days until departure (local midnight). Returns null once the trip has started. */
+function daysUntilDeparture(departureDate: string): number | null {
+  const departure = new Date(`${departureDate}T00:00:00`);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (today >= departure) return null;
+  const diffMs = departure.getTime() - today.getTime();
+  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+}
+
+function TripDepartureCountdown({ departureDate }: { departureDate: string }) {
+  const [daysLeft, setDaysLeft] = useState(() => daysUntilDeparture(departureDate));
+
+  useEffect(() => {
+    const update = () => setDaysLeft(daysUntilDeparture(departureDate));
+    update();
+    const timer = window.setInterval(update, 60 * 1000);
+    return () => window.clearInterval(timer);
+  }, [departureDate]);
+
+  if (daysLeft == null) return null;
+
+  return (
+    <p className="ln-hero-ink-secondary mb-2 text-sm">
+      距離出發還有{' '}
+      <span className="ln-tabular text-base font-semibold text-[var(--ln-accent)]">{daysLeft}</span> 天
+    </p>
+  );
+}
+
 function FlightSegmentRow({
   segment,
   showLayover,
@@ -148,6 +178,7 @@ export function HomePage({
           </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
+            {departure?.date && <TripDepartureCountdown departureDate={departure.date} />}
             <p className="ln-label ln-hero-ink-secondary">葡萄牙 · 2026年10月15–24日</p>
             <h1 className="ln-hero-ink mt-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[2rem]">
               葡萄牙旅行行程
