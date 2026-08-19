@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Attraction, FlightInfo, ItineraryDay } from '../data/tripData';
+import type { Attraction, FlightInfo, FlightSegment, ItineraryDay } from '../data/tripData';
 import { formatDateZh } from '../data/tripData';
 import type { Tab } from './Layout';
 import { ScrollReveal } from './ScrollReveal';
@@ -9,6 +9,39 @@ import { TripImage } from './TripImage';
 
 function allDayDates(days: ItineraryDay[]): Set<string> {
   return new Set(days.map((day) => day.date));
+}
+
+function FlightSegmentRow({
+  segment,
+  showLayover,
+}: {
+  segment: FlightSegment;
+  showLayover?: boolean;
+}) {
+  return (
+    <>
+      <div className="flex items-center justify-between gap-2 py-2">
+        <div className="min-w-0">
+          <p className="text-xs font-medium text-[var(--ln-ink)]">{segment.flightNumber}</p>
+          <p className="ln-tabular text-lg font-semibold">{segment.departureTime}</p>
+          <p className="text-xs text-[var(--ln-ink-tertiary)]">{segment.originCode}</p>
+        </div>
+        <div className="flex-1 px-2 text-center">
+          <p className="text-[10px] text-[var(--ln-ink-tertiary)]">
+            {segment.originCode} → {segment.destCode}
+          </p>
+          <div className="mx-auto mt-1 h-px w-full max-w-[64px] bg-[var(--ln-border-strong)]" />
+        </div>
+        <div className="min-w-0 text-right">
+          <p className="ln-tabular text-lg font-semibold">{segment.arrivalTime}</p>
+          <p className="text-xs text-[var(--ln-ink-tertiary)]">{segment.destCode}</p>
+        </div>
+      </div>
+      {showLayover && segment.layoverAfter && (
+        <p className="py-1 text-center text-xs text-[var(--ln-accent)]">{segment.layoverAfter}</p>
+      )}
+    </>
+  );
 }
 
 function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
@@ -35,6 +68,18 @@ function TransportLeg({ leg, label }: { leg: FlightInfo; label?: string }) {
           <p className="text-xs text-[var(--ln-ink-tertiary)]">{leg.destCode ?? '—'}</p>
         </div>
       </div>
+      {leg.segments && leg.segments.length > 0 && (
+        <div className="mt-4 rounded-lg border border-[var(--ln-border)] bg-[var(--ln-bg-elevated)] px-3 py-1">
+          <p className="ln-label py-2">航班分段</p>
+          {leg.segments.map((segment, i) => (
+            <FlightSegmentRow
+              key={`${segment.flightNumber}-${i}`}
+              segment={segment}
+              showLayover={i < leg.segments!.length - 1}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

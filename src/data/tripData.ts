@@ -1,5 +1,15 @@
 import { FLIGHT_QUOTE } from '../constants/flightQuotes';
 
+export interface FlightSegment {
+  flightNumber: string;
+  originCode: string;
+  destCode: string;
+  departureTime: string;
+  arrivalTime: string;
+  /** 此段飛行後的轉機等候說明 */
+  layoverAfter?: string;
+}
+
 export interface FlightInfo {
   id: string;
   type: 'departure' | 'return';
@@ -20,6 +30,8 @@ export interface FlightInfo {
   quoteSource?: string;
   quoteUrl?: string;
   quotedAt?: string;
+  /** 分段航班與轉機詳情 */
+  segments?: FlightSegment[];
 }
 
 export interface Attraction {
@@ -66,7 +78,7 @@ export const BASE_CURRENCY = 'EUR' as const;
 export const EUR_TO_HKD = 8.45;
 
 export const defaultTripData: TripData = {
-  version: 7,
+  version: 8,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -86,13 +98,30 @@ export const defaultTripData: TripData = {
       arrivalAirport: '里斯本機場',
       departureTime: '00:40',
       arrivalTime: '12:35',
-      duration: '約 16 小時（迪拜轉機 EK381→EK191）',
+      duration: '約 16 小時（含迪拜轉機）',
       status: '已訂位',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.outboundHkd,
       quoteSource: FLIGHT_QUOTE.source,
       quoteUrl: FLIGHT_QUOTE.sourceUrl,
       quotedAt: FLIGHT_QUOTE.quotedAt,
+      segments: [
+        {
+          flightNumber: 'EK381',
+          originCode: 'HKG',
+          destCode: 'DXB',
+          departureTime: '00:40',
+          arrivalTime: '04:25',
+          layoverAfter: '迪拜轉機約 3 小時',
+        },
+        {
+          flightNumber: 'EK191',
+          originCode: 'DXB',
+          destCode: 'LIS',
+          departureTime: '07:25',
+          arrivalTime: '12:35',
+        },
+      ],
     },
     {
       id: 'return-lis-hkg',
@@ -106,14 +135,31 @@ export const defaultTripData: TripData = {
       departureAirport: '里斯本機場',
       arrivalAirport: '香港國際機場',
       departureTime: '14:15',
-      arrivalTime: '15:25+1',
-      duration: '約 21 小時（迪拜轉機 EK192→EK382）',
+      arrivalTime: '14:45+1',
+      duration: '約 21 小時（含迪拜轉機）',
       status: '已訂位',
       cabinClass: FLIGHT_QUOTE.cabinClass,
       quoteHkd: FLIGHT_QUOTE.returnHkd,
       quoteSource: FLIGHT_QUOTE.source,
       quoteUrl: FLIGHT_QUOTE.sourceUrl,
       quotedAt: FLIGHT_QUOTE.quotedAt,
+      segments: [
+        {
+          flightNumber: 'EK192',
+          originCode: 'LIS',
+          destCode: 'DXB',
+          departureTime: '14:15',
+          arrivalTime: '00:50+1',
+          layoverAfter: '迪拜轉機約 2 小時 40 分',
+        },
+        {
+          flightNumber: 'EK382',
+          originCode: 'DXB',
+          destCode: 'HKG',
+          departureTime: '03:30',
+          arrivalTime: '14:45',
+        },
+      ],
     },
   ],
   attractions: [
@@ -682,7 +728,7 @@ export const defaultTripData: TripData = {
           time: '14:15',
           title: 'EK192 起飛返港',
           location: '里斯本 → 香港',
-          description: '搭乘 EK192（14:15 起飛）經迪拜轉機 EK382，10/25 約 15:25 抵達香港。',
+          description: '搭乘 EK192（14:15 起飛）經迪拜轉機 EK382（03:30 起飛），10/25 約 14:45 抵達香港。',
         },
       ],
     },
