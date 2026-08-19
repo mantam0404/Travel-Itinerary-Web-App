@@ -4,6 +4,7 @@ import { HomePage } from './components/HomePage';
 import type { NavigateOptions } from './components/HomePage';
 import { Itinerary } from './components/Itinerary';
 import { TravelMap } from './components/TravelMap';
+import { ExpenseTracker } from './components/ExpenseTracker';
 import { SplashScreen } from './components/SplashScreen';
 import { useOfflineSync } from './hooks/useOfflineSync';
 import { useTheme } from './hooks/useTheme';
@@ -116,6 +117,9 @@ export default function App() {
           isDark={isDark}
           focusRequest={mapFocus}
         />
+      )}
+      {activeTab === 'expenses' && (
+        <ExpenseTracker expenses={tripData.expenses} exchangeRate={tripData.exchangeRate} />
       )}
     </Layout>
     </>

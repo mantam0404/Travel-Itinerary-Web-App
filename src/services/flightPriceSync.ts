@@ -1,4 +1,4 @@
-import { DEFAULT_FLIGHT_QUOTE, type FlightQuote } from '../constants/flightQuotes';
+import { DEFAULT_FLIGHT_QUOTE, hkdToBase, type FlightQuote } from '../constants/flightQuotes';
 import type { TripData } from '../data/tripData';
 
 const QUOTE_URL = `${import.meta.env.BASE_URL}data/flight-quote.json`;
@@ -24,8 +24,7 @@ export async function fetchLatestFlightQuote(): Promise<FlightQuote | null> {
   }
 }
 
-/** Merge quote fares into trip flights; preserve booked status and Emirates flight numbers. */
-export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): TripData {
+function applyFlightQuoteToFlights(data: TripData, quote: FlightQuote): TripData {
   const next = structuredClone(data);
   const cabin = quote.cabinClass ?? 'Economy';
   const airline = quote.airline?.trim();
@@ -54,6 +53,41 @@ export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): 
     }
   }
 
+  return next;
+}
+
+/** Sync flight quote into the flights expense line item. */
+export function applyFlightQuoteToExpenses(data: TripData, quote: FlightQuote): TripData {
+  const next = structuredClone(data);
+  const flightExpense = next.expenses?.find((e) => e.id === 'flights-emirates');
+  if (!flightExpense) return next;
+
+  const outEur = hkdToBase(quote.outboundHkd, next.exchangeRate);
+  const retEur = hkdToBase(quote.returnHkd, next.exchangeRate);
+  const cabin = quote.cabinClass ?? '經濟艙';
+
+  flightExpense.amountEur = hkdToBase(quote.roundTripHkd, next.exchangeRate);
+  flightExpense.amountHkd = quote.roundTripHkd;
+  flightExpense.quotedAt = quote.quotedAt;
+  flightExpense.sourceUrl = quote.sourceUrl;
+  flightExpense.breakdown = [
+    {
+      label: `${quote.outboundFlight} 香港→里斯本（10/15）${cabin}`,
+      amountEur: outEur,
+    },
+    {
+      label: `${quote.returnFlight} 里斯本→香港（10/24）${cabin}`,
+      amountEur: retEur,
+    },
+  ];
+
+  return next;
+}
+
+/** Apply quote to trip flights and expense row. */
+export function applyFlightQuoteToTripData(data: TripData, quote: FlightQuote): TripData {
+  let next = applyFlightQuoteToFlights(data, quote);
+  next = applyFlightQuoteToExpenses(next, quote);
   return next;
 }
 

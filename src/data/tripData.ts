@@ -1,4 +1,4 @@
-import { FLIGHT_QUOTE } from '../constants/flightQuotes';
+import { FLIGHT_QUOTE, hkdToBase } from '../constants/flightQuotes';
 
 export interface FlightSegment {
   flightNumber: string;
@@ -62,6 +62,19 @@ export interface ItineraryDay {
   activities: ItineraryActivity[];
 }
 
+export interface ExpenseItem {
+  id: string;
+  category: 'accommodation' | 'transportation' | 'tickets' | 'flights';
+  name: string;
+  date: string;
+  amountEur: number;
+  amountHkd?: number;
+  breakdown: { label: string; amountEur: number }[];
+  notes?: string;
+  sourceUrl?: string;
+  quotedAt?: string;
+}
+
 export interface TripData {
   version: number;
   lastUpdated: string;
@@ -72,13 +85,18 @@ export interface TripData {
   flights: FlightInfo[];
   itinerary: ItineraryDay[];
   attractions: Attraction[];
+  expenses: ExpenseItem[];
 }
 
 export const BASE_CURRENCY = 'EUR' as const;
 export const EUR_TO_HKD = 8.45;
 
+const flightQuoteEur = hkdToBase(FLIGHT_QUOTE.roundTripHkd, EUR_TO_HKD);
+const outboundQuoteEur = hkdToBase(FLIGHT_QUOTE.outboundHkd, EUR_TO_HKD);
+const returnQuoteEur = hkdToBase(FLIGHT_QUOTE.returnHkd, EUR_TO_HKD);
+
 export const defaultTripData: TripData = {
-  version: 8,
+  version: 9,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -733,12 +751,223 @@ export const defaultTripData: TripData = {
       ],
     },
   ],
+  expenses: [
+    {
+      id: 'flights-emirates',
+      category: 'flights',
+      name: '來回機票 EK381/EK191 · EK192/EK382',
+      date: '2026-10-15',
+      amountEur: flightQuoteEur,
+      amountHkd: FLIGHT_QUOTE.roundTripHkd,
+      breakdown: [
+        {
+          label: `EK381/EK191 香港→里斯本（10/15）${FLIGHT_QUOTE.cabinClass}`,
+          amountEur: outboundQuoteEur,
+        },
+        {
+          label: `EK192/EK382 里斯本→香港（10/24）${FLIGHT_QUOTE.cabinClass}`,
+          amountEur: returnQuoteEur,
+        },
+      ],
+      notes: '已訂位。' + FLIGHT_QUOTE.notes,
+      sourceUrl: FLIGHT_QUOTE.sourceUrl,
+      quotedAt: FLIGHT_QUOTE.quotedAt,
+    },
+    {
+      id: 'hotel-lisbon',
+      category: 'accommodation',
+      name: '里斯本住宿（6 晚）',
+      date: '2026-10-15',
+      amountEur: 252,
+      breakdown: [
+        { label: '房費（6 晚 × €42/晚，市中心平價酒店估算）', amountEur: 252 },
+      ],
+      notes: '10/15–18、10/22–23 共 6 晚。實際以訂房為準。',
+    },
+    {
+      id: 'hotel-porto',
+      category: 'accommodation',
+      name: '波圖住宿（3 晚）',
+      date: '2026-10-19',
+      amountEur: 114,
+      breakdown: [
+        { label: '房費（3 晚 × €38/晚，市中心平價酒店估算）', amountEur: 114 },
+      ],
+      notes: '10/19–21 共 3 晚。實際以訂房為準。',
+    },
+    {
+      id: 'lisboa-card',
+      category: 'transportation',
+      name: '48 小時里斯本卡 Lisboa Card 48h',
+      date: '2026-10-16',
+      amountEur: 42,
+      breakdown: [
+        { label: '48 小時成人卡（含交通＋部分景點）', amountEur: 42 },
+      ],
+      notes: '10/15 機場領卡，10/16 09:00 啟用。含辛特拉 CP 火車、貝倫區景點等。',
+    },
+    {
+      id: 'cp-lisbon-porto',
+      category: 'transportation',
+      name: 'CP 國鐵 里斯本↔波圖',
+      date: '2026-10-19',
+      amountEur: 38,
+      breakdown: [
+        { label: '10/19 里斯本→波圖 Alfa Pendular 早鳥票', amountEur: 19 },
+        { label: '10/22 波圖→里斯本 Alfa Pendular 早鳥票', amountEur: 19 },
+      ],
+      notes: 'Promo Ticket 估算 €15–20/程，建議提前 30–60 天購票。',
+    },
+    {
+      id: 'cp-aveiro',
+      category: 'transportation',
+      name: 'CP 火車 波圖↔阿威羅',
+      date: '2026-10-21',
+      amountEur: 7.6,
+      breakdown: [
+        { label: 'São Bento↔Aveiro 來回（2 人 × €3.80）', amountEur: 7.6 },
+      ],
+      notes: '10/21 阿威羅一日遊。現場買票或刷卡。',
+    },
+    {
+      id: 'cp-cascais',
+      category: 'transportation',
+      name: 'CP 火車 里斯本↔卡斯凱什',
+      date: '2026-10-23',
+      amountEur: 4.8,
+      breakdown: [
+        { label: 'Cais do Sodré↔Cascais 來回（2 人 × €2.40）', amountEur: 4.8 },
+      ],
+      notes: '10/23 卡斯凱什＋地獄之口。刷感應信用卡即可。',
+    },
+    {
+      id: 'sintra-local',
+      category: 'transportation',
+      name: '辛特拉當地交通',
+      date: '2026-10-17',
+      amountEur: 12,
+      breakdown: [
+        { label: '434 公車上山（2 人來回估算）', amountEur: 7.6 },
+        { label: '佩納宮↔雷加萊拉（435 公車或 Uber 分攤）', amountEur: 4.4 },
+      ],
+      notes: '10/17 辛特拉一日遊。亦可改搭 Uber 上山。',
+    },
+    {
+      id: 'uber-bolt',
+      category: 'transportation',
+      name: 'Uber / Bolt 叫車',
+      date: '2026-10-15',
+      amountEur: 68,
+      breakdown: [
+        { label: '機場→里斯本酒店（10/15）', amountEur: 15 },
+        { label: 'Porto Campanhã→波圖酒店（10/19）', amountEur: 8 },
+        { label: '火車站↔酒店（里斯本、波圖）', amountEur: 15 },
+        { label: '波圖市區短途（10/19–21）', amountEur: 12 },
+        { label: '里斯本酒店→機場（10/24）', amountEur: 12 },
+        { label: '其他短途備用', amountEur: 10 },
+      ],
+      notes: '拖行李或陡坡路段建議叫車，單程多為 €4–€8。',
+    },
+    {
+      id: 'ticket-pena',
+      category: 'tickets',
+      name: '佩納宮 Palácio Nacional da Pena',
+      date: '2026-10-17',
+      amountEur: 40,
+      breakdown: [
+        { label: '宮殿＋公園門票（2 人，官網預約 09:00 場）', amountEur: 40 },
+      ],
+      notes: '需官網單獨購票並預約時段，不包在里斯本卡內。',
+    },
+    {
+      id: 'ticket-regaleira',
+      category: 'tickets',
+      name: '雷加萊拉莊園 Quinta da Regaleira',
+      date: '2026-10-17',
+      amountEur: 36,
+      breakdown: [
+        { label: '入場門票（2 人）', amountEur: 36 },
+      ],
+    },
+    {
+      id: 'ticket-lello',
+      category: 'tickets',
+      name: '萊羅書店 Livraria Lello',
+      date: '2026-10-20',
+      amountEur: 20,
+      breakdown: [
+        { label: 'Ticket-Voucher（2 人，可抵扣購書）', amountEur: 20 },
+      ],
+      notes: '建議提前官網購買 Voucher。',
+    },
+    {
+      id: 'ticket-clerigos',
+      category: 'tickets',
+      name: '牧師塔 Torre dos Clérigos',
+      date: '2026-10-20',
+      amountEur: 16,
+      breakdown: [
+        { label: '登塔門票（2 人）', amountEur: 16 },
+      ],
+    },
+    {
+      id: 'ticket-port-wine',
+      category: 'tickets',
+      name: '加亞新城波特酒品嚐',
+      date: '2026-10-20',
+      amountEur: 24,
+      breakdown: [
+        { label: '酒莊品酒體驗（2 人估算）', amountEur: 24 },
+      ],
+      notes: 'Vila Nova de Gaia 多家酒莊可選，部分免費試飲。',
+    },
+    {
+      id: 'ticket-jeronimos-slot',
+      category: 'tickets',
+      name: '哲羅姆派修道院預約',
+      date: '2026-10-16',
+      amountEur: 0,
+      breakdown: [
+        { label: '憑里斯本卡免費入場（官網預約時段）', amountEur: 0 },
+      ],
+      notes: '門票含在里斯本卡，需至官方系統登記入場時段。',
+    },
+    {
+      id: 'ticket-castle-slot',
+      category: 'tickets',
+      name: '聖若熱城堡',
+      date: '2026-10-18',
+      amountEur: 0,
+      breakdown: [
+        { label: '09:00 前憑里斯本卡免費入場', amountEur: 0 },
+      ],
+    },
+  ],
 };
 
 export function formatDateZh(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
   const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（週${weekdays[d.getDay()]}）`;
+}
+
+export const categoryLabels: Record<ExpenseItem['category'], string> = {
+  accommodation: '住宿',
+  transportation: '交通',
+  tickets: '門票',
+  flights: '機票',
+};
+
+export function formatHkdAmount(amountHkd: number): string {
+  return `HK$${amountHkd.toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+}
+
+export function formatHkd(amountEur: number, rate: number = EUR_TO_HKD): string {
+  return `HK$${(amountEur * rate).toLocaleString('zh-Hant', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+}
+
+export function formatEur(amount: number): string {
+  return `€${amount.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 /** @deprecated Use EUR_TO_HKD */

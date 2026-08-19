@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import '../styles/linear.css';
 
-export type Tab = 'home' | 'itinerary' | 'map';
+export type Tab = 'home' | 'itinerary' | 'map' | 'expenses';
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,11 +13,13 @@ interface LayoutProps {
 const tabs: { id: Tab; label: string }[] = [
   { id: 'home', label: '首頁' },
   { id: 'map', label: '地圖' },
+  { id: 'expenses', label: '費用' },
 ];
 
 const pageTitles: Record<Exclude<Tab, 'home'>, string> = {
   itinerary: '每日行程',
   map: '景點地圖',
+  expenses: '費用與預算',
 };
 
 export function Layout({

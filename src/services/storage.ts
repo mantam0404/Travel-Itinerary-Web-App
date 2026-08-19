@@ -34,6 +34,7 @@ const defaultSyncMeta = (): SyncMeta => ({
 
 function isPortugalTrip(data: TripData): boolean {
   if (data.destination !== '葡萄牙' || data.baseCurrency !== 'EUR') return false;
+  if (!Array.isArray(data.expenses) || data.expenses.length === 0) return false;
   if (data.itinerary.length !== 10) return false;
   if (data.itinerary[0]?.date !== '2026-10-15') return false;
   if (data.itinerary.at(-1)?.date !== '2026-10-24') return false;
