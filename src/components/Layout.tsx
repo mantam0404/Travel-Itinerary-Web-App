@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { ThemeToggleButton } from './icons';
 import '../styles/linear.css';
 
 export type Tab = 'home' | 'itinerary' | 'map' | 'expenses';
@@ -8,6 +9,7 @@ interface LayoutProps {
   activeTab: Tab;
   onTabChange: (tab: Tab) => void;
   isDark: boolean;
+  onToggleTheme: () => void;
 }
 
 const tabs: { id: Tab; label: string }[] = [
@@ -27,6 +29,7 @@ export function Layout({
   activeTab,
   onTabChange,
   isDark,
+  onToggleTheme,
 }: LayoutProps) {
   return (
     <div
@@ -36,7 +39,10 @@ export function Layout({
 
       {activeTab !== 'home' && (
         <header className="ln-fade sticky top-0 z-40 border-b border-[var(--ln-border)] bg-[var(--ln-nav-bg)] px-4 py-4 backdrop-blur-xl">
-          <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-lg font-semibold tracking-[-0.02em]">{pageTitles[activeTab]}</h1>
+            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} />
+          </div>
         </header>
       )}
 

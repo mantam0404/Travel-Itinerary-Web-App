@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
+const THEME_STORAGE_KEY = 'portugal-theme';
+
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme') as Theme | null;
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
     return stored ?? 'dark';
   });
 
@@ -12,11 +14,11 @@ export function useTheme() {
     const root = document.documentElement;
     root.classList.remove('dark', 'light');
     root.classList.add(theme);
-    localStorage.setItem('theme', theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
 
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute('content', theme === 'dark' ? '#1a1625' : '#faf6f0');
+      meta.setAttribute('content', theme === 'dark' ? '#08090a' : '#faf6f0');
     }
   }, [theme]);
 

@@ -6,6 +6,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { ItineraryDayCard } from './ItineraryDayCard';
 import { getHeroImage } from '../utils/itineraryImages';
 import { TripImage } from './TripImage';
+import { ThemeToggleButton } from './icons';
 
 function allDayDates(days: ItineraryDay[]): Set<string> {
   return new Set(days.map((day) => day.date));
@@ -94,6 +95,7 @@ interface HomePageProps {
   itinerary: ItineraryDay[];
   attractions: Attraction[];
   isDark: boolean;
+  onToggleTheme: () => void;
   onNavigate: (tab: Tab, options?: NavigateOptions) => void;
 }
 
@@ -102,6 +104,7 @@ export function HomePage({
   itinerary,
   attractions,
   isDark,
+  onToggleTheme,
   onNavigate,
 }: HomePageProps) {
   const departure = flights.find((f) => f.type === 'departure');
@@ -139,6 +142,10 @@ export function HomePage({
             loading="eager"
           />
           <div className="ln-hero-overlay absolute inset-0" />
+
+          <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-end gap-2 px-4 pt-4 pb-2 sm:px-6">
+            <ThemeToggleButton isDark={isDark} onToggle={onToggleTheme} variant="hero" />
+          </div>
 
           <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-8 sm:px-6">
             <p className="ln-label ln-hero-ink-secondary">葡萄牙 · 2026年10月15–24日</p>
