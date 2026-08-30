@@ -12,8 +12,8 @@
   "returnHkd": 4900,
   "source": "Google Flights",
   "sourceUrl": "https://www.google.com/travel/flights/search?q=Flights%20from%20HKG%20to%20LIS%20on%202026-10-15%20through%202026-10-24",
-  "quotedAt": "2026-08-29",
+  "quotedAt": "2026-08-30",
   "note": "參考報價（未購票）— 香港↔里斯本 經濟艙",
-  "fetchedAt": "2026-08-29T11:59:41.028Z",
+  "fetchedAt": "2026-08-30T10:56:25.184Z",
   "cabinClass": "經濟艙"
 }
