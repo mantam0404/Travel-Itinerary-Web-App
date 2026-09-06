@@ -13,14 +13,14 @@ const trip = path.join(root, 'public/images/trip');
 
 const DAY_SOURCES = {
   '2026-10-15': 'praca-comercio-hero.jpg',
-  '2026-10-16': 'belem-tower-hero.jpg',
-  '2026-10-17': 'sintra-pena-hero.jpg',
-  '2026-10-18': 'lisbon-castle-hero.jpg',
-  '2026-10-19': 'porto-ribeira-hero.jpg',
-  '2026-10-20': 'livraria-lello-hero.jpg',
-  '2026-10-21': 'aveiro-hero.jpg',
-  '2026-10-22': 'timeout-market-hero.jpg',
-  '2026-10-23': 'cascais-hero.jpg',
+  '2026-10-16': 'lisbon-castle-hero.jpg',
+  '2026-10-17': 'belem-tower-hero.jpg',
+  '2026-10-18': 'sintra-pena-hero.jpg',
+  '2026-10-19': 'avenida-liberdade-hero.jpg',
+  '2026-10-20': 'porto-ribeira-hero.jpg',
+  '2026-10-21': 'livraria-lello-hero.jpg',
+  '2026-10-22': 'foz-porto-hero.jpg',
+  '2026-10-23': 'aveiro-hero.jpg',
   '2026-10-24': 'lisbon-airport-hero.jpg',
 };
 

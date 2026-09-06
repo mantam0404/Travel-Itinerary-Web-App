@@ -184,7 +184,7 @@ export function HomePage({
               葡萄牙旅行行程
             </h1>
             <p className="ln-hero-ink-secondary mt-2 max-w-md text-sm leading-relaxed">
-              10 日 9 夜 · 離線行程與地圖
+              10 日 9 夜 · Montebelo + Porto Almada 180 · 離線行程與地圖
             </p>
           </div>
         </div>
