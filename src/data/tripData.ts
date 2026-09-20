@@ -96,7 +96,7 @@ const outboundQuoteEur = hkdToBase(FLIGHT_QUOTE.outboundHkd, EUR_TO_HKD);
 const returnQuoteEur = hkdToBase(FLIGHT_QUOTE.returnHkd, EUR_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 10,
+  version: 11,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -189,7 +189,7 @@ export const defaultTripData: TripData = {
       lng: -9.1342,
       category: '交通樞紐',
       openingHours: '全天開放',
-      tips: '10/24 建議 11:30 前抵達 Terminal 1 辦理退稅與登機。',
+      tips: '10/24 09:22 抵 Oriente 後 Uber 約 10 分鐘至機場，建議 12:15 前完成 check-in，有充足退稅時間。',
     },
     {
       id: 'montebelo-apartments',
@@ -653,15 +653,15 @@ export const defaultTripData: TripData = {
       city: '波圖 Porto',
       activities: [
         {
-          time: '09:30',
-          title: '高鐵前往波圖',
-          location: 'CP 高鐵 AP/IC',
+          time: '08:00',
+          title: 'CP 高鐵前往波圖（已確認）',
+          location: 'Lisboa Santa Apolónia',
           description:
-            'Montebelo 退房後，CP 高鐵（AP 或 IC）：Lisboa Santa Apolónia ➔ Porto Campanhã（建議 09:30/10:00 發車）。提前 60 天於 cp.pt 搶購早鳥票（Promotional Ticket）。',
-          transport: 'CP 高鐵：Santa Apolónia ➔ Campanhã',
+            'Montebelo 退房後前往 Santa Apolónia 站。已確認班次：08:00 發車 ➔ 10:55 抵達 Porto Campanhã（車程約 2 小時 55 分）。',
+          transport: 'CP 高鐵：Santa Apolónia 08:00 ➔ Campanhã 10:55',
         },
         {
-          time: '12:30',
+          time: '11:15',
           title: 'Porto Almada 180 Check-in',
           location: 'Rua do Almada 180',
           description:
@@ -800,26 +800,26 @@ export const defaultTripData: TripData = {
       city: '離境返港',
       activities: [
         {
-          time: '08:30',
+          time: '06:15',
           title: '前往 Campanhã 站',
           location: 'Porto Campanhã',
-          description: '攜帶行李 Uber 從 Porto Almada 180 直達 Campanhã 站（約 10 分鐘）。',
+          description: '攜帶行李 Uber 從 Porto Almada 180 直達 Campanhã 站（約 10 分鐘），預留 06:40 班次登車時間。',
           attractionId: 'porto-almada-180',
           transport: 'Uber：Porto Almada 180 ➔ Campanhã',
         },
         {
-          time: '08:32',
-          title: 'CP 高鐵返回里斯本',
+          time: '06:40',
+          title: 'CP 高鐵返回里斯本（已確認）',
           location: 'Lisboa Oriente',
           description:
-            'CP 高鐵：Porto Campanhã ➔ Lisboa Oriente（建議班次 08:32–11:30，約 3 小時）。提前 60 天於 cp.pt 搶購早鳥票。',
-          transport: 'CP 高鐵：Campanhã ➔ Oriente',
+            '已確認班次：06:40 從 Porto Campanhã 發車 ➔ 09:22 抵達 Lisboa Oriente（車程約 2 小時 42 分）。',
+          transport: 'CP 高鐵：Campanhã 06:40 ➔ Oriente 09:22',
         },
         {
-          time: '11:30',
+          time: '09:35',
           title: '轉乘機場',
           location: '里斯本機場 LIS Terminal 1',
-          description: 'Oriente 站 Uber 直達 Terminal 1（約 10 分鐘），時間足夠銜接 14:15 航班。',
+          description: 'Oriente 站 Uber 直達 Terminal 1（約 10 分鐘），約 09:45 抵達，距 14:15 起飛有充足時間辦理退稅與登機。',
           attractionId: 'lisbon-airport',
           transport: 'Uber：Oriente ➔ LIS Terminal 1',
         },
@@ -894,10 +894,10 @@ export const defaultTripData: TripData = {
       date: '2026-10-20',
       amountEur: 38,
       breakdown: [
-        { label: '10/20 里斯本→波圖 AP/IC 早鳥票', amountEur: 19 },
-        { label: '10/24 波圖→里斯本 AP/IC 早鳥票', amountEur: 19 },
+        { label: '10/20 Santa Apolónia 08:00→Campanhã 10:55（已確認）', amountEur: 19 },
+        { label: '10/24 Campanhã 06:40→Oriente 09:22（已確認）', amountEur: 19 },
       ],
-      notes: 'Promo Ticket 估算 €15–20/程，建議出發前 60 天於 cp.pt 購票。',
+      notes: '已於 cp.pt 確認班次並購票。',
     },
     {
       id: 'cp-aveiro',
