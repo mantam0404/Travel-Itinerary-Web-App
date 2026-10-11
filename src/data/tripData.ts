@@ -96,7 +96,7 @@ const outboundQuoteEur = hkdToBase(FLIGHT_QUOTE.outboundHkd, EUR_TO_HKD);
 const returnQuoteEur = hkdToBase(FLIGHT_QUOTE.returnHkd, EUR_TO_HKD);
 
 export const defaultTripData: TripData = {
-  version: 11,
+  version: 12,
   lastUpdated: new Date().toISOString(),
   destination: '葡萄牙',
   baseCurrency: BASE_CURRENCY,
@@ -218,7 +218,7 @@ export const defaultTripData: TripData = {
       lng: -9.1334,
       category: '城堡',
       openingHours: '09:00 – 21:00',
-      tips: '10/16 建議 Uber 直達城堡門口（約 €5），避免爬坡體力消耗。',
+      tips: '10/16 09:00 啟用里斯本卡後憑卡免費入場。建議 Uber 直達城堡門口（約 €5）。',
     },
     {
       id: 'alfama',
@@ -238,7 +238,7 @@ export const defaultTripData: TripData = {
       lng: -9.1394,
       category: '古蹟',
       openingHours: '07:30 – 23:00',
-      tips: '10/16 下山後可順道參觀，登頂俯瞰 Baixa 下城全景。',
+      tips: '10/16 憑里斯本卡多數可免費或折扣登頂，登頂俯瞰 Baixa 下城全景。',
     },
     {
       id: 'timeout-market',
@@ -268,7 +268,7 @@ export const defaultTripData: TripData = {
       lng: -9.216,
       category: '古蹟',
       openingHours: '09:30 – 18:00',
-      tips: '48 小時里斯本卡 Day 1 免費入場，建議與修道院同日參觀。',
+      tips: '48 小時里斯本卡有效日內免費入場，建議與修道院同日參觀。',
     },
     {
       id: 'pasteis-belem',
@@ -281,14 +281,14 @@ export const defaultTripData: TripData = {
       tips: '內用與外帶排隊動線不同，建議錯開尖峰時段。',
     },
     {
-      id: 'sintra-pena',
-      name: '佩納宮',
-      description: '辛特拉山頂彩色宮殿 Palácio Nacional da Pena，童話般建築。',
-      lat: 38.7876,
-      lng: -9.3906,
+      id: 'sintra-national-palace',
+      name: '辛特拉國家宮殿',
+      description: 'Palácio Nacional de Sintra，辛特拉老城黑白烟囱宫殿，世界遗产。',
+      lat: 38.7977,
+      lng: -9.3905,
       category: '宮殿',
-      openingHours: '09:30 – 18:00',
-      tips: '務必預約 10/18 09:30 時段，官網實名購票。',
+      openingHours: '09:30 – 18:30',
+      tips: '10/18 火車站步行約 10–15 分鐘。門票不含在里斯本卡內，建議官網購票。',
     },
     {
       id: 'regaleira',
@@ -298,7 +298,7 @@ export const defaultTripData: TripData = {
       lng: -9.396,
       category: '莊園',
       openingHours: '09:30 – 20:00',
-      tips: '佩納宮後搭 Uber 前往山區景點，預留 2 小時。',
+      tips: '國家宮殿午餐後 Uber 前往（約 €6–8），預留 2 小時。',
     },
     {
       id: 'avenida-liberdade',
@@ -481,9 +481,9 @@ export const defaultTripData: TripData = {
           title: 'EK191 抵達里斯本',
           location: '里斯本機場 LIS',
           description:
-            '10/15 00:40 香港出發 EK381（04:25 抵迪拜）轉 EK191（07:25 起飛），約 12:35 抵達里斯本。出關後 Uber/Bolt 直達 Montebelo Apartments（車程約 20 分鐘，€10–€15）。',
+            '10/15 00:40 香港出發 EK381（04:25 抵迪拜）轉 EK191（07:25 起飛），約 12:35 抵達里斯本。機場 Ask Me Lisboa 領取實體 48h 里斯本卡（先不啟用）。',
           attractionId: 'lisbon-airport',
-          transport: 'Uber/Bolt：LIS ➔ Montebelo Apartments',
+          transport: '🚗 Uber/Bolt：LIS ➔ Montebelo｜約 20 分｜2 人 €12–18',
         },
         {
           time: '14:30',
@@ -497,6 +497,7 @@ export const defaultTripData: TripData = {
           title: '龐巴爾下城漫步',
           location: 'Baixa',
           description: '沿龐巴爾下城（Baixa）街道漫步，感受里斯本市中心平坦路段風貌。',
+          transport: '🚶 步行｜€0',
         },
         {
           time: '17:30',
@@ -504,6 +505,7 @@ export const defaultTripData: TripData = {
           location: 'Praça do Comércio',
           description: '在特茹河畔商業廣場散步，欣賞黃色拱門與河景。',
           attractionId: 'praca-comercio',
+          transport: '🚶 步行｜€0',
         },
       ],
     },
@@ -514,12 +516,19 @@ export const defaultTripData: TripData = {
       activities: [
         {
           time: '09:00',
+          title: '啟用 48 小時里斯本卡',
+          location: 'Montebelo 附近',
+          description:
+            '第一次刷卡即啟用（連續 48 小時至 10/18 09:00）。最划算安排：覆蓋城堡、貝倫與辛特拉去程；10/18 傍晚回程火車需另購票（見當日行程）。',
+          transport: '🟢 Lisboa Card 啟用｜2 人卡費已含在預算 €84',
+        },
+        {
+          time: '09:15',
           title: '聖若熱城堡',
           location: 'Castelo de S. Jorge',
-          description:
-            'Uber 從 Montebelo 直達城堡門口（車資約 €5），避免爬坡體力消耗。登城堡俯瞰里斯本全景。',
+          description: '憑里斯本卡免費入場。登城堡俯瞰里斯本全景。',
           attractionId: 'lisbon-castle',
-          transport: 'Uber：Montebelo ➔ Castelo de S. Jorge',
+          transport: '🚗 Uber：Montebelo ➔ 城堡｜約 10 分｜2 人 €5–8',
         },
         {
           time: '11:00',
@@ -527,13 +536,15 @@ export const defaultTripData: TripData = {
           location: 'Alfama',
           description: '沿斜坡步行下山，穿梭阿法瑪區蜿蜒巷弄與紅瓦屋頂。',
           attractionId: 'alfama',
+          transport: '🚶 步行下山｜€0',
         },
         {
           time: '14:00',
           title: '聖胡斯塔升降機',
           location: 'Elevador de Santa Justa',
-          description: '參觀新哥特式升降機，登頂俯瞰 Baixa 下城全景。',
+          description: '憑里斯本卡免費或折扣登頂，俯瞰 Baixa 下城全景。',
           attractionId: 'elevador-santa-justa',
+          transport: '🟢 憑 Lisboa Card｜€0',
         },
         {
           time: '19:00',
@@ -541,6 +552,7 @@ export const defaultTripData: TripData = {
           location: 'Mercado da Ribeira',
           description: '在里斯本人氣美食市集安排晚餐，匯集多家名廚小店。',
           attractionId: 'timeout-market',
+          transport: '🚶 步行或 💳 地鐵單程｜約 €1.7/人',
         },
       ],
     },
@@ -550,20 +562,14 @@ export const defaultTripData: TripData = {
       city: '里斯本 貝倫區 Belém',
       activities: [
         {
-          time: '09:00',
-          title: '啟用 48 小時里斯本卡',
-          location: '貝倫區',
-          description:
-            '早上 09:00 啟用 48 小時里斯本卡（Day 1）。搭乘 15E 路面電車往返貝倫區，交通免費搭乘。',
-        },
-        {
           time: '09:30',
           title: '哲羅姆派修道院',
           location: 'Mosteiro dos Jerónimos',
           description:
-            '15E 電車：Praça da Figueira 站 ➔ Mosteiro Jerónimos 站（約 30 分鐘）。憑里斯本卡免費入場，建議事先於官方預約系統登記時段。',
+            '憑里斯本卡免費入場，建議事先於官方預約系統登記時段。',
           attractionId: 'jeronimos-monastery',
-          transport: '15E 路面電車',
+          transport:
+            '🟢 15E 電車：Montebelo 附近 → Praça da Figueira 上車 ➔ Jerónimos｜約 30 分｜€0（卡內）',
         },
         {
           time: '11:00',
@@ -571,6 +577,7 @@ export const defaultTripData: TripData = {
           location: 'Torre de Belém',
           description: '參觀大航海時代象徵建築，憑里斯本卡免費入場。',
           attractionId: 'belem-tower',
+          transport: '🚶 貝倫區步行｜€0',
         },
         {
           time: '12:30',
@@ -578,6 +585,14 @@ export const defaultTripData: TripData = {
           location: 'Pastéis de Belém',
           description: '品嚐葡式蛋撻老店，內用與外帶排隊動線不同。',
           attractionId: 'pasteis-belem',
+          transport: '🚶 步行｜€0',
+        },
+        {
+          time: '15:00',
+          title: '返回市區',
+          location: 'Montebelo',
+          description: '搭 15E 或 💳 地鐵返回住宿休息。',
+          transport: '🟢 15E 電車返程｜€0（卡內，至 10/18 09:00 前有效）',
         },
       ],
     },
@@ -591,30 +606,33 @@ export const defaultTripData: TripData = {
           title: '前往辛特拉',
           location: 'Rossio 站',
           description:
-            'Rossio 站搭乘 CP 火車（08:01 或 08:31 發車，約 40 分鐘）。48 小時里斯本卡 Day 2，CP 火車免費刷卡進出。',
-          transport: 'CP 火車：Rossio ➔ Sintra',
+            'Montebelo → Rossio：💳 地鐵或 🚗 Uber（€5–7）。Rossio 搭 CP 往 Sintra（08:01 或 08:31，約 40 分）。去程在卡有效期內可 🟢 刷卡免費。',
+          transport: '🟢 CP：Rossio ➔ Sintra｜去程 €0（卡內）',
         },
         {
           time: '09:30',
-          title: '佩納宮（預約場次）',
-          location: 'Palácio Nacional da Pena',
+          title: '辛特拉國家宮殿',
+          location: 'Palácio Nacional de Sintra',
           description:
-            '預約 09:30 時段入場。辛特拉山區景點間搭乘 Uber 上山。門票需提早於官網單獨購買時段。',
-          attractionId: 'sintra-pena',
-          transport: 'Uber 上山',
+            'Sintra 火車站步行約 10–15 分鐘至老城宮殿。門票需官網購買（不含在里斯本卡）。',
+          attractionId: 'sintra-national-palace',
+          transport: '🚶 火車站 ➔ 宮殿｜約 12 分｜€0',
         },
         {
           time: '12:30',
           title: '雷加萊拉莊園',
           location: 'Quinta da Regaleira',
-          description: '參觀倒立天井與神秘花園，佩納宮後 Uber 前往。',
+          description: '參觀倒立天井與神秘花園。午餐後 Uber 前往。',
           attractionId: 'regaleira',
+          transport: '🚗 Uber：老城 ➔ Regaleira｜約 8 分｜2 人 €6–10',
         },
         {
           time: '17:00',
           title: '返回里斯本',
           location: 'Montebelo Apartments',
-          description: '傍晚搭乘 CP 火車返回里斯本 Montebelo 飯店。',
+          description:
+            'Sintra 站購回程票至 Lisboa（Rossio）。因卡於 10/18 09:00 失效，傍晚回程需 💳 現場購票或感應信用卡。',
+          transport: '💳 CP：Sintra ➔ Rossio｜2 人約 €10–12',
         },
       ],
     },
@@ -629,6 +647,7 @@ export const defaultTripData: TripData = {
           location: 'Avenida da Liberdade',
           description: '沿里斯本最時尚林蔭大道漫步，品牌店與咖啡館林立。',
           attractionId: 'avenida-liberdade',
+          transport: '🚶 從 Montebelo 步行｜€0',
         },
         {
           time: '13:00',
@@ -636,7 +655,7 @@ export const defaultTripData: TripData = {
           location: 'LX Factory',
           description: '舊工廠改造文創園區，可逛書店、設計小店與特色餐廳。',
           attractionId: 'lx-factory',
-          transport: '步行 / Uber（單程約 €4–€7）',
+          transport: '🚗 Uber 單程｜2 人 €4–7',
         },
         {
           time: '16:00',
@@ -644,6 +663,7 @@ export const defaultTripData: TripData = {
           location: 'Príncipe Real',
           description: '傍晚在質感街區散步，感受當地文青氛圍與花園景觀。',
           attractionId: 'principe-real',
+          transport: '🚗 Uber 或 🚶 步行｜€0–8',
         },
       ],
     },
@@ -658,7 +678,7 @@ export const defaultTripData: TripData = {
           location: 'Lisboa Santa Apolónia',
           description:
             'Montebelo 退房後前往 Santa Apolónia 站。已確認班次：08:00 發車 ➔ 10:55 抵達 Porto Campanhã（車程約 2 小時 55 分）。',
-          transport: 'CP 高鐵：Santa Apolónia 08:00 ➔ Campanhã 10:55',
+          transport: '🚗 07:00 Uber 至 Santa Apolónia（€6–10）➔ 🎫 CP 08:00–10:55（已購票）',
         },
         {
           time: '11:15',
@@ -667,7 +687,7 @@ export const defaultTripData: TripData = {
           description:
             'Campanhã 站 ➔ Porto Almada 180 Apartments：Uber 直達門口（約 10 分鐘，€6–€8），設電梯方便大型行李。',
           attractionId: 'porto-almada-180',
-          transport: 'Uber：Campanhã ➔ Porto Almada 180',
+          transport: '🚗 Uber：Campanhã ➔ Almada 180｜約 10 分｜2 人 €6–8',
         },
         {
           time: '15:00',
@@ -675,6 +695,7 @@ export const defaultTripData: TripData = {
           location: 'Ribeira',
           description: '漫步杜羅河畔彩色街區，從住宿步行 8 分鐘即可抵達。',
           attractionId: 'porto-ribeira',
+          transport: '🚶 步行約 8 分｜€0',
         },
         {
           time: '18:30',
@@ -682,6 +703,7 @@ export const defaultTripData: TripData = {
           location: 'Ponte Dom Luís I',
           description: '在大橋欣賞落日，河畔氣氛最佳時段。',
           attractionId: 'dom-luis-bridge',
+          transport: '🚶 步行｜€0',
         },
       ],
     },
@@ -696,6 +718,7 @@ export const defaultTripData: TripData = {
           location: 'Livraria Lello',
           description: '參觀著名新藝術風格書店，需提前官網預約早上場次 Ticket-Voucher。',
           attractionId: 'livraria-lello',
+          transport: '🚶 住宿步行 5 分｜€0',
         },
         {
           time: '11:00',
@@ -703,6 +726,7 @@ export const defaultTripData: TripData = {
           location: 'São Bento / Carmo',
           description: '欣賞車站大廳藍白瓷磚壁畫，步行 3 分鐘至卡爾莫教堂瓷磚外牆。',
           attractionId: 'sao-bento-station',
+          transport: '🚶 步行 3–6 分｜€0',
         },
         {
           time: '12:30',
@@ -710,6 +734,7 @@ export const defaultTripData: TripData = {
           location: 'Palácio da Bolsa',
           description: '參加預約的英文或中文導覽，阿拉伯厅為必看亮點。',
           attractionId: 'palacio-bolsa',
+          transport: '🚶 步行 5 分｜€0',
         },
         {
           time: '19:00',
@@ -717,6 +742,7 @@ export const defaultTripData: TripData = {
           location: 'Torre dos Clérigos / Ribeira',
           description: '登牧師塔俯瞰波圖夜景，或改為里貝拉河岸晚餐。全程步行 3–8 分鐘。',
           attractionId: 'clerigos-tower',
+          transport: '🚶 步行｜€0',
         },
       ],
     },
@@ -731,6 +757,7 @@ export const defaultTripData: TripData = {
           location: 'Igreja de São Francisco',
           description: '參觀巴洛克金箔內部裝飾，波圖最華麗教堂之一。',
           attractionId: 'igreja-sao-francisco',
+          transport: '🚶 步行約 8 分｜€0',
         },
         {
           time: '11:00',
@@ -739,7 +766,7 @@ export const defaultTripData: TripData = {
           description:
             '1 號電車：Infante 站 ➔ Passeio Alegre 站（Foz 海濱）。單程票 €6，上車向司機購買。',
           attractionId: 'foz-porto',
-          transport: '1 號復古電車',
+          transport: '💳 1 號電車 Infante➔Foz｜2 人 €12（上車向司機購票）',
         },
         {
           time: '17:30',
@@ -747,7 +774,7 @@ export const defaultTripData: TripData = {
           location: 'Jardins do Palácio de Cristal',
           description: 'Foz 海濱 ➔ 水晶宮花園：Uber 約 10 分鐘（€6–€8），高地俯瞰杜羅河日落。',
           attractionId: 'jardim-cristal',
-          transport: 'Uber：Foz ➔ 水晶宮花園',
+          transport: '🚗 Uber：Foz ➔ 水晶宮｜約 10 分｜2 人 €6–8',
         },
       ],
     },
@@ -763,7 +790,7 @@ export const defaultTripData: TripData = {
           description:
             '從住宿步行 6 分鐘至 São Bento 站，搭 CP 近郊火車（每 30 分鐘一班，車程 1 小時）。售票機購買來回票約 €7.5。',
           attractionId: 'sao-bento-station',
-          transport: 'CP 近郊火車：São Bento ➔ Aveiro',
+          transport: '🚶 步行 6 分至 São Bento ➔ 💳 CP 至 Aveiro｜2 人來回約 €7.5–15',
         },
         {
           time: '10:00',
@@ -771,12 +798,14 @@ export const defaultTripData: TripData = {
           location: 'Aveiro',
           description: '沿運河漫步，欣賞彩色 Moliceiro 小船與新藝術風格建築。',
           attractionId: 'aveiro',
+          transport: '🚶 老城步行｜€0',
         },
         {
           time: '14:00',
           title: '返回波圖',
           location: '波圖',
           description: '搭乘 CP 火車返回波圖 Porto Almada 180。',
+          transport: '💳 CP：Aveiro ➔ São Bento｜含於來回票',
         },
         {
           time: '16:00',
@@ -784,6 +813,7 @@ export const defaultTripData: TripData = {
           location: 'Casa da Música',
           description: '參觀 Rem Koolhaas 設計的現代音樂殿堂，建議提前官網預約導覽。',
           attractionId: 'casa-musica',
+          transport: '🚗 Uber：公寓 ➔ Casa da Música｜2 人 €5–8',
         },
         {
           time: '19:00',
@@ -791,6 +821,7 @@ export const defaultTripData: TripData = {
           location: 'Rua de Santa Catarina',
           description: '步行街購物伴手禮，安排波圖最後一晚告別晚餐。',
           attractionId: 'santa-catarina',
+          transport: '🚶 步行｜€0',
         },
       ],
     },
@@ -805,7 +836,7 @@ export const defaultTripData: TripData = {
           location: 'Porto Campanhã',
           description: '攜帶行李 Uber 從 Porto Almada 180 直達 Campanhã 站（約 10 分鐘），預留 06:40 班次登車時間。',
           attractionId: 'porto-almada-180',
-          transport: 'Uber：Porto Almada 180 ➔ Campanhã',
+          transport: '🚗 Uber：Almada 180 ➔ Campanhã｜約 10 分｜2 人 €6–8',
         },
         {
           time: '06:40',
@@ -813,7 +844,7 @@ export const defaultTripData: TripData = {
           location: 'Lisboa Oriente',
           description:
             '已確認班次：06:40 從 Porto Campanhã 發車 ➔ 09:22 抵達 Lisboa Oriente（車程約 2 小時 42 分）。',
-          transport: 'CP 高鐵：Campanhã 06:40 ➔ Oriente 09:22',
+          transport: '🎫 CP 06:40–09:22（已購票）',
         },
         {
           time: '09:35',
@@ -821,7 +852,7 @@ export const defaultTripData: TripData = {
           location: '里斯本機場 LIS Terminal 1',
           description: 'Oriente 站 Uber 直達 Terminal 1（約 10 分鐘），約 09:45 抵達，距 14:15 起飛有充足時間辦理退稅與登機。',
           attractionId: 'lisbon-airport',
-          transport: 'Uber：Oriente ➔ LIS Terminal 1',
+          transport: '🚗 Uber：Oriente ➔ LIS T1｜約 10 分｜2 人 €10–14',
         },
         {
           time: '14:15',
@@ -879,13 +910,13 @@ export const defaultTripData: TripData = {
     {
       id: 'lisboa-card',
       category: 'transportation',
-      name: '48 小時里斯本卡 Lisboa Card 48h',
-      date: '2026-10-17',
-      amountEur: 42,
+      name: '48 小時里斯本卡 Lisboa Card 48h（2 人）',
+      date: '2026-10-16',
+      amountEur: 84,
       breakdown: [
-        { label: '48 小時成人卡（含交通＋部分景點）', amountEur: 42 },
+        { label: '48 小時成人卡 × 2（含交通＋部分景點）', amountEur: 84 },
       ],
-      notes: '10/15 機場領卡，10/17 09:00 啟用。含辛特拉 CP 火車、貝倫區景點等。',
+      notes: '10/15 機場領卡，10/16 09:00 啟用（至 10/18 09:00）。覆蓋城堡、貝倫、辛特拉去程；10/18 回程 CP 另購。',
     },
     {
       id: 'cp-lisbon-porto',
@@ -915,12 +946,12 @@ export const defaultTripData: TripData = {
       category: 'transportation',
       name: '辛特拉當地交通',
       date: '2026-10-18',
-      amountEur: 16,
+      amountEur: 19,
       breakdown: [
-        { label: '佩納宮↔雷加萊拉 Uber（2 人分攤估算）', amountEur: 10 },
-        { label: '辛特拉站↔山區景點 Uber', amountEur: 6 },
+        { label: '國家宮殿↔雷加萊拉 Uber（2 人）', amountEur: 8 },
+        { label: 'Sintra→Rossio 回程 CP（卡已過期，2 人）', amountEur: 11 },
       ],
-      notes: '10/18 辛特拉一日遊，山區景點間建議 Uber。',
+      notes: '10/18 辛特拉一日遊。去程 CP 憑 Lisboa Card；17:00 回程現場購票。',
     },
     {
       id: 'tram-porto-1',
@@ -942,6 +973,7 @@ export const defaultTripData: TripData = {
       breakdown: [
         { label: '機場→Montebelo（10/15）', amountEur: 12 },
         { label: 'Montebelo→聖若熱城堡（10/16）', amountEur: 5 },
+        { label: 'Montebelo→Santa Apolónia（10/20 清晨）', amountEur: 8 },
         { label: '里斯本市區短途（10/16–19）', amountEur: 18 },
         { label: 'Campanhã→Porto Almada 180（10/20）', amountEur: 7 },
         { label: 'Foz→水晶宮花園（10/22）', amountEur: 7 },
@@ -952,15 +984,15 @@ export const defaultTripData: TripData = {
       notes: '拖行李或陡坡路段建議叫車，單程多為 €4–€8。',
     },
     {
-      id: 'ticket-pena',
+      id: 'ticket-sintra-national',
       category: 'tickets',
-      name: '佩納宮 Palácio Nacional da Pena',
+      name: '辛特拉國家宮殿 Palácio Nacional de Sintra',
       date: '2026-10-18',
-      amountEur: 40,
+      amountEur: 26,
       breakdown: [
-        { label: '宮殿＋公園門票（2 人，官網預約 09:30 場）', amountEur: 40 },
+        { label: '入場門票（2 人，官網或現場）', amountEur: 26 },
       ],
-      notes: '出發前 30 天官網預約 10/18 09:30 時段，不包在里斯本卡內。',
+      notes: '不含在里斯本卡內。建議官網提前購票。',
     },
     {
       id: 'ticket-regaleira',
@@ -977,11 +1009,10 @@ export const defaultTripData: TripData = {
       category: 'tickets',
       name: '聖若熱城堡 Castelo de S. Jorge',
       date: '2026-10-16',
-      amountEur: 22,
+      amountEur: 0,
       breakdown: [
-        { label: '入場門票（2 人，官網或現場）', amountEur: 22 },
+        { label: '憑 10/16 啟用的 Lisboa Card 免費入場', amountEur: 0 },
       ],
-      notes: '10/16 參觀，里斯本卡啟用前需單獨購票。',
     },
     {
       id: 'ticket-lello',
@@ -1051,9 +1082,9 @@ export const defaultTripData: TripData = {
       category: 'tickets',
       name: '聖胡斯塔升降機',
       date: '2026-10-16',
-      amountEur: 11,
+      amountEur: 0,
       breakdown: [
-        { label: '登頂票（2 人估算）', amountEur: 11 },
+        { label: '憑 Lisboa Card 免費或折扣登頂', amountEur: 0 },
       ],
     },
   ],

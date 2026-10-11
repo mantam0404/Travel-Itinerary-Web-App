@@ -110,6 +110,12 @@ export function ItineraryDayCard({
                     <p className="mt-1 text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
                       {act.description}
                     </p>
+                    {act.transport && (
+                      <p className="mt-2 rounded-lg border border-[var(--ln-border)] bg-[var(--ln-surface-elevated)] px-2.5 py-1.5 text-xs leading-relaxed text-[var(--ln-ink)]">
+                        <span className="font-medium">交通｜</span>
+                        {act.transport}
+                      </p>
+                    )}
                     {attraction?.youtubeVideoId && (
                       <YouTubeEmbed
                         videoId={attraction.youtubeVideoId}

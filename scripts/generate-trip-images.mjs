@@ -15,7 +15,7 @@ const DAY_SOURCES = {
   '2026-10-15': 'praca-comercio-hero.jpg',
   '2026-10-16': 'lisbon-castle-hero.jpg',
   '2026-10-17': 'belem-tower-hero.jpg',
-  '2026-10-18': 'sintra-pena-hero.jpg',
+  '2026-10-18': 'sintra-national-palace-hero.jpg',
   '2026-10-19': 'avenida-liberdade-hero.jpg',
   '2026-10-20': 'porto-ribeira-hero.jpg',
   '2026-10-21': 'livraria-lello-hero.jpg',

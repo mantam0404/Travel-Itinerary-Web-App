@@ -52,7 +52,7 @@ function isPortugalTrip(data: TripData): boolean {
   );
   if (hasGuangzhouAttractions) return false;
 
-  const requiredIds = ['lisbon-airport', 'belem-tower', 'porto-ribeira', 'sintra-pena'];
+  const requiredIds = ['lisbon-airport', 'belem-tower', 'porto-ribeira', 'sintra-national-palace'];
   return requiredIds.every((id) => data.attractions.some((a) => a.id === id));
 }
 
