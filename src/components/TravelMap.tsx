@@ -6,7 +6,8 @@ import { ScrollReveal } from './ScrollReveal';
 import { MapFlyTo, MapInvalidateOnTheme } from './map/MapHelpers';
 import { MapUserLocation } from './map/MapUserLocation';
 import { IconMyLocation } from './icons';
-import { getAttractionImage, getAttractionHeroImage, MAP_TILES } from '../utils/itineraryImages';
+import { getAttractionImage, getAttractionHeroImage } from '../utils/itineraryImages';
+import { getMapBasemapConfig, hasCartoBasemapKey } from '../config/mapBasemap';
 import { YouTubeEmbed } from './YouTubeEmbed';
 import type { MapFocusRequest } from '../types/navigation';
 import 'leaflet/dist/leaflet.css';
@@ -66,7 +67,8 @@ export function TravelMap({
   const [locateStatus, setLocateStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [locateMessage, setLocateMessage] = useState<string | null>(null);
 
-  const tiles = isDark ? MAP_TILES.dark : MAP_TILES.light;
+  const basemap = useMemo(() => getMapBasemapConfig(isDark), [isDark]);
+  const usingOsmFallback = basemap.provider === 'osm';
   const attractionById = useMemo(
     () => new Map(attractions.map((attr) => [attr.id, attr])),
     [attractions],
@@ -166,6 +168,13 @@ export function TravelMap({
         <p className="text-sm leading-relaxed text-[var(--ln-ink-secondary)]">
           地圖隨深／淺色模式切換 · 點擊標記查看景點
         </p>
+        {usingOsmFallback && (
+          <p className="mt-1 text-xs leading-relaxed text-[var(--ln-ink-tertiary)]">
+            底圖使用 OpenStreetMap（免 API key）。若曾出現「API key required」，可在建置時設定{' '}
+            <code className="text-[var(--ln-ink-secondary)]">VITE_CARTO_BASEMAPS_API_KEY</code> 以啟用
+            CARTO 高清底圖。
+          </p>
+        )}
         {locateMessage && (
           <p
             className={`mt-2 text-xs ${locateStatus === 'error' ? 'text-[#c13515]' : 'text-[var(--ln-ink-tertiary)]'}`}
@@ -176,7 +185,9 @@ export function TravelMap({
       </ScrollReveal>
 
       <ScrollReveal delay={80}>
-        <div className="ln-panel ln-map-shell overflow-hidden p-1">
+        <div
+          className={`ln-panel ln-map-shell overflow-hidden p-1 ${basemap.useDarkTileFilter ? 'ln-map-basemap-osm-dark' : ''}`}
+        >
           {mapReady && (
             <MapContainer
               center={mapCenterCoords}
@@ -187,9 +198,10 @@ export function TravelMap({
             >
               <MapInvalidateOnTheme isDark={isDark} />
               <TileLayer
-                key={isDark ? 'dark-tiles' : 'light-tiles'}
-                attribution={tiles.attribution}
-                url={tiles.url}
+                key={`${basemap.provider}-${isDark ? 'dark' : 'light'}-${hasCartoBasemapKey()}`}
+                attribution={basemap.attribution}
+                url={basemap.url}
+                maxZoom={basemap.maxZoom}
               />
               {flyCoords && (
                 <MapFlyTo

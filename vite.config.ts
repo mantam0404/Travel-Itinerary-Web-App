@@ -42,7 +42,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        cacheId: 'portugal-trip-2026-10-v12',
+        cacheId: 'portugal-trip-2026-10-v13-map',
         skipWaiting: true,
         clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,svg,woff2}'],

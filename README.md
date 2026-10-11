@@ -118,6 +118,19 @@ npm run images:trip            # 生成 hero 與每日封面圖
 npm run images:all             # PWA 圖示 + 景點圖
 ```
 
+## 地圖底圖（CARTO「API key required」）
+
+CARTO 點陣瓦片底圖（`basemaps.cartocdn.com`）自 2025 年起需免費 API key，否則瓦片會顯示 **API key required** 水印。
+
+| 情況 | 行為 |
+|------|------|
+| **未設定 key** | 自動改用 **OpenStreetMap** 底圖（無 key、無水印）；深色模式對瓦片套用柔和反色 |
+| **已設定 key** | 使用 CARTO Voyager / Dark 高清底圖 |
+
+1. 至 [carto.com/basemaps/apikey](https://carto.com/basemaps/apikey/) 申請免費 key（非商用約 500 萬瓦片/月）
+2. 本地：复制 `.env.example` 为 `.env`，填入 `VITE_CARTO_BASEMAPS_API_KEY=你的key` 后 `npm run build`
+3. GitHub Pages：在仓库 **Settings → Secrets → Actions** 新增 `VITE_CARTO_BASEMAPS_API_KEY`，推送 `cursor/portugal-trip-a2de` 会由 CI 注入建置
+
 ## 離線使用
 
 1. 首次以網路連線開啟應用程式
